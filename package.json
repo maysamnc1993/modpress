@@ -1,0 +1,16 @@
+{
+  "name": "developer-starter-theme",
+  "version": "1.0.0",
+  "description": "استارتر تم حرفه‌ای وردپرس",
+  "author": "Meysam Khatami",
+  "license": "GPL-2.0-or-later",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "watch": "vite build --watch"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0",
+    "sass": "^1.69.0"
+  }
+}

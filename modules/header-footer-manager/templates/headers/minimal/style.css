@@ -1,0 +1,71 @@
+/**
+ * هدر مینیمال - استایل
+ */
+
+.dst-header-minimal {
+    background: transparent;
+    padding: 24px 0;
+}
+
+.dst-header-minimal .dst-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.dst-header-minimal .dst-header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* لوگو */
+.dst-header-minimal .dst-header-logo a {
+    text-decoration: none;
+}
+
+.dst-header-minimal .dst-header-logo img {
+    max-height: 36px;
+    width: auto;
+}
+
+.dst-header-minimal .dst-site-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1e293b;
+    letter-spacing: -0.5px;
+}
+
+/* منو */
+.dst-header-minimal .dst-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 32px;
+}
+
+.dst-header-minimal .dst-menu a {
+    color: #64748b;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.dst-header-minimal .dst-menu a:hover,
+.dst-header-minimal .dst-menu .current-menu-item a {
+    color: #1e293b;
+}
+
+/* ریسپانسیو */
+@media (max-width: 768px) {
+    .dst-header-minimal .dst-header-inner {
+        flex-direction: column;
+        gap: 16px;
+    }
+    
+    .dst-header-minimal .dst-menu {
+        gap: 20px;
+    }
+}

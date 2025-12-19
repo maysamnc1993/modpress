@@ -1,0 +1,204 @@
+// ═══════════════════════════════════════════════════════════════
+// Cards - کارت‌ها
+// ═══════════════════════════════════════════════════════════════
+
+.dst-card {
+  @include card;
+  @include card-hover;
+  
+  // ─────────────────────────────────────────
+  // Image
+  // ─────────────────────────────────────────
+  &__image {
+    display: block;
+    overflow: hidden;
+    
+    img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform $transition-normal;
+    }
+  }
+  
+  &:hover &__image img {
+    transform: scale(1.05);
+  }
+  
+  // ─────────────────────────────────────────
+  // Content
+  // ─────────────────────────────────────────
+  &__content {
+    padding: $spacing-lg;
+  }
+  
+  // ─────────────────────────────────────────
+  // Header
+  // ─────────────────────────────────────────
+  &__header {
+    margin-bottom: $spacing-md;
+  }
+  
+  &__title {
+    font-size: $text-xl;
+    font-weight: $font-semibold;
+    margin-bottom: $spacing-xs;
+    
+    a {
+      color: gray(900);
+      
+      &:hover {
+        color: $color-primary;
+      }
+    }
+  }
+  
+  &__subtitle {
+    font-size: $text-sm;
+    color: gray(500);
+  }
+  
+  // ─────────────────────────────────────────
+  // Body
+  // ─────────────────────────────────────────
+  &__body {
+    color: gray(600);
+    line-height: $leading-relaxed;
+  }
+  
+  // ─────────────────────────────────────────
+  // Footer
+  // ─────────────────────────────────────────
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: $spacing-md;
+    padding-top: $spacing-md;
+    border-top: 1px solid gray(100);
+  }
+  
+  // ─────────────────────────────────────────
+  // Meta
+  // ─────────────────────────────────────────
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    font-size: $text-sm;
+    color: gray(500);
+    
+    span {
+      display: flex;
+      align-items: center;
+      gap: $spacing-xs;
+    }
+    
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+  
+  // ─────────────────────────────────────────
+  // Variants
+  // ─────────────────────────────────────────
+  
+  // Horizontal
+  &--horizontal {
+    display: flex;
+    flex-direction: column;
+    
+    @include screen(md) {
+      flex-direction: row;
+    }
+    
+    .dst-card__image {
+      @include screen(md) {
+        width: 300px;
+        flex-shrink: 0;
+      }
+      
+      img {
+        @include screen(md) {
+          height: 100%;
+        }
+      }
+    }
+  }
+  
+  // Featured
+  &--featured {
+    .dst-card__image img {
+      height: 300px;
+    }
+    
+    .dst-card__title {
+      font-size: $text-2xl;
+    }
+  }
+  
+  // Compact
+  &--compact {
+    .dst-card__content {
+      padding: $spacing-md;
+    }
+    
+    .dst-card__image img {
+      height: 150px;
+    }
+  }
+  
+  // Bordered
+  &--bordered {
+    box-shadow: none;
+    border: 1px solid gray(200);
+    
+    &:hover {
+      border-color: $color-primary;
+      box-shadow: none;
+      transform: none;
+    }
+  }
+}
+
+// ─────────────────────────────────────────
+// Card Grid
+// ─────────────────────────────────────────
+.dst-cards {
+  display: grid;
+  gap: $spacing-lg;
+  
+  // Columns
+  &--2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  &--3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  &--4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  // Auto-fit
+  &--auto {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+  
+  // Responsive
+  @include screen-down(lg) {
+    &--4 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @include screen-down(md) {
+    &--2,
+    &--3,
+    &--4 {
+      grid-template-columns: 1fr;
+    }
+  }
+}

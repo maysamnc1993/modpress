@@ -1,0 +1,15 @@
+{
+    "name": "header-footer-manager",
+    "title": "مدیریت هدر و فوتر",
+    "version": "2.0.0",
+    "description": "انتخاب و مدیریت انواع هدر و فوتر از پنل ادمین",
+    "author": "Developer Starter",
+    "enabled": true,
+    "requires": [],
+    "features": [
+        "انتخاب هدر از پنل ادمین",
+        "انتخاب فوتر از پنل ادمین",
+        "قابلیت افزودن هدر/فوتر جدید",
+        "CSS و JS اختصاصی هر تمپلیت"
+    ]
+}

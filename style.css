@@ -1,0 +1,18 @@
+/*
+Theme Name: Developer Starter Theme
+Theme URI: https://developer.starter
+Author: Meysam Khatami
+Author URI: https://hostlino.com
+Description: یک استارتر تم ماژولار و حرفه‌ای برای توسعه سریع قالب‌های وردپرس با ACF Blocks
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 6.5
+Requires PHP: 8.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: developer-starter
+Tags: rtl-language-support, block-styles, custom-logo, custom-menu, featured-images
+
+این قالب یک پایه حرفه‌ای برای ساخت قالب‌های اختصاصی است.
+تمام استایل‌ها در پوشه assets/css قرار دارند.
+*/

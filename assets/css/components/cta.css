@@ -1,0 +1,253 @@
+/**
+ * CTA (Call to Action) Components
+ * کامپوننت‌های دکمه فراخوان
+ */
+
+/* ===== Base CTA ===== */
+.dst-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.dst-cta-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dst-cta-icon svg {
+    width: 1em;
+    height: 1em;
+}
+
+/* ===== Sizes ===== */
+.dst-cta-size-sm {
+    padding: 8px 16px;
+    font-size: 13px;
+    border-radius: 6px;
+}
+
+.dst-cta-size-md {
+    padding: 12px 24px;
+    font-size: 15px;
+    border-radius: 8px;
+}
+
+.dst-cta-size-lg {
+    padding: 16px 32px;
+    font-size: 17px;
+    border-radius: 10px;
+}
+
+.dst-cta-size-xl {
+    padding: 20px 40px;
+    font-size: 19px;
+    border-radius: 12px;
+}
+
+/* ===== Styles ===== */
+
+/* Solid */
+.dst-cta-style-solid {
+    background: var(--dst-primary, #3C50E0);
+    color: #fff;
+    border-color: var(--dst-primary, #3C50E0);
+}
+
+.dst-cta-style-solid:hover {
+    background: color-mix(in srgb, var(--dst-primary, #3C50E0) 85%, #000);
+    border-color: color-mix(in srgb, var(--dst-primary, #3C50E0) 85%, #000);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(60, 80, 224, 0.3);
+}
+
+/* Outline */
+.dst-cta-style-outline {
+    background: transparent;
+    color: var(--dst-primary, #3C50E0);
+    border-color: var(--dst-primary, #3C50E0);
+}
+
+.dst-cta-style-outline:hover {
+    background: var(--dst-primary, #3C50E0);
+    color: #fff;
+}
+
+/* Gradient */
+.dst-cta-style-gradient {
+    background: linear-gradient(135deg, var(--dst-primary, #3C50E0), var(--dst-secondary, #10B981));
+    color: #fff;
+    border: none;
+}
+
+.dst-cta-style-gradient:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(60, 80, 224, 0.4);
+}
+
+/* Rounded (Pill) */
+.dst-cta-style-rounded {
+    background: var(--dst-primary, #3C50E0);
+    color: #fff;
+    border-radius: 50px !important;
+    border-color: var(--dst-primary, #3C50E0);
+}
+
+.dst-cta-style-rounded:hover {
+    background: color-mix(in srgb, var(--dst-primary, #3C50E0) 85%, #000);
+    transform: translateY(-2px);
+}
+
+/* Shadow */
+.dst-cta-style-shadow {
+    background: var(--dst-primary, #3C50E0);
+    color: #fff;
+    border-color: var(--dst-primary, #3C50E0);
+    box-shadow: 0 4px 14px rgba(60, 80, 224, 0.4);
+}
+
+.dst-cta-style-shadow:hover {
+    box-shadow: 0 8px 25px rgba(60, 80, 224, 0.5);
+    transform: translateY(-3px);
+}
+
+/* ===== Special Types ===== */
+
+/* Secondary - همیشه outline */
+.dst-cta-secondary {
+    background: transparent;
+    color: var(--dst-text, #1e293b);
+    border-color: var(--dst-text, #1e293b);
+}
+
+.dst-cta-secondary:hover {
+    background: var(--dst-text, #1e293b);
+    color: #fff;
+}
+
+/* WhatsApp */
+.dst-cta-whatsapp {
+    background: #25D366;
+    color: #fff;
+    border-color: #25D366;
+}
+
+.dst-cta-whatsapp:hover {
+    background: #20bd5a;
+    border-color: #20bd5a;
+    transform: translateY(-2px);
+}
+
+/* Phone */
+.dst-cta-phone {
+    background: var(--dst-secondary, #10B981);
+    color: #fff;
+    border-color: var(--dst-secondary, #10B981);
+}
+
+.dst-cta-phone:hover {
+    background: color-mix(in srgb, var(--dst-secondary, #10B981) 85%, #000);
+    transform: translateY(-2px);
+}
+
+/* Telegram */
+.dst-cta-telegram {
+    background: #0088cc;
+    color: #fff;
+    border-color: #0088cc;
+}
+
+.dst-cta-telegram:hover {
+    background: #0077b5;
+    border-color: #0077b5;
+    transform: translateY(-2px);
+}
+
+/* ===== CTA Group ===== */
+.dst-cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.dst-cta-gap-sm {
+    gap: 8px;
+}
+
+.dst-cta-gap-md {
+    gap: 16px;
+}
+
+.dst-cta-gap-lg {
+    gap: 24px;
+}
+
+/* ===== Floating WhatsApp ===== */
+.dst-floating-whatsapp {
+    position: fixed;
+    bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #25D366;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    z-index: 9999;
+    transition: all 0.3s ease;
+}
+
+.dst-floating-whatsapp:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
+}
+
+.dst-floating-whatsapp svg {
+    width: 24px;
+    height: 24px;
+}
+
+.dst-floating-bottom-left {
+    left: 24px;
+}
+
+.dst-floating-bottom-right {
+    right: 24px;
+}
+
+/* Hide text on mobile */
+@media (max-width: 768px) {
+    .dst-floating-whatsapp .dst-floating-text {
+        display: none;
+    }
+    
+    .dst-floating-whatsapp {
+        padding: 14px;
+        border-radius: 50%;
+    }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 576px) {
+    .dst-cta-group {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .dst-cta-group .dst-cta {
+        width: 100%;
+        justify-content: center;
+    }
+}

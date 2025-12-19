@@ -1,0 +1,104 @@
+// ═══════════════════════════════════════════════════════════════
+// Reset - ریست استایل‌های پیش‌فرض
+// ═══════════════════════════════════════════════════════════════
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  line-height: $leading-normal;
+  font-family: $font-primary;
+  color: gray(800);
+  background-color: #fff;
+}
+
+// تصاویر و مدیا
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+// فرم‌ها
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+// متن
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+// لینک‌ها
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+// لیست‌ها
+ul,
+ol {
+  list-style: none;
+}
+
+// جدول
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+// فیلدست
+fieldset {
+  border: none;
+}
+
+// Hidden attribute
+[hidden] {
+  display: none !important;
+}
+
+// Focus visible
+:focus-visible {
+  outline: 2px solid $color-primary;
+  outline-offset: 2px;
+}
+
+// Selection
+::selection {
+  background: rgba($color-primary, 0.2);
+  color: gray(900);
+}

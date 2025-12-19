@@ -1,0 +1,33 @@
+{
+    "name": "transparent",
+    "title": "هدر شفاف",
+    "description": "هدر شفاف با متن سفید - مناسب برای اسلایدر",
+    "version": "1.0.0",
+    "settings": {
+        "show_cta": {
+            "type": "checkbox",
+            "label": "نمایش دکمه CTA",
+            "default": true
+        },
+        "cta_text": {
+            "type": "text",
+            "label": "متن دکمه CTA",
+            "default": "شروع کنید"
+        },
+        "cta_url": {
+            "type": "text",
+            "label": "لینک دکمه CTA",
+            "default": "#"
+        },
+        "sticky": {
+            "type": "checkbox",
+            "label": "هدر چسبان (Sticky)",
+            "default": true
+        },
+        "bg_color_on_scroll": {
+            "type": "color",
+            "label": "رنگ پس‌زمینه هنگام اسکرول",
+            "default": "#ffffff"
+        }
+    }
+}

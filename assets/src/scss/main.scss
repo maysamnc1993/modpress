@@ -1,0 +1,128 @@
+// ═══════════════════════════════════════════════════════════════
+// Developer Starter Theme - Main Stylesheet
+// ═══════════════════════════════════════════════════════════════
+// 
+// ترتیب import مهم است:
+// 1. Variables & Mixins (ابتدا متغیرها)
+// 2. Base (ریست و تایپوگرافی)
+// 3. Components (دکمه، کارت، فرم)
+// 4. Layout (هدر، فوتر)
+// 5. Blocks (بلاک‌های ACF)
+// 6. Utilities (کلاس‌های کمکی - آخر)
+// 
+// ═══════════════════════════════════════════════════════════════
+
+// ─────────────────────────────────────────
+// 1. Base - پایه
+// ─────────────────────────────────────────
+@import 'base/variables';
+@import 'base/mixins';
+@import 'base/reset';
+@import 'base/typography';
+
+// ─────────────────────────────────────────
+// 2. Components - کامپوننت‌ها
+// ─────────────────────────────────────────
+@import 'components/buttons';
+@import 'components/cards';
+@import 'components/forms';
+@import 'components/utilities';
+
+// ─────────────────────────────────────────
+// 3. Layout - لایه‌بندی
+// ─────────────────────────────────────────
+@import 'layout/header';
+@import 'layout/footer';
+
+// ─────────────────────────────────────────
+// 4. Blocks - بلاک‌های ACF
+// ─────────────────────────────────────────
+// هر بلاک فایل جداگانه دارد
+// @import 'blocks/hero';
+// @import 'blocks/services';
+// ...
+
+// ─────────────────────────────────────────
+// 5. Custom - استایل‌های سفارشی پروژه
+// ─────────────────────────────────────────
+
+// Main content area
+.dst-main {
+  min-height: calc(100vh - 150px);
+}
+
+.dst-content {
+  @extend .dst-section;
+}
+
+// Posts Grid
+.dst-posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: $spacing-lg;
+}
+
+// Pagination
+.dst-pagination {
+  margin-top: $spacing-2xl;
+  
+  .nav-links {
+    @include flex-center;
+    gap: $spacing-xs;
+  }
+  
+  a,
+  span {
+    padding: $spacing-sm $spacing-md;
+    border-radius: $radius-md;
+    background: gray(100);
+    color: gray(700);
+    transition: all $transition-fast;
+  }
+  
+  a:hover {
+    background: $color-primary;
+    color: #fff;
+  }
+  
+  .current {
+    background: $color-primary;
+    color: #fff;
+  }
+}
+
+// No posts
+.dst-no-posts {
+  text-align: center;
+  padding: $spacing-3xl;
+  color: gray(500);
+}
+
+// Block placeholder (editor)
+.dst-block-placeholder {
+  @include flex-center;
+  flex-direction: column;
+  min-height: 200px;
+  background: gray(50);
+  border: 2px dashed gray(300);
+  border-radius: $radius-lg;
+  color: gray(500);
+  text-align: center;
+  padding: $spacing-xl;
+  
+  .dashicons {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    margin-bottom: $spacing-md;
+    opacity: 0.5;
+  }
+}
+
+.dst-block-error {
+  background: #fee2e2;
+  color: #dc2626;
+  padding: $spacing-md;
+  border-radius: $radius-md;
+  text-align: center;
+}

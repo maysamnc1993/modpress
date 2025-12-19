@@ -1,0 +1,234 @@
+// ═══════════════════════════════════════════════════════════════
+// Typography - تایپوگرافی
+// ═══════════════════════════════════════════════════════════════
+
+// فونت Vazirmatn
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap');
+
+// ─────────────────────────────────────────
+// هدینگ‌ها
+// ─────────────────────────────────────────
+h1, h2, h3, h4, h5, h6 {
+  @include heading;
+  margin-bottom: $spacing-md;
+}
+
+h1 {
+  font-size: $text-4xl;
+  
+  @include screen(md) {
+    font-size: $text-5xl;
+  }
+}
+
+h2 {
+  font-size: $text-3xl;
+  
+  @include screen(md) {
+    font-size: $text-4xl;
+  }
+}
+
+h3 {
+  font-size: $text-2xl;
+  
+  @include screen(md) {
+    font-size: $text-3xl;
+  }
+}
+
+h4 {
+  font-size: $text-xl;
+}
+
+h5 {
+  font-size: $text-lg;
+}
+
+h6 {
+  font-size: $text-base;
+}
+
+// ─────────────────────────────────────────
+// پاراگراف
+// ─────────────────────────────────────────
+p {
+  margin-bottom: $spacing-md;
+  line-height: $leading-relaxed;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// ─────────────────────────────────────────
+// لینک‌ها
+// ─────────────────────────────────────────
+a {
+  color: $color-primary;
+  transition: color $transition-fast;
+  
+  &:hover {
+    color: $color-primary-dark;
+  }
+}
+
+// ─────────────────────────────────────────
+// محتوای اصلی (Entry Content)
+// ─────────────────────────────────────────
+.entry-content {
+  // لیست‌ها
+  ul,
+  ol {
+    margin: $spacing-md 0;
+    padding-right: $spacing-xl;
+  }
+  
+  li {
+    margin-bottom: $spacing-sm;
+    line-height: $leading-relaxed;
+  }
+  
+  ul li {
+    list-style-type: disc;
+  }
+  
+  ol li {
+    list-style-type: decimal;
+  }
+  
+  // بلوک‌کوت
+  blockquote {
+    padding: $spacing-md $spacing-lg;
+    margin: $spacing-lg 0;
+    border-right: 4px solid $color-primary;
+    background: gray(50);
+    font-style: italic;
+    color: gray(700);
+    border-radius: 0 $radius-md $radius-md 0;
+    
+    p:last-child {
+      margin-bottom: 0;
+    }
+    
+    cite {
+      display: block;
+      margin-top: $spacing-sm;
+      font-size: $text-sm;
+      font-style: normal;
+      color: gray(500);
+      
+      &::before {
+        content: '— ';
+      }
+    }
+  }
+  
+  // کد
+  code {
+    font-family: $font-mono;
+    background: gray(100);
+    padding: 0.2em 0.4em;
+    border-radius: $radius-sm;
+    font-size: 0.9em;
+    color: $color-primary-dark;
+  }
+  
+  pre {
+    background: gray(900);
+    color: #fff;
+    padding: $spacing-lg;
+    border-radius: $radius-lg;
+    overflow-x: auto;
+    direction: ltr;
+    text-align: left;
+    margin: $spacing-lg 0;
+    
+    code {
+      background: none;
+      padding: 0;
+      color: inherit;
+      font-size: $text-sm;
+    }
+  }
+  
+  // تصاویر
+  img {
+    border-radius: $radius-lg;
+    margin: $spacing-lg 0;
+  }
+  
+  figure {
+    margin: $spacing-lg 0;
+    
+    img {
+      margin: 0;
+    }
+    
+    figcaption {
+      margin-top: $spacing-sm;
+      font-size: $text-sm;
+      color: gray(500);
+      text-align: center;
+    }
+  }
+  
+  // جدول
+  table {
+    width: 100%;
+    margin: $spacing-lg 0;
+    border: 1px solid gray(200);
+    border-radius: $radius-md;
+    overflow: hidden;
+    
+    th,
+    td {
+      padding: $spacing-sm $spacing-md;
+      text-align: right;
+      border-bottom: 1px solid gray(200);
+    }
+    
+    th {
+      background: gray(50);
+      font-weight: $font-semibold;
+    }
+    
+    tr:last-child td {
+      border-bottom: none;
+    }
+  }
+  
+  // خط افقی
+  hr {
+    border: none;
+    border-top: 1px solid gray(200);
+    margin: $spacing-xl 0;
+  }
+}
+
+// ─────────────────────────────────────────
+// کلاس‌های متن
+// ─────────────────────────────────────────
+.text-xs { font-size: $text-xs; }
+.text-sm { font-size: $text-sm; }
+.text-base { font-size: $text-base; }
+.text-lg { font-size: $text-lg; }
+.text-xl { font-size: $text-xl; }
+.text-2xl { font-size: $text-2xl; }
+.text-3xl { font-size: $text-3xl; }
+
+.font-light { font-weight: $font-light; }
+.font-normal { font-weight: $font-normal; }
+.font-medium { font-weight: $font-medium; }
+.font-semibold { font-weight: $font-semibold; }
+.font-bold { font-weight: $font-bold; }
+
+.text-right { text-align: right; }
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+
+.text-primary { color: $color-primary; }
+.text-muted { color: gray(500); }
+.text-success { color: $color-success; }
+.text-warning { color: $color-warning; }
+.text-error { color: $color-error; }

@@ -1,0 +1,65 @@
+/**
+ * فوتر ساده - استایل
+ */
+
+.dst-footer-simple {
+    background: #ffffff;
+    border-top: 1px solid #e5e7eb;
+    padding: 24px 0;
+    margin-top: 60px;
+}
+
+.dst-footer-simple .dst-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.dst-footer-simple .dst-footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dst-footer-simple .dst-copyright {
+    color: #64748b;
+    font-size: 14px;
+    margin: 0;
+}
+
+.dst-footer-simple .dst-copyright a {
+    color: #1e293b;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.dst-footer-simple .dst-footer-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 24px;
+}
+
+.dst-footer-simple .dst-footer-menu a {
+    color: #64748b;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+.dst-footer-simple .dst-footer-menu a:hover {
+    color: #3C50E0;
+}
+
+@media (max-width: 576px) {
+    .dst-footer-simple .dst-footer-inner {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+    }
+    
+    .dst-footer-simple .dst-footer-menu {
+        gap: 16px;
+    }
+}
