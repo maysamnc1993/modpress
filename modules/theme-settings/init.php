@@ -169,6 +169,10 @@ class DST_Theme_Settings {
                         'label' => 'رنگ متن فوتر',
                         'default' => '#e2e8f0',
                     ],
+                    '_color_preview' => [
+                        'type' => 'preview',
+                        'label' => '',
+                    ],
                 ],
             ],
             
@@ -540,8 +544,8 @@ class DST_Theme_Settings {
     }
     
     /**
-     * ذخیره تنظیمات
-     */
+ * ذخیره تنظیمات
+ */
     public function handle_save_settings() {
         if (!isset($_POST['dst_theme_settings_save']) || !current_user_can('manage_options')) {
             return;
@@ -549,32 +553,65 @@ class DST_Theme_Settings {
         
         check_admin_referer('dst_theme_settings_nonce');
         
+        // گرفتن تنظیمات قبلی
+        $old_settings = get_option($this->option_name, []);
         $new_settings = [];
         
         foreach ($this->tabs as $tab_id => $tab) {
             foreach ($tab['fields'] as $field_id => $field) {
                 $type = $field['type'];
-                $value = isset($_POST[$field_id]) ? $_POST[$field_id] : '';
+                
+                // نادیده گرفتن فیلدهای خاص
+                if ($type === 'preview') {
+                    continue;
+                }
                 
                 switch ($type) {
                     case 'checkbox':
-                        $new_settings[$field_id] = !empty($value);
+                        $new_settings[$field_id] = isset($_POST[$field_id]) && $_POST[$field_id] ? true : false;
                         break;
+                        
                     case 'number':
-                        $new_settings[$field_id] = intval($value);
+                        $new_settings[$field_id] = isset($_POST[$field_id]) ? intval($_POST[$field_id]) : ($field['default'] ?? 0);
                         break;
+                        
                     case 'email':
-                        $new_settings[$field_id] = sanitize_email($value);
+                        $new_settings[$field_id] = isset($_POST[$field_id]) ? sanitize_email($_POST[$field_id]) : '';
                         break;
+                        
                     case 'url':
-                        $new_settings[$field_id] = esc_url_raw($value);
+                        $new_settings[$field_id] = isset($_POST[$field_id]) ? esc_url_raw($_POST[$field_id]) : '';
                         break;
+                        
                     case 'textarea':
                     case 'code':
-                        $new_settings[$field_id] = wp_unslash($value);
+                        $new_settings[$field_id] = isset($_POST[$field_id]) ? wp_unslash($_POST[$field_id]) : '';
                         break;
+                        
+                    case 'color':
+                        // اگر مقدار خالی بود، از مقدار قبلی یا پیش‌فرض استفاده کن
+                        if (isset($_POST[$field_id]) && !empty($_POST[$field_id])) {
+                            $new_settings[$field_id] = sanitize_hex_color($_POST[$field_id]);
+                        } else {
+                            $new_settings[$field_id] = isset($old_settings[$field_id]) ? $old_settings[$field_id] : ($field['default'] ?? '');
+                        }
+                        break;
+                        
+                    case 'image':
+                        // اگر مقدار خالی بود و قبلاً مقدار داشت، حفظ کن
+                        if (isset($_POST[$field_id]) && !empty($_POST[$field_id])) {
+                            $new_settings[$field_id] = esc_url_raw($_POST[$field_id]);
+                        } elseif (isset($_POST[$field_id]) && $_POST[$field_id] === '') {
+                            // اگر صریحاً خالی شده (دکمه حذف زده شده)
+                            $new_settings[$field_id] = '';
+                        } else {
+                            // حفظ مقدار قبلی
+                            $new_settings[$field_id] = isset($old_settings[$field_id]) ? $old_settings[$field_id] : '';
+                        }
+                        break;
+                        
                     default:
-                        $new_settings[$field_id] = sanitize_text_field($value);
+                        $new_settings[$field_id] = isset($_POST[$field_id]) ? sanitize_text_field($_POST[$field_id]) : '';
                 }
             }
         }
@@ -759,7 +796,56 @@ class DST_Theme_Settings {
                 </div>
                 <?php
                 break;
-        }
+                case 'preview':
+                ?>
+                <div class="dst-color-preview">
+                    <h3>🎨 پیش‌نمایش رنگ‌ها</h3>
+                    <div class="dst-color-preview-grid">
+                        <div class="dst-color-preview-item">
+                            <div class="dst-color-preview-box" data-preview="primary"></div>
+                            <span>رنگ اصلی</span>
+                        </div>
+                        <div class="dst-color-preview-item">
+                            <div class="dst-color-preview-box" data-preview="secondary"></div>
+                            <span>رنگ ثانویه</span>
+                        </div>
+                        <div class="dst-color-preview-item">
+                            <div class="dst-color-preview-box" data-preview="accent"></div>
+                            <span>رنگ تأکیدی</span>
+                        </div>
+                        <div class="dst-color-preview-item">
+                            <div class="dst-color-preview-box" data-preview="text"></div>
+                            <span>رنگ متن</span>
+                        </div>
+                        <div class="dst-color-preview-item">
+                            <div class="dst-color-preview-box" data-preview="headerBg"></div>
+                            <span>پس‌زمینه هدر</span>
+                        </div>
+                        <div class="dst-color-preview-item">
+                            <div class="dst-color-preview-box" data-preview="footerBg"></div>
+                            <span>پس‌زمینه فوتر</span>
+                        </div>
+                    </div>
+                    
+                    <div class="dst-theme-preview">
+                        <div class="dst-theme-preview-header">
+                            <span>لوگو</span>
+                            <span>منو</span>
+                        </div>
+                        <div class="dst-theme-preview-content">
+                            <h4>نمونه محتوا</h4>
+                            <p>این یک متن نمونه است. <span class="dst-theme-preview-accent">متن تأکیدی</span></p>
+                            <div style="margin-top: 15px;">
+                                <span class="dst-theme-preview-btn">دکمه اصلی</span>
+                                <span class="dst-theme-preview-btn secondary">دکمه ثانویه</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php
+                break;
+        
+            }
         
         // توضیحات
         if (isset($field['description'])) {
@@ -795,7 +881,7 @@ class DST_Theme_Settings {
         $body_font = $this->get('body_font') ?: 'Vazirmatn';
         $heading_font = $this->get('heading_font') ?: 'Vazirmatn';
         
-        $css .= 'body { font-family: "' . $body_font . '", sans-serif; font-size: var(--dst-font-size); line-height: var(--dst-line-height); color: var(--dst-text); background-color: var(--dst-bg); }';
+        $css .= 'body { font-family: "' . $body_font . '", sans-serif; font-size: var(--dst-font-size); line-height: var(--dst-line-height); color: var(--dst-text); background-color: var(--dst-bg)!important; }';
         $css .= 'h1, h2, h3, h4, h5, h6 { font-family: "' . $heading_font . '", sans-serif; }';
         $css .= '.dst-container { max-width: var(--dst-container); margin: 0 auto; padding: 0 20px; }';
         
