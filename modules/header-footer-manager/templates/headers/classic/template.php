@@ -24,17 +24,24 @@ $bg_color = $settings['bg_color'] ?? '#ffffff';
     style="background-color: <?php echo esc_attr($bg_color); ?>;"
 >
     <!-- Top Bar (Optional) -->
+    <?php
+    $phone = dst_get_contact('phone');
+    $email = dst_get_contact('email');
+    $has_contact = $phone || $email;
+    $has_social = dst_get_social('instagram') || dst_get_social('telegram') || dst_get_social('whatsapp');
+    ?>
+    <?php if ($has_contact || $has_social): ?>
     <div class="bg-secondary-800 text-white py-2 hidden lg:block">
         <div class="hf-container">
             <div class="flex items-center justify-between text-sm">
                 <div class="flex items-center gap-4">
-                    <?php if ($phone = get_option('dst_phone')): ?>
+                    <?php if ($phone): ?>
                         <a href="tel:<?php echo esc_attr($phone); ?>" class="flex items-center gap-1 hover:text-primary-400 transition-colors">
                             <?php echo dst_get_icon('phone', 'w-4 h-4'); ?>
                             <span><?php echo esc_html($phone); ?></span>
                         </a>
                     <?php endif; ?>
-                    <?php if ($email = get_option('dst_email')): ?>
+                    <?php if ($email): ?>
                         <a href="mailto:<?php echo esc_attr($email); ?>" class="flex items-center gap-1 hover:text-primary-400 transition-colors">
                             <?php echo dst_get_icon('mail', 'w-4 h-4'); ?>
                             <span><?php echo esc_html($email); ?></span>
@@ -42,25 +49,21 @@ $bg_color = $settings['bg_color'] ?? '#ffffff';
                     <?php endif; ?>
                 </div>
                 <div class="flex items-center gap-3">
-                    <?php if ($instagram = get_option('dst_instagram')): ?>
-                        <a href="<?php echo esc_url($instagram); ?>" target="_blank" class="hover:text-primary-400 transition-colors">
-                            <?php echo dst_get_icon('instagram', 'w-4 h-4'); ?>
+                    <?php
+                    $social_networks = ['instagram', 'telegram', 'whatsapp', 'twitter'];
+                    foreach ($social_networks as $network):
+                        $url = dst_get_social($network);
+                        if (!$url) continue;
+                    ?>
+                        <a href="<?php echo esc_url($url); ?>" target="_blank" rel="noopener" class="hover:text-primary-400 transition-colors">
+                            <?php echo dst_get_icon($network, 'w-4 h-4'); ?>
                         </a>
-                    <?php endif; ?>
-                    <?php if ($telegram = get_option('dst_telegram')): ?>
-                        <a href="<?php echo esc_url($telegram); ?>" target="_blank" class="hover:text-primary-400 transition-colors">
-                            <?php echo dst_get_icon('telegram', 'w-4 h-4'); ?>
-                        </a>
-                    <?php endif; ?>
-                    <?php if ($whatsapp = get_option('dst_whatsapp')): ?>
-                        <a href="<?php echo esc_url($whatsapp); ?>" target="_blank" class="hover:text-primary-400 transition-colors">
-                            <?php echo dst_get_icon('whatsapp', 'w-4 h-4'); ?>
-                        </a>
-                    <?php endif; ?>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>
     </div>
+    <?php endif; ?>
 
     <!-- Main Header -->
     <div class="hf-container">
@@ -68,21 +71,7 @@ $bg_color = $settings['bg_color'] ?? '#ffffff';
 
             <!-- Logo -->
             <div class="flex-shrink-0">
-                <?php if (has_custom_logo()): ?>
-                    <a href="<?php echo home_url('/'); ?>" class="block">
-                        <?php
-                        $logo_id = get_theme_mod('custom_logo');
-                        $logo_url = wp_get_attachment_image_url($logo_id, 'full');
-                        ?>
-                        <img src="<?php echo esc_url($logo_url); ?>"
-                             alt="<?php bloginfo('name'); ?>"
-                             class="h-10 w-auto max-w-[180px] object-contain">
-                    </a>
-                <?php else: ?>
-                    <a href="<?php echo home_url('/'); ?>" class="text-xl font-bold text-secondary-800 hover:text-primary-600 transition-colors">
-                        <?php bloginfo('name'); ?>
-                    </a>
-                <?php endif; ?>
+                <?php dst_the_logo('default', 'h-10 w-auto max-w-[180px] object-contain'); ?>
             </div>
 
             <!-- Desktop Navigation -->

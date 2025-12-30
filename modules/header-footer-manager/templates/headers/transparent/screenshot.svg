@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100">
+  <defs>
+    <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+      <rect width="10" height="10" fill="#ffffff"/>
+      <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#e5e7eb" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  <rect width="300" height="100" fill="url(#grid)"/>
+  <rect x="10" y="35" width="50" height="30" rx="4" fill="#ffffff" opacity="0.9"/>
+  <text x="35" y="55" font-size="8" fill="#2563eb" text-anchor="middle">لوگو</text>
+  <rect x="80" y="40" width="120" height="20" rx="4" fill="#ffffff" opacity="0.8"/>
+  <text x="140" y="54" font-size="8" fill="#6b7280" text-anchor="middle">منو</text>
+  <circle cx="240" cy="50" r="12" fill="#ffffff" opacity="0.8"/>
+  <circle cx="270" cy="50" r="12" fill="#ffffff" opacity="0.8"/>
+</svg>

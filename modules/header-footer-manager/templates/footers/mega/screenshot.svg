@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 150">
+  <rect width="300" height="150" fill="#1f2937"/>
+  <rect x="5" y="10" width="50" height="95" rx="3" fill="#374151"/>
+  <text x="30" y="22" font-size="6" fill="#d1d5db" text-anchor="middle" font-weight="bold">محصولات</text>
+  <line x1="10" y1="28" x2="50" y2="28" stroke="#4b5563" stroke-width="0.5"/>
+  <line x1="10" y1="36" x2="48" y2="36" stroke="#6b7280" stroke-width="0.3"/>
+  <line x1="10" y1="43" x2="45" y2="43" stroke="#6b7280" stroke-width="0.3"/>
+  <line x1="10" y1="50" x2="48" y2="50" stroke="#6b7280" stroke-width="0.3"/>
+  <line x1="10" y1="57" x2="46" y2="57" stroke="#6b7280" stroke-width="0.3"/>
+
+  <rect x="62" y="10" width="50" height="95" rx="3" fill="#374151"/>
+  <text x="87" y="22" font-size="6" fill="#d1d5db" text-anchor="middle" font-weight="bold">خدمات</text>
+  <line x1="67" y1="28" x2="107" y2="28" stroke="#4b5563" stroke-width="0.5"/>
+  <line x1="67" y1="36" x2="105" y2="36" stroke="#6b7280" stroke-width="0.3"/>
+  <line x1="67" y1="43" x2="102" y2="43" stroke="#6b7280" stroke-width="0.3"/>
+  <line x1="67" y1="50" x2="105" y2="50" stroke="#6b7280" stroke-width="0.3"/>
+
+  <rect x="119" y="10" width="50" height="95" rx="3" fill="#374151"/>
+  <text x="144" y="22" font-size="6" fill="#d1d5db" text-anchor="middle" font-weight="bold">شرکت</text>
+  <line x1="124" y1="28" x2="164" y2="28" stroke="#4b5563" stroke-width="0.5"/>
+  <line x1="124" y1="36" x2="162" y2="36" stroke="#6b7280" stroke-width="0.3"/>
+  <line x1="124" y1="43" x2="159" y2="43" stroke="#6b7280" stroke-width="0.3"/>
+  <line x1="124" y1="50" x2="162" y2="50" stroke="#6b7280" stroke-width="0.3"/>
+
+  <rect x="176" y="10" width="50" height="95" rx="3" fill="#374151"/>
+  <text x="201" y="22" font-size="6" fill="#d1d5db" text-anchor="middle" font-weight="bold">پشتیبانی</text>
+  <line x1="181" y1="28" x2="221" y2="28" stroke="#4b5563" stroke-width="0.5"/>
+  <line x1="181" y1="36" x2="219" y2="36" stroke="#6b7280" stroke-width="0.3"/>
+  <line x1="181" y1="43" x2="216" y2="43" stroke="#6b7280" stroke-width="0.3"/>
+
+  <rect x="233" y="10" width="62" height="95" rx="3" fill="#374151"/>
+  <text x="264" y="22" font-size="6" fill="#d1d5db" text-anchor="middle" font-weight="bold">تماس با ما</text>
+  <line x1="238" y1="28" x2="290" y2="28" stroke="#4b5563" stroke-width="0.5"/>
+  <line x1="238" y1="36" x2="285" y2="36" stroke="#6b7280" stroke-width="0.3"/>
+  <circle cx="248" cy="52" r="6" fill="#2563eb"/>
+  <circle cx="264" cy="52" r="6" fill="#2563eb"/>
+  <circle cx="280" cy="52" r="6" fill="#2563eb"/>
+
+  <line x1="0" y1="120" x2="300" y2="120" stroke="#4b5563" stroke-width="1"/>
+  <text x="150" y="135" font-size="5" fill="#9ca3af" text-anchor="middle">© 2024 تمام حقوق محفوظ است</text>
+</svg>

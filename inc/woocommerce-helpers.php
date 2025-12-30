@@ -130,6 +130,11 @@ function dst_mini_cart() {
         return '';
     }
 
+    // چک کردن وجود cart
+    if (!WC()->cart) {
+        return '';
+    }
+
     ob_start();
     ?>
     <div class="hf-mini-cart" x-data="miniCart" @click.outside="close()">
@@ -141,7 +146,7 @@ function dst_mini_cart() {
         </div>
 
         <div class="hf-mini-cart-body">
-            <?php if (WC()->cart->is_empty()): ?>
+            <?php if (!WC()->cart || WC()->cart->is_empty()): ?>
                 <p class="text-center py-8 text-secondary-500">سبد خرید شما خالی است</p>
             <?php else: ?>
                 <?php foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item):
@@ -192,7 +197,7 @@ function dst_mini_cart() {
             <?php endif; ?>
         </div>
 
-        <?php if (!WC()->cart->is_empty()): ?>
+        <?php if (WC()->cart && !WC()->cart->is_empty()): ?>
             <div class="hf-mini-cart-footer">
                 <div class="flex justify-between items-center mb-3">
                     <span class="text-sm text-secondary-600">جمع کل:</span>

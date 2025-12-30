@@ -50,3 +50,6 @@ require_once DST_PATH . '/inc/helpers.php';
 
 // توابع WooCommerce برای هدر و فوتر
 require_once DST_PATH . '/inc/woocommerce-helpers.php';
+
+// تنظیمات Customizer (رنگ‌ها، لوگو، شبکه‌های اجتماعی)
+require_once DST_PATH . '/inc/customizer.php';
