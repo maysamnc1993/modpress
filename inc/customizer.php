@@ -365,18 +365,20 @@ add_action('wp_head', 'dst_customizer_css', 100);
 /**
  * تبدیل HEX به RGB
  */
-function dst_hex_to_rgb($hex) {
-    $hex = ltrim($hex, '#');
+if (!function_exists('dst_hex_to_rgb')) {
+    function dst_hex_to_rgb($hex) {
+        $hex = ltrim($hex, '#');
 
-    if (strlen($hex) == 3) {
-        $hex = $hex[0] . $hex[0] . $hex[1] . $hex[1] . $hex[2] . $hex[2];
+        if (strlen($hex) == 3) {
+            $hex = $hex[0] . $hex[0] . $hex[1] . $hex[1] . $hex[2] . $hex[2];
+        }
+
+        $r = hexdec(substr($hex, 0, 2));
+        $g = hexdec(substr($hex, 2, 2));
+        $b = hexdec(substr($hex, 4, 2));
+
+        return "{$r}, {$g}, {$b}";
     }
-
-    $r = hexdec(substr($hex, 0, 2));
-    $g = hexdec(substr($hex, 2, 2));
-    $b = hexdec(substr($hex, 4, 2));
-
-    return "{$r}, {$g}, {$b}";
 }
 
 /**
@@ -385,27 +387,29 @@ function dst_hex_to_rgb($hex) {
  * @param string $type 'default' یا 'light'
  * @return string URL لوگو
  */
-function dst_get_logo($type = 'default') {
-    if ($type === 'light') {
-        $logo = get_theme_mod('dst_logo_light');
+if (!function_exists('dst_get_logo')) {
+    function dst_get_logo($type = 'default') {
+        if ($type === 'light') {
+            $logo = get_theme_mod('dst_logo_light');
+            if ($logo) {
+                return $logo;
+            }
+        }
+
+        // لوگوی اصلی از Customizer ما
+        $logo = get_theme_mod('dst_logo');
         if ($logo) {
             return $logo;
         }
-    }
 
-    // لوگوی اصلی از Customizer ما
-    $logo = get_theme_mod('dst_logo');
-    if ($logo) {
-        return $logo;
-    }
+        // fallback به لوگوی استاندارد وردپرس
+        $custom_logo_id = get_theme_mod('custom_logo');
+        if ($custom_logo_id) {
+            return wp_get_attachment_image_url($custom_logo_id, 'full');
+        }
 
-    // fallback به لوگوی استاندارد وردپرس
-    $custom_logo_id = get_theme_mod('custom_logo');
-    if ($custom_logo_id) {
-        return wp_get_attachment_image_url($custom_logo_id, 'full');
+        return '';
     }
-
-    return '';
 }
 
 /**
@@ -414,58 +418,66 @@ function dst_get_logo($type = 'default') {
  * @param string $type 'default' یا 'light'
  * @param string $class کلاس CSS اضافی
  */
-function dst_the_logo($type = 'default', $class = 'h-10 w-auto') {
-    $logo_url = dst_get_logo($type);
+if (!function_exists('dst_the_logo')) {
+    function dst_the_logo($type = 'default', $class = 'h-10 w-auto') {
+        $logo_url = dst_get_logo($type);
 
-    if ($logo_url) {
-        printf(
-            '<a href="%s" class="block"><img src="%s" alt="%s" class="%s"></a>',
-            esc_url(home_url('/')),
-            esc_url($logo_url),
-            esc_attr(get_bloginfo('name')),
-            esc_attr($class)
-        );
-    } else {
-        printf(
-            '<a href="%s" class="text-xl font-bold text-secondary-800 hover:text-primary-600 transition-colors">%s</a>',
-            esc_url(home_url('/')),
-            esc_html(get_bloginfo('name'))
-        );
+        if ($logo_url) {
+            printf(
+                '<a href="%s" class="block"><img src="%s" alt="%s" class="%s"></a>',
+                esc_url(home_url('/')),
+                esc_url($logo_url),
+                esc_attr(get_bloginfo('name')),
+                esc_attr($class)
+            );
+        } else {
+            printf(
+                '<a href="%s" class="text-xl font-bold text-secondary-800 hover:text-primary-600 transition-colors">%s</a>',
+                esc_url(home_url('/')),
+                esc_html(get_bloginfo('name'))
+            );
+        }
     }
 }
 
 /**
  * گرفتن اطلاعات تماس
  */
-function dst_get_contact($field) {
-    return get_theme_mod("dst_{$field}", '');
+if (!function_exists('dst_get_contact')) {
+    function dst_get_contact($field) {
+        return get_theme_mod("dst_{$field}", '');
+    }
 }
 
 /**
  * گرفتن لینک شبکه اجتماعی
  */
-function dst_get_social($network) {
-    return get_theme_mod("dst_{$network}", '');
+if (!function_exists('dst_get_social')) {
+    function dst_get_social($network) {
+        return get_theme_mod("dst_{$network}", '');
+    }
 }
 
 /**
  * نمایش آیکون‌های شبکه‌های اجتماعی
  */
-function dst_social_icons($class = 'hf-social-icons') {
-    $networks = ['instagram', 'telegram', 'whatsapp', 'twitter', 'facebook', 'linkedin', 'youtube'];
+if (!function_exists('dst_social_icons')) {
+    function dst_social_icons($class = 'hf-social-icons') {
+        $networks = ['instagram', 'telegram', 'whatsapp', 'twitter', 'facebook', 'linkedin', 'youtube'];
 
-    ob_start();
-    ?>
-    <div class="<?php echo esc_attr($class); ?>">
-        <?php foreach ($networks as $network):
-            $url = dst_get_social($network);
-            if (!$url) continue;
+        ob_start();
         ?>
-            <a href="<?php echo esc_url($url); ?>" target="_blank" rel="noopener noreferrer" class="hf-social-icon" title="<?php echo esc_attr(ucfirst($network)); ?>">
-                <?php echo dst_get_icon($network, 'w-5 h-5'); ?>
-            </a>
-        <?php endforeach; ?>
-    </div>
-    <?php
-    return ob_get_clean();
+        <div class="<?php echo esc_attr($class); ?>">
+            <?php foreach ($networks as $network):
+                $url = dst_get_social($network);
+                if (!$url) continue;
+            ?>
+                <a href="<?php echo esc_url($url); ?>" target="_blank" rel="noopener noreferrer" class="hf-social-icon" title="<?php echo esc_attr(ucfirst($network)); ?>">
+                    <?php echo dst_get_icon($network, 'w-5 h-5'); ?>
+                </a>
+            <?php endforeach; ?>
+        </div>
+        <?php
+        return ob_get_clean();
+    }
 }
