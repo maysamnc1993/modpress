@@ -42,14 +42,7 @@ $bg_color = $settings['bg_color'] ?? '#ffffff';
 
                 <!-- Centered Logo -->
                 <div class="absolute left-1/2 transform -translate-x-1/2">
-                    <?php if (has_custom_logo()): ?>
-                        <a href="<?php echo home_url('/'); ?>" class="block">
-                            <?php $logo_id = get_theme_mod('custom_logo'); $logo_url = wp_get_attachment_image_url($logo_id, 'full'); ?>
-                            <img src="<?php echo esc_url($logo_url); ?>" alt="<?php bloginfo('name'); ?>" class="h-12 w-auto max-w-[200px] object-contain">
-                        </a>
-                    <?php else: ?>
-                        <a href="<?php echo home_url('/'); ?>" class="text-2xl font-bold text-secondary-800 hover:text-primary-600"><?php bloginfo('name'); ?></a>
-                    <?php endif; ?>
+                    <?php dst_the_logo('default', 'h-10 w-auto max-w-[180px] object-contain'); ?>
                 </div>
 
                 <!-- Right Actions -->

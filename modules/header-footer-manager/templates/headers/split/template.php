@@ -40,21 +40,7 @@ $bg_color = $settings['bg_color'] ?? '#ffffff';
 
             <!-- Centered Logo -->
             <div class="flex-shrink-0 px-8">
-                <?php if (has_custom_logo()): ?>
-                    <a href="<?php echo home_url('/'); ?>" class="block">
-                        <?php
-                        $logo_id = get_theme_mod('custom_logo');
-                        $logo_url = wp_get_attachment_image_url($logo_id, 'full');
-                        ?>
-                        <img src="<?php echo esc_url($logo_url); ?>"
-                             alt="<?php bloginfo('name'); ?>"
-                             class="h-14 w-auto max-w-[200px] object-contain">
-                    </a>
-                <?php else: ?>
-                    <a href="<?php echo home_url('/'); ?>" class="text-2xl font-bold text-secondary-800 hover:text-primary-600 transition-colors whitespace-nowrap">
-                        <?php bloginfo('name'); ?>
-                    </a>
-                <?php endif; ?>
+                <?php dst_the_logo('default', 'h-10 w-auto max-w-[180px] object-contain'); ?>
             </div>
 
             <!-- Right Navigation & Actions -->
@@ -105,21 +91,7 @@ $bg_color = $settings['bg_color'] ?? '#ffffff';
             <div class="lg:hidden flex items-center justify-between w-full">
                 <!-- Mobile Logo -->
                 <div class="flex-1">
-                    <?php if (has_custom_logo()): ?>
-                        <a href="<?php echo home_url('/'); ?>" class="block">
-                            <?php
-                            $logo_id = get_theme_mod('custom_logo');
-                            $logo_url = wp_get_attachment_image_url($logo_id, 'full');
-                            ?>
-                            <img src="<?php echo esc_url($logo_url); ?>"
-                                 alt="<?php bloginfo('name'); ?>"
-                                 class="h-10 w-auto max-w-[150px] object-contain">
-                        </a>
-                    <?php else: ?>
-                        <a href="<?php echo home_url('/'); ?>" class="text-lg font-bold text-secondary-800">
-                            <?php bloginfo('name'); ?>
-                        </a>
-                    <?php endif; ?>
+                    <?php dst_the_logo('default', 'h-10 w-auto max-w-[180px] object-contain'); ?>
                 </div>
 
                 <!-- Mobile Actions -->

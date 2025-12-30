@@ -30,24 +30,7 @@ $bg_color = $settings['bg_color'] ?? '#ffffff';
 
             <!-- Logo -->
             <div class="flex-shrink-0">
-                <?php if (has_custom_logo()): ?>
-                    <a href="<?php echo home_url('/'); ?>" class="block">
-                        <?php
-                        $logo_id = get_theme_mod('custom_logo');
-                        $logo_url = wp_get_attachment_image_url($logo_id, 'full');
-                        ?>
-                        <img src="<?php echo esc_url($logo_url); ?>"
-                             alt="<?php bloginfo('name'); ?>"
-                             :class="{ 'h-8': isScrolled, 'h-12': !isScrolled }"
-                             class="w-auto max-w-[180px] object-contain transition-all duration-300">
-                    </a>
-                <?php else: ?>
-                    <a href="<?php echo home_url('/'); ?>" 
-                       :class="{ 'text-lg': isScrolled, 'text-2xl': !isScrolled }"
-                       class="font-bold text-secondary-800 hover:text-primary-600 transition-all duration-300">
-                        <?php bloginfo('name'); ?>
-                    </a>
-                <?php endif; ?>
+                <?php dst_the_logo('default', 'h-10 w-auto max-w-[180px] object-contain'); ?>
             </div>
 
             <!-- Desktop Navigation -->

@@ -74,21 +74,7 @@ $bg_color = $settings['bg_color'] ?? '#1a1a1a';
 
             <!-- Logo -->
             <div class="flex-shrink-0">
-                <?php if (has_custom_logo()): ?>
-                    <a href="<?php echo home_url('/'); ?>" class="block">
-                        <?php
-                        $logo_id = get_theme_mod('custom_logo');
-                        $logo_url = wp_get_attachment_image_url($logo_id, 'full');
-                        ?>
-                        <img src="<?php echo esc_url($logo_url); ?>"
-                             alt="<?php bloginfo('name'); ?>"
-                             class="h-10 w-auto max-w-[180px] object-contain filter brightness-0 invert">
-                    </a>
-                <?php else: ?>
-                    <a href="<?php echo home_url('/'); ?>" class="text-xl font-bold text-white hover:text-primary-400 transition-colors">
-                        <?php bloginfo('name'); ?>
-                    </a>
-                <?php endif; ?>
+                <?php dst_the_logo('light', 'h-10 w-auto max-w-[180px] object-contain'); ?>
             </div>
 
             <!-- Desktop Navigation -->

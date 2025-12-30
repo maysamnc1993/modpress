@@ -392,13 +392,16 @@ class DST_Header_Footer_Manager {
                                     <div class="dst-hf-card-thumb">
                                         <?php if ($config['thumbnail']): ?>
                                             <img src="<?php echo esc_url($config['thumbnail']); ?>" alt="<?php echo esc_attr($config['title']); ?>">
+                                            <button type="button" class="dst-hf-zoom-btn" data-lightbox="<?php echo esc_url($config['thumbnail']); ?>" data-title="<?php echo esc_attr($config['title']); ?>">
+                                                <span class="dashicons dashicons-search"></span>
+                                            </button>
                                         <?php else: ?>
                                             <div class="dst-hf-no-thumb">
                                                 <span class="dashicons dashicons-format-image"></span>
                                             </div>
                                         <?php endif; ?>
                                     </div>
-                                    
+
                                     <div class="dst-hf-card-info">
                                         <h3><?php echo esc_html($config['title']); ?></h3>
                                         <?php if ($config['description']): ?>
@@ -460,13 +463,16 @@ class DST_Header_Footer_Manager {
                                     <div class="dst-hf-card-thumb">
                                         <?php if ($config['thumbnail']): ?>
                                             <img src="<?php echo esc_url($config['thumbnail']); ?>" alt="<?php echo esc_attr($config['title']); ?>">
+                                            <button type="button" class="dst-hf-zoom-btn" data-lightbox="<?php echo esc_url($config['thumbnail']); ?>" data-title="<?php echo esc_attr($config['title']); ?>">
+                                                <span class="dashicons dashicons-search"></span>
+                                            </button>
                                         <?php else: ?>
                                             <div class="dst-hf-no-thumb">
                                                 <span class="dashicons dashicons-format-image"></span>
                                             </div>
                                         <?php endif; ?>
                                     </div>
-                                    
+
                                     <div class="dst-hf-card-info">
                                         <h3><?php echo esc_html($config['title']); ?></h3>
                                         <?php if ($config['description']): ?>
@@ -539,52 +545,154 @@ templates/headers/my-header/
 }
                 </pre>
             </div>
+
+            <!-- لایت‌باکس -->
+            <div class="dst-lightbox" id="dst-lightbox">
+                <div class="dst-lightbox-content">
+                    <button type="button" class="dst-lightbox-close">
+                        <span class="dashicons dashicons-no-alt"></span>
+                    </button>
+                    <button type="button" class="dst-lightbox-nav prev">
+                        <span class="dashicons dashicons-arrow-right-alt2"></span>
+                    </button>
+                    <button type="button" class="dst-lightbox-nav next">
+                        <span class="dashicons dashicons-arrow-left-alt2"></span>
+                    </button>
+                    <img src="" alt="" class="dst-lightbox-image">
+                    <div class="dst-lightbox-title"></div>
+                </div>
+            </div>
         </div>
-        
+
         <script>
         jQuery(document).ready(function($) {
             // کلیک روی کارت
             $('.dst-hf-card').on('click', function(e) {
+                // اگر روی دکمه زوم کلیک شده، کارت رو انتخاب نکن
+                if ($(e.target).closest('.dst-hf-zoom-btn').length) {
+                    return;
+                }
+
                 var $this = $(this);
                 var $section = $this.closest('.dst-hf-section');
-                
+
                 // حذف active از همه کارت‌های این بخش
                 $section.find('.dst-hf-card').removeClass('active');
-                
+
                 // اضافه کردن active به کارت کلیک شده
                 $this.addClass('active');
-                
+
                 // انتخاب radio
                 $this.find('input[type="radio"]').prop('checked', true).trigger('change');
             });
-            
+
             // وقتی radio عوض میشه
             $('input[name="active_header"]').on('change', function() {
                 var $card = $(this).closest('.dst-hf-card');
                 var $section = $card.closest('.dst-hf-section');
                 var templateName = $(this).val();
-                
+
                 // آپدیت کارت‌ها
                 $section.find('.dst-hf-card').removeClass('active');
                 $card.addClass('active');
-                
+
                 // نمایش/مخفی کردن تنظیمات
                 $section.find('.dst-hf-template-settings').hide();
                 $section.find('[data-template="header-' + templateName + '"]').show();
             });
-            
+
             $('input[name="active_footer"]').on('change', function() {
                 var $card = $(this).closest('.dst-hf-card');
                 var $section = $card.closest('.dst-hf-section');
                 var templateName = $(this).val();
-                
+
                 // آپدیت کارت‌ها
                 $section.find('.dst-hf-card').removeClass('active');
                 $card.addClass('active');
-                
+
                 // نمایش/مخفی کردن تنظیمات
                 $section.find('.dst-hf-template-settings').hide();
                 $section.find('[data-template="footer-' + templateName + '"]').show();
+            });
+
+            // لایت‌باکس
+            var $lightbox = $('#dst-lightbox');
+            var $lightboxImage = $lightbox.find('.dst-lightbox-image');
+            var $lightboxTitle = $lightbox.find('.dst-lightbox-title');
+            var currentImages = [];
+            var currentIndex = 0;
+
+            // جمع‌آوری تصاویر
+            function collectImages($section) {
+                var images = [];
+                $section.find('.dst-hf-zoom-btn').each(function() {
+                    images.push({
+                        src: $(this).data('lightbox'),
+                        title: $(this).data('title')
+                    });
+                });
+                return images;
+            }
+
+            // باز کردن لایت‌باکس
+            $('.dst-hf-zoom-btn').on('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                var $section = $(this).closest('.dst-hf-section');
+                currentImages = collectImages($section);
+                currentIndex = $section.find('.dst-hf-zoom-btn').index(this);
+
+                showImage(currentIndex);
+                $lightbox.addClass('is-open');
+                $('body').css('overflow', 'hidden');
+            });
+
+            // نمایش تصویر
+            function showImage(index) {
+                if (currentImages[index]) {
+                    $lightboxImage.attr('src', currentImages[index].src);
+                    $lightboxTitle.text(currentImages[index].title);
+                }
+            }
+
+            // بستن لایت‌باکس
+            $lightbox.find('.dst-lightbox-close').on('click', closeLightbox);
+            $lightbox.on('click', function(e) {
+                if ($(e.target).hasClass('dst-lightbox')) {
+                    closeLightbox();
+                }
+            });
+
+            function closeLightbox() {
+                $lightbox.removeClass('is-open');
+                $('body').css('overflow', '');
+            }
+
+            // ناوبری
+            $lightbox.find('.dst-lightbox-nav.prev').on('click', function() {
+                currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+                showImage(currentIndex);
+            });
+
+            $lightbox.find('.dst-lightbox-nav.next').on('click', function() {
+                currentIndex = (currentIndex + 1) % currentImages.length;
+                showImage(currentIndex);
+            });
+
+            // کیبورد
+            $(document).on('keydown', function(e) {
+                if (!$lightbox.hasClass('is-open')) return;
+
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowRight') {
+                    currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+                    showImage(currentIndex);
+                }
+                if (e.key === 'ArrowLeft') {
+                    currentIndex = (currentIndex + 1) % currentImages.length;
+                    showImage(currentIndex);
+                }
             });
         });
         </script>

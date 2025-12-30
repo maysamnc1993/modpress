@@ -10,13 +10,7 @@
             
             <!-- لوگو -->
             <div class="dst-header-logo">
-                <?php if (has_custom_logo()): ?>
-                    <?php the_custom_logo(); ?>
-                <?php else: ?>
-                    <a href="<?php echo esc_url(home_url('/')); ?>" class="dst-site-title">
-                        <?php bloginfo('name'); ?>
-                    </a>
-                <?php endif; ?>
+                <?php dst_the_logo('default', 'h-10 w-auto max-w-[180px] object-contain'); ?>
             </div>
             
             <!-- منوی اصلی -->

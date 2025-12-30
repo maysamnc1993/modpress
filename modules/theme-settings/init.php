@@ -930,7 +930,29 @@ class DST_Theme_Settings {
         $css .= '.hf-btn-primary { background-color: var(--dst-btn-bg); color: var(--dst-btn-text); }';
         $css .= '.hf-btn-primary:hover { background-color: var(--dst-btn-hover); }';
         $css .= '.hf-badge-primary { background-color: var(--dst-btn-bg); color: var(--dst-btn-text); }';
-        
+
+        // Admin bar offset for fixed/absolute headers
+        $css .= '
+        body.admin-bar .hf-header-sticky,
+        body.admin-bar .hf-header-fixed,
+        body.admin-bar header[style*="position: fixed"],
+        body.admin-bar header[style*="position:fixed"],
+        body.admin-bar header.fixed,
+        body.admin-bar header.sticky {
+            top: 32px !important;
+        }
+        @media screen and (max-width: 782px) {
+            body.admin-bar .hf-header-sticky,
+            body.admin-bar .hf-header-fixed,
+            body.admin-bar header[style*="position: fixed"],
+            body.admin-bar header[style*="position:fixed"],
+            body.admin-bar header.fixed,
+            body.admin-bar header.sticky {
+                top: 46px !important;
+            }
+        }
+        ';
+
         // Custom CSS
         $custom_css = $this->get('custom_css');
         if ($custom_css) {

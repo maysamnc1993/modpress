@@ -39,21 +39,7 @@ $bg_color = $settings['bg_color'] ?? '#ffffff';
 
             <!-- Logo (Centered) -->
             <div class="absolute left-1/2 transform -translate-x-1/2">
-                <?php if (has_custom_logo()): ?>
-                    <a href="<?php echo home_url('/'); ?>" class="block">
-                        <?php
-                        $logo_id = get_theme_mod('custom_logo');
-                        $logo_url = wp_get_attachment_image_url($logo_id, 'full');
-                        ?>
-                        <img src="<?php echo esc_url($logo_url); ?>"
-                             alt="<?php bloginfo('name'); ?>"
-                             class="h-10 w-auto max-w-[180px] object-contain">
-                    </a>
-                <?php else: ?>
-                    <a href="<?php echo home_url('/'); ?>" class="text-xl font-bold text-secondary-800 hover:text-primary-600 transition-colors">
-                        <?php bloginfo('name'); ?>
-                    </a>
-                <?php endif; ?>
+                <?php dst_the_logo('default', 'h-10 w-auto max-w-[180px] object-contain'); ?>
             </div>
 
             <!-- Header Actions -->
@@ -114,19 +100,7 @@ $bg_color = $settings['bg_color'] ?? '#ffffff';
     >
         <!-- Sidebar Header -->
         <div class="flex items-center justify-between p-6 border-b border-secondary-100 bg-primary-600 text-white">
-            <?php if (has_custom_logo()): ?>
-                <a href="<?php echo home_url('/'); ?>" class="block">
-                    <?php
-                    $logo_id = get_theme_mod('custom_logo');
-                    $logo_url = wp_get_attachment_image_url($logo_id, 'full');
-                    ?>
-                    <img src="<?php echo esc_url($logo_url); ?>"
-                         alt="<?php bloginfo('name'); ?>"
-                         class="h-8 w-auto filter brightness-0 invert">
-                </a>
-            <?php else: ?>
-                <span class="text-lg font-bold"><?php bloginfo('name'); ?></span>
-            <?php endif; ?>
+            <?php dst_the_logo('light', 'h-8 w-auto'); ?>
             <button @click="closeMobileMenu()" class="text-white hover:text-primary-200 transition-colors">
                 <?php echo dst_get_icon('close', 'w-6 h-6'); ?>
             </button>
