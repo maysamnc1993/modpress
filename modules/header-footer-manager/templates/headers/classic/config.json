@@ -1,10 +1,10 @@
 {
-    "name": "transparent",
-    "title": "شفاف",
-    "description": "هدر شفاف برای استفاده روی Hero Section - با افکت تغییر رنگ هنگام اسکرول",
+    "name": "classic",
+    "title": "کلاسیک",
+    "description": "هدر کلاسیک با لوگو سمت راست و منو سمت چپ - مناسب همه سایت‌ها",
     "version": "2.0.0",
     "author": "Developer Starter",
-    "supports": ["woocommerce", "search", "sticky"],
+    "supports": ["woocommerce", "mega-menu", "search", "sticky"],
     "settings": {
         "sticky": {
             "type": "checkbox",
@@ -16,7 +16,7 @@
             "type": "checkbox",
             "label": "نمایش جستجو",
             "default": true,
-            "checkbox_label": "نمایش فرم جستجو"
+            "checkbox_label": "نمایش فرم جستجو در هدر"
         },
         "show_cart": {
             "type": "checkbox",
@@ -32,7 +32,7 @@
         },
         "bg_color": {
             "type": "color",
-            "label": "رنگ پس‌زمینه (بعد از اسکرول)",
+            "label": "رنگ پس‌زمینه",
             "default": "#ffffff"
         }
     }

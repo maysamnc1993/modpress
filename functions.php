@@ -47,3 +47,6 @@ require_once DST_PATH . '/inc/acf-config.php';
 
 // توابع کمکی
 require_once DST_PATH . '/inc/helpers.php';
+
+// توابع WooCommerce برای هدر و فوتر
+require_once DST_PATH . '/inc/woocommerce-helpers.php';

@@ -1,6 +1,39 @@
 {
     "name": "minimal",
-    "title": "هدر مینیمال",
-    "description": "هدر ساده و تمیز با حداقل المان‌ها",
-    "version": "1.0.0"
+    "title": "مینیمال",
+    "description": "هدر ساده و مینیمال - فقط لوگو و منوی اصلی بدون المان اضافی",
+    "version": "2.0.0",
+    "author": "Developer Starter",
+    "supports": ["search", "sticky"],
+    "settings": {
+        "sticky": {
+            "type": "checkbox",
+            "label": "هدر چسبان",
+            "default": false,
+            "checkbox_label": "فعال کردن حالت Sticky"
+        },
+        "show_search": {
+            "type": "checkbox",
+            "label": "نمایش جستجو",
+            "default": false,
+            "checkbox_label": "نمایش آیکون جستجو"
+        },
+        "show_cart": {
+            "type": "checkbox",
+            "label": "نمایش سبد خرید",
+            "default": false,
+            "checkbox_label": "نمایش آیکون سبد خرید"
+        },
+        "show_account": {
+            "type": "checkbox",
+            "label": "نمایش حساب کاربری",
+            "default": false,
+            "checkbox_label": "نمایش آیکون حساب کاربری"
+        },
+        "bg_color": {
+            "type": "color",
+            "label": "رنگ پس‌زمینه",
+            "default": "#ffffff"
+        }
+    }
 }

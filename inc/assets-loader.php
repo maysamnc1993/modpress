@@ -1,12 +1,13 @@
 <?php
 /**
  * Assets Loader - لود CSS و JavaScript
- * 
+ *
  * این فایل فایل‌های CSS و JS را بر اساس محیط لود می‌کند:
  * - Development: از Vite dev server
  * - Production: از پوشه dist
- * 
+ *
  * @package Developer_Starter
+ * @version 2.0.0
  */
 
 defined('ABSPATH') || exit;
@@ -16,14 +17,19 @@ defined('ABSPATH') || exit;
  * اگر Vite در حال اجراست، true برمی‌گرداند
  */
 function dst_is_development() {
-    // چک کردن فایل hot که Vite می‌سازد
-    $hot_file = DST_PATH . '/assets/dist/.vite/manifest.json';
-    
-    // یا چک کردن با constant
+    // چک کردن با constant
     if (defined('DST_DEVELOPMENT') && DST_DEVELOPMENT) {
         return true;
     }
-    
+
+    // یا چک کردن اتصال به Vite
+    if (defined('WP_DEBUG') && WP_DEBUG) {
+        $vite_check = @file_get_contents('http://localhost:3000/@vite/client', false, stream_context_create([
+            'http' => ['timeout' => 0.5]
+        ]));
+        return $vite_check !== false;
+    }
+
     return false;
 }
 
@@ -31,13 +37,13 @@ function dst_is_development() {
  * لود استایل‌ها و اسکریپت‌ها
  */
 function dst_enqueue_assets() {
-    
+
     if (dst_is_development()) {
         // ═══════════════════════════════════════
         // Development Mode (Vite Dev Server)
         // ═══════════════════════════════════════
-        
-        // Vite client
+
+        // Vite client for HMR
         wp_enqueue_script(
             'vite-client',
             'http://localhost:3000/@vite/client',
@@ -45,8 +51,8 @@ function dst_enqueue_assets() {
             null,
             false
         );
-        
-        // Main JS (شامل SCSS هم میشه)
+
+        // Main JS (includes Tailwind CSS via PostCSS)
         wp_enqueue_script(
             'dst-main',
             'http://localhost:3000/js/main.js',
@@ -54,43 +60,27 @@ function dst_enqueue_assets() {
             null,
             true
         );
-        
+
     } else {
         // ═══════════════════════════════════════
         // Production Mode (Built Files)
         // ═══════════════════════════════════════
-        
-        // Grid System CSS
-        wp_enqueue_style(
-            'dst-grid',
-            DST_URL . '/assets/css/grid.css',
-            [],
-            DST_VERSION
-        );
-        
-        // CTA Components CSS
-        wp_enqueue_style(
-            'dst-cta',
-            DST_URL . '/assets/css/components/cta.css',
-            [],
-            DST_VERSION
-        );
-        
-        // CSS
+
+        // Tailwind CSS (built)
         $css_file = DST_PATH . '/assets/dist/css/style.css';
         $css_version = file_exists($css_file) ? filemtime($css_file) : DST_VERSION;
-        
+
         wp_enqueue_style(
             'dst-main',
             DST_URL . '/assets/dist/css/style.css',
-            ['dst-grid'],
+            [],
             $css_version
         );
-        
-        // JavaScript
+
+        // JavaScript with Alpine.js
         $js_file = DST_PATH . '/assets/dist/js/main.js';
         $js_version = file_exists($js_file) ? filemtime($js_file) : DST_VERSION;
-        
+
         wp_enqueue_script(
             'dst-main',
             DST_URL . '/assets/dist/js/main.js',
@@ -99,15 +89,25 @@ function dst_enqueue_assets() {
             true
         );
     }
-    
+
+    // Vazirmatn Font for Persian/RTL
+    wp_enqueue_style(
+        'vazirmatn-font',
+        'https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css',
+        [],
+        '33.003'
+    );
+
     // متغیرها برای JS
     wp_localize_script('dst-main', 'dstConfig', [
-        'ajaxUrl'   => admin_url('admin-ajax.php'),
-        'nonce'     => wp_create_nonce('dst_nonce'),
-        'siteUrl'   => home_url('/'),
-        'themeUrl'  => DST_URL,
-        'isRTL'     => is_rtl(),
-        'isLoggedIn'=> is_user_logged_in(),
+        'ajaxUrl'    => admin_url('admin-ajax.php'),
+        'nonce'      => wp_create_nonce('dst_nonce'),
+        'siteUrl'    => home_url('/'),
+        'themeUrl'   => DST_URL,
+        'isRTL'      => is_rtl(),
+        'isLoggedIn' => is_user_logged_in(),
+        'cartUrl'    => function_exists('wc_get_cart_url') ? wc_get_cart_url() : '',
+        'checkoutUrl'=> function_exists('wc_get_checkout_url') ? wc_get_checkout_url() : '',
     ]);
 }
 add_action('wp_enqueue_scripts', 'dst_enqueue_assets');

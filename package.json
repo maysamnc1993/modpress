@@ -1,7 +1,7 @@
 {
   "name": "developer-starter-theme",
-  "version": "1.0.0",
-  "description": "استارتر تم حرفه‌ای وردپرس",
+  "version": "2.0.0",
+  "description": "استارتر تم حرفه‌ای وردپرس با Tailwind CSS",
   "author": "Meysam Khatami",
   "license": "GPL-2.0-or-later",
   "scripts": {
@@ -10,7 +10,17 @@
     "watch": "vite build --watch"
   },
   "devDependencies": {
-    "vite": "^5.0.0",
-    "sass": "^1.69.0"
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.10",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32",
+    "sass": "^1.69.0",
+    "tailwindcss": "^3.4.0",
+    "terser": "^5.44.1",
+    "vite": "^5.0.0"
+  },
+  "dependencies": {
+    "alpinejs": "^3.13.3"
   }
 }

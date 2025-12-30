@@ -1,26 +1,32 @@
 <?php
 /**
- * Header Template: Minimal
- * هدر ساده و مینیمال - فقط لوگو و منو
+ * Header Template: Sticky
+ * هدر چسبان با افکت اسکرول - تغییر اندازه و سایه
  */
 
 defined('ABSPATH') || exit;
 
 $settings = dst_get_header_setting();
-$is_sticky = $settings['sticky'] ?? false;
-$show_search = $settings['show_search'] ?? false;
-$show_cart = $settings['show_cart'] ?? false;
-$show_account = $settings['show_account'] ?? false;
+$is_sticky = $settings['sticky'] ?? true;
+$show_search = $settings['show_search'] ?? true;
+$show_cart = $settings['show_cart'] ?? true;
+$show_account = $settings['show_account'] ?? true;
 $bg_color = $settings['bg_color'] ?? '#ffffff';
 ?>
 
 <header
     x-data="header"
-    class="<?php echo $is_sticky ? 'hf-header-sticky' : 'relative'; ?> transition-all duration-300 border-b border-secondary-100"
+    :class="{
+        'shadow-lg': isScrolled,
+        'shadow-sm': !isScrolled
+    }"
+    class="<?php echo $is_sticky ? 'hf-header-sticky' : 'relative'; ?> bg-white transition-all duration-300"
     style="background-color: <?php echo esc_attr($bg_color); ?>;"
 >
     <div class="hf-container">
-        <div class="flex items-center justify-between h-16 lg:h-20">
+        <div 
+            :class="{ 'h-16': isScrolled, 'h-24': !isScrolled }"
+            class="flex items-center justify-between transition-all duration-300">
 
             <!-- Logo -->
             <div class="flex-shrink-0">
@@ -32,24 +38,27 @@ $bg_color = $settings['bg_color'] ?? '#ffffff';
                         ?>
                         <img src="<?php echo esc_url($logo_url); ?>"
                              alt="<?php bloginfo('name'); ?>"
-                             class="h-8 lg:h-10 w-auto max-w-[150px] object-contain">
+                             :class="{ 'h-8': isScrolled, 'h-12': !isScrolled }"
+                             class="w-auto max-w-[180px] object-contain transition-all duration-300">
                     </a>
                 <?php else: ?>
-                    <a href="<?php echo home_url('/'); ?>" class="text-lg lg:text-xl font-bold text-secondary-800 hover:text-primary-600 transition-colors">
+                    <a href="<?php echo home_url('/'); ?>" 
+                       :class="{ 'text-lg': isScrolled, 'text-2xl': !isScrolled }"
+                       class="font-bold text-secondary-800 hover:text-primary-600 transition-all duration-300">
                         <?php bloginfo('name'); ?>
                     </a>
                 <?php endif; ?>
             </div>
 
             <!-- Desktop Navigation -->
-            <nav class="hidden lg:flex items-center">
+            <nav class="hidden lg:flex items-center gap-1">
                 <?php
                 wp_nav_menu([
                     'theme_location' => 'primary',
                     'container' => false,
                     'menu_class' => 'hf-nav-menu',
                     'fallback_cb' => false,
-                    'depth' => 2,
+                    'depth' => 3,
                 ]);
                 ?>
             </nav>
@@ -59,14 +68,34 @@ $bg_color = $settings['bg_color'] ?? '#ffffff';
 
                 <!-- Search -->
                 <?php if ($show_search): ?>
-                    <button @click="toggleSearch()" class="hf-icon-btn hidden md:flex" aria-label="جستجو">
-                        <?php echo dst_get_icon('search'); ?>
-                    </button>
+                    <div class="relative hidden md:block" x-data="{ searchOpen: false }">
+                        <button
+                            @click="searchOpen = !searchOpen"
+                            class="hf-icon-btn"
+                            aria-label="جستجو"
+                        >
+                            <?php echo dst_get_icon('search'); ?>
+                        </button>
+
+                        <div
+                            x-show="searchOpen"
+                            x-transition
+                            @click.outside="searchOpen = false"
+                            class="absolute top-full left-0 rtl:left-auto rtl:right-0 mt-2 w-80"
+                        >
+                            <?php echo dst_product_search_form(); ?>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
+                <!-- Wishlist -->
+                <?php if (function_exists('YITH_WCWL')): ?>
+                    <?php echo dst_wishlist_icon('hidden md:flex'); ?>
                 <?php endif; ?>
 
                 <!-- Cart -->
                 <?php if ($show_cart && dst_is_woocommerce_active()): ?>
-                    <div class="relative hidden md:block" x-data="miniCart">
+                    <div class="relative" x-data="miniCart">
                         <button @click="toggle()" class="hf-cart-icon hf-icon-btn">
                             <?php echo dst_get_icon('cart'); ?>
                             <?php if (dst_get_cart_count() > 0): ?>
@@ -86,6 +115,7 @@ $bg_color = $settings['bg_color'] ?? '#ffffff';
                 <button
                     @click="toggleMobileMenu()"
                     class="lg:hidden hf-icon-btn"
+                    :class="{ 'text-primary-600': isMobileMenuOpen }"
                     aria-label="منو"
                 >
                     <div class="hf-hamburger" :class="{ 'is-active': isMobileMenuOpen }">
@@ -97,15 +127,6 @@ $bg_color = $settings['bg_color'] ?? '#ffffff';
             </div>
         </div>
     </div>
-
-    <!-- Search Overlay -->
-    <?php if ($show_search): ?>
-        <div x-show="isSearchOpen" x-transition @click.outside="closeSearch()" class="absolute top-full left-0 right-0 bg-white shadow-lg p-4 z-50 border-t border-secondary-100">
-            <div class="hf-container max-w-2xl mx-auto">
-                <?php echo dst_product_search_form(); ?>
-            </div>
-        </div>
-    <?php endif; ?>
 
     <!-- Mobile Menu -->
     <div
@@ -122,7 +143,12 @@ $bg_color = $settings['bg_color'] ?? '#ffffff';
             </button>
         </div>
 
-        <!-- Mobile Navigation -->
+        <?php if ($show_search): ?>
+            <div class="p-4 border-b border-secondary-100">
+                <?php echo dst_product_search_form(); ?>
+            </div>
+        <?php endif; ?>
+
         <nav class="p-4">
             <?php
             wp_nav_menu([
@@ -136,25 +162,25 @@ $bg_color = $settings['bg_color'] ?? '#ffffff';
             ?>
         </nav>
 
-        <!-- Mobile Actions -->
-        <?php if ($show_cart || $show_account): ?>
-            <div class="p-4 border-t border-secondary-100 mt-auto">
-                <div class="grid grid-cols-2 gap-3">
-                    <?php if ($show_cart && dst_is_woocommerce_active()): ?>
-                        <a href="<?php echo dst_get_cart_url(); ?>" class="hf-btn hf-btn-primary">
-                            <?php echo dst_get_icon('cart', 'w-5 h-5'); ?>
-                            <span>سبد خرید</span>
-                        </a>
-                    <?php endif; ?>
+        <div class="p-4 border-t border-secondary-100 mt-auto">
+            <div class="grid grid-cols-2 gap-3">
+                <?php if ($show_cart && dst_is_woocommerce_active()): ?>
+                    <a href="<?php echo dst_get_cart_url(); ?>" class="hf-btn hf-btn-primary">
+                        <?php echo dst_get_icon('cart', 'w-5 h-5'); ?>
+                        <span>سبد خرید</span>
+                        <?php if (dst_get_cart_count() > 0): ?>
+                            <span class="hf-badge bg-white text-primary-600"><?php echo dst_get_cart_count(); ?></span>
+                        <?php endif; ?>
+                    </a>
+                <?php endif; ?>
 
-                    <?php if ($show_account): ?>
-                        <a href="<?php echo dst_get_account_url(); ?>" class="hf-btn hf-btn-secondary">
-                            <?php echo dst_get_icon('user', 'w-5 h-5'); ?>
-                            <span><?php echo is_user_logged_in() ? 'حساب من' : 'ورود'; ?></span>
-                        </a>
-                    <?php endif; ?>
-                </div>
+                <?php if ($show_account): ?>
+                    <a href="<?php echo dst_get_account_url(); ?>" class="hf-btn hf-btn-secondary">
+                        <?php echo dst_get_icon('user', 'w-5 h-5'); ?>
+                        <span><?php echo is_user_logged_in() ? 'حساب من' : 'ورود'; ?></span>
+                    </a>
+                <?php endif; ?>
             </div>
-        <?php endif; ?>
+        </div>
     </div>
 </header>

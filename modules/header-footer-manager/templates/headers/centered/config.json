@@ -1,6 +1,33 @@
 {
     "name": "centered",
-    "title": "هدر وسط‌چین",
-    "description": "لوگو در وسط و منو زیر آن",
-    "version": "1.0.0"
+    "title": "مرکزی",
+    "description": "هدر با لوگو در مرکز - طراحی مینیمال و شیک",
+    "version": "2.0.0",
+    "author": "Developer Starter",
+    "supports": ["woocommerce", "search", "sticky"],
+    "settings": {
+        "sticky": {
+            "type": "checkbox",
+            "label": "هدر چسبان",
+            "default": true,
+            "checkbox_label": "فعال کردن حالت Sticky"
+        },
+        "show_search": {
+            "type": "checkbox",
+            "label": "نمایش جستجو",
+            "default": true,
+            "checkbox_label": "نمایش فرم جستجو"
+        },
+        "show_cart": {
+            "type": "checkbox",
+            "label": "نمایش سبد خرید",
+            "default": true,
+            "checkbox_label": "نمایش آیکون سبد خرید"
+        },
+        "bg_color": {
+            "type": "color",
+            "label": "رنگ پس‌زمینه",
+            "default": "#ffffff"
+        }
+    }
 }

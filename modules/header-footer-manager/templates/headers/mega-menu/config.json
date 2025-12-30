@@ -1,10 +1,10 @@
 {
-    "name": "transparent",
-    "title": "شفاف",
-    "description": "هدر شفاف برای استفاده روی Hero Section - با افکت تغییر رنگ هنگام اسکرول",
+    "name": "mega-menu",
+    "title": "منوی بزرگ",
+    "description": "هدر با منوی بزرگ Dropdown - مناسب سایت‌های با دسته‌بندی زیاد",
     "version": "2.0.0",
     "author": "Developer Starter",
-    "supports": ["woocommerce", "search", "sticky"],
+    "supports": ["woocommerce", "mega-menu", "search", "sticky"],
     "settings": {
         "sticky": {
             "type": "checkbox",
@@ -32,7 +32,7 @@
         },
         "bg_color": {
             "type": "color",
-            "label": "رنگ پس‌زمینه (بعد از اسکرول)",
+            "label": "رنگ پس‌زمینه",
             "default": "#ffffff"
         }
     }
