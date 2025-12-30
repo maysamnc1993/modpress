@@ -300,8 +300,10 @@ class DST_Header_Footer_Manager {
                 $config['thumbnail'] = $this->module_url . '/templates/headers/' . $name . '/screenshot.png';
             } elseif (file_exists($folder . '/screenshot.jpg')) {
                 $config['thumbnail'] = $this->module_url . '/templates/headers/' . $name . '/screenshot.jpg';
+            } elseif (file_exists($folder . '/screenshot.svg')) {
+                $config['thumbnail'] = $this->module_url . '/templates/headers/' . $name . '/screenshot.svg';
             }
-            
+
             $headers[$name] = $config;
         }
         
@@ -345,8 +347,10 @@ class DST_Header_Footer_Manager {
                 $config['thumbnail'] = $this->module_url . '/templates/footers/' . $name . '/screenshot.png';
             } elseif (file_exists($folder . '/screenshot.jpg')) {
                 $config['thumbnail'] = $this->module_url . '/templates/footers/' . $name . '/screenshot.jpg';
+            } elseif (file_exists($folder . '/screenshot.svg')) {
+                $config['thumbnail'] = $this->module_url . '/templates/footers/' . $name . '/screenshot.svg';
             }
-            
+
             $footers[$name] = $config;
         }
         

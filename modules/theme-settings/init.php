@@ -159,6 +159,36 @@ class DST_Theme_Settings {
                         'label' => 'رنگ متن هدر',
                         'default' => '#1e293b',
                     ],
+                    'menu_text_color' => [
+                        'type' => 'color',
+                        'label' => 'رنگ آیتم‌های منو',
+                        'default' => '#1e293b',
+                    ],
+                    'menu_hover_color' => [
+                        'type' => 'color',
+                        'label' => 'رنگ منو در هاور',
+                        'default' => '#3C50E0',
+                    ],
+                    'menu_active_color' => [
+                        'type' => 'color',
+                        'label' => 'رنگ آیتم فعال منو',
+                        'default' => '#3C50E0',
+                    ],
+                    'button_bg_color' => [
+                        'type' => 'color',
+                        'label' => 'رنگ پس‌زمینه دکمه',
+                        'default' => '#3C50E0',
+                    ],
+                    'button_text_color' => [
+                        'type' => 'color',
+                        'label' => 'رنگ متن دکمه',
+                        'default' => '#ffffff',
+                    ],
+                    'button_hover_bg_color' => [
+                        'type' => 'color',
+                        'label' => 'رنگ دکمه در هاور',
+                        'default' => '#2D3FBD',
+                    ],
                     'footer_bg_color' => [
                         'type' => 'color',
                         'label' => 'رنگ پس‌زمینه فوتر',
@@ -869,6 +899,12 @@ class DST_Theme_Settings {
         $css .= '--dst-bg: ' . ($this->get('background_color') ?: '#ffffff') . ';';
         $css .= '--dst-header-bg: ' . ($this->get('header_bg_color') ?: '#ffffff') . ';';
         $css .= '--dst-header-text: ' . ($this->get('header_text_color') ?: '#1e293b') . ';';
+        $css .= '--dst-menu-text: ' . ($this->get('menu_text_color') ?: '#1e293b') . ';';
+        $css .= '--dst-menu-hover: ' . ($this->get('menu_hover_color') ?: '#3C50E0') . ';';
+        $css .= '--dst-menu-active: ' . ($this->get('menu_active_color') ?: '#3C50E0') . ';';
+        $css .= '--dst-btn-bg: ' . ($this->get('button_bg_color') ?: '#3C50E0') . ';';
+        $css .= '--dst-btn-text: ' . ($this->get('button_text_color') ?: '#ffffff') . ';';
+        $css .= '--dst-btn-hover: ' . ($this->get('button_hover_bg_color') ?: '#2D3FBD') . ';';
         $css .= '--dst-footer-bg: ' . ($this->get('footer_bg_color') ?: '#1e293b') . ';';
         $css .= '--dst-footer-text: ' . ($this->get('footer_text_color') ?: '#e2e8f0') . ';';
         $css .= '--dst-container: ' . ($this->get('container_width') ?: 1280) . 'px;';
@@ -884,6 +920,16 @@ class DST_Theme_Settings {
         $css .= 'body { font-family: "' . $body_font . '", sans-serif; font-size: var(--dst-font-size); line-height: var(--dst-line-height); color: var(--dst-text); background-color: var(--dst-bg)!important; }';
         $css .= 'h1, h2, h3, h4, h5, h6 { font-family: "' . $heading_font . '", sans-serif; }';
         $css .= '.dst-container { max-width: var(--dst-container); margin: 0 auto; padding: 0 20px; }';
+
+        // Menu styles
+        $css .= '.hf-nav-menu > li > a { color: var(--dst-menu-text); }';
+        $css .= '.hf-nav-menu > li > a:hover { color: var(--dst-menu-hover); }';
+        $css .= '.hf-nav-menu > li.current-menu-item > a, .hf-nav-menu > li.current-menu-ancestor > a { color: var(--dst-menu-active); }';
+
+        // Button styles
+        $css .= '.hf-btn-primary { background-color: var(--dst-btn-bg); color: var(--dst-btn-text); }';
+        $css .= '.hf-btn-primary:hover { background-color: var(--dst-btn-hover); }';
+        $css .= '.hf-badge-primary { background-color: var(--dst-btn-bg); color: var(--dst-btn-text); }';
         
         // Custom CSS
         $custom_css = $this->get('custom_css');

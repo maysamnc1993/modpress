@@ -383,23 +383,25 @@ if (!function_exists('dst_hex_to_rgb')) {
 
 /**
  * گرفتن لوگوی سایت
+ * از تنظیمات قالب (dst-theme-settings) می‌خواند
  *
  * @param string $type 'default' یا 'light'
  * @return string URL لوگو
  */
 if (!function_exists('dst_get_logo')) {
     function dst_get_logo($type = 'default') {
-        if ($type === 'light') {
-            $logo = get_theme_mod('dst_logo_light');
+        // اول از تنظیمات قالب بخوان
+        if (function_exists('dst_get_setting')) {
+            if ($type === 'light') {
+                $logo = dst_get_setting('site_logo_light');
+                if ($logo) {
+                    return $logo;
+                }
+            }
+            $logo = dst_get_setting('site_logo');
             if ($logo) {
                 return $logo;
             }
-        }
-
-        // لوگوی اصلی از Customizer ما
-        $logo = get_theme_mod('dst_logo');
-        if ($logo) {
-            return $logo;
         }
 
         // fallback به لوگوی استاندارد وردپرس
@@ -442,19 +444,27 @@ if (!function_exists('dst_the_logo')) {
 
 /**
  * گرفتن اطلاعات تماس
+ * از تنظیمات قالب (dst-theme-settings) می‌خواند
  */
 if (!function_exists('dst_get_contact')) {
     function dst_get_contact($field) {
-        return get_theme_mod("dst_{$field}", '');
+        if (function_exists('dst_get_setting')) {
+            return dst_get_setting($field, '');
+        }
+        return '';
     }
 }
 
 /**
  * گرفتن لینک شبکه اجتماعی
+ * از تنظیمات قالب (dst-theme-settings) می‌خواند
  */
 if (!function_exists('dst_get_social')) {
     function dst_get_social($network) {
-        return get_theme_mod("dst_{$network}", '');
+        if (function_exists('dst_get_setting')) {
+            return dst_get_setting($network, '');
+        }
+        return '';
     }
 }
 
