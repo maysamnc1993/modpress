@@ -1,0 +1,13 @@
+{
+    "name": "clients",
+    "title": "مشتریان و شرکا",
+    "description": "نمایش لوگوی مشتریان و شرکا با اسلایدر",
+    "category": "developer-starter",
+    "icon": "building",
+    "keywords": ["clients", "partners", "logos", "مشتریان", "شرکا"],
+    "supports": {
+        "align": ["wide", "full"],
+        "mode": true,
+        "anchor": true
+    }
+}

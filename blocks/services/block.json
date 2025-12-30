@@ -1,0 +1,13 @@
+{
+    "name": "services",
+    "title": "خدمات",
+    "description": "نمایش خدمات یا ویژگی‌ها با آیکون و توضیحات",
+    "category": "developer-starter",
+    "icon": "grid-view",
+    "keywords": ["services", "features", "grid", "خدمات"],
+    "supports": {
+        "align": ["wide", "full"],
+        "mode": true,
+        "anchor": true
+    }
+}

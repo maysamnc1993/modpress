@@ -1,0 +1,13 @@
+{
+    "name": "contact",
+    "title": "اطلاعات تماس",
+    "description": "نمایش اطلاعات تماس با فرم و نقشه",
+    "category": "developer-starter",
+    "icon": "email",
+    "keywords": ["contact", "form", "map", "تماس"],
+    "supports": {
+        "align": ["wide", "full"],
+        "mode": true,
+        "anchor": true
+    }
+}

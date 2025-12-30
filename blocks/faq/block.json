@@ -1,0 +1,13 @@
+{
+    "name": "faq",
+    "title": "سوالات متداول",
+    "description": "سوالات متداول با آکاردئون",
+    "category": "developer-starter",
+    "icon": "editor-help",
+    "keywords": ["faq", "questions", "accordion", "سوالات"],
+    "supports": {
+        "align": ["wide", "full"],
+        "mode": true,
+        "anchor": true
+    }
+}

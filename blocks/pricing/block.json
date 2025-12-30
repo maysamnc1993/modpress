@@ -1,0 +1,13 @@
+{
+    "name": "pricing",
+    "title": "جدول قیمت",
+    "description": "نمایش پلن‌های قیمتی با ویژگی‌ها",
+    "category": "developer-starter",
+    "icon": "money-alt",
+    "keywords": ["pricing", "plans", "packages", "قیمت"],
+    "supports": {
+        "align": ["wide", "full"],
+        "mode": true,
+        "anchor": true
+    }
+}

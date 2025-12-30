@@ -1,0 +1,13 @@
+{
+    "name": "hero",
+    "title": "Hero Section",
+    "description": "بخش Hero با تصویر، ویدیو یا گرادیان پس‌زمینه",
+    "category": "developer-starter",
+    "icon": "cover-image",
+    "keywords": ["hero", "banner", "slider", "header"],
+    "supports": {
+        "align": ["wide", "full"],
+        "mode": true,
+        "anchor": true
+    }
+}
