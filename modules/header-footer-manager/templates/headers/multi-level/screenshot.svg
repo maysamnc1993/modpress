@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100">
+  <!-- Background -->
+  <rect width="300" height="100" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- Header Container -->
+  <rect x="10" y="10" width="280" height="30" fill="none" stroke="#d1d5db" stroke-width="1" rx="2"/>
+
+  <!-- Logo -->
+  <rect x="20" y="18" width="40" height="14" fill="none" stroke="#3b82f6" stroke-width="1.5" rx="2"/>
+  <text x="40" y="28" font-size="6" fill="#3b82f6" text-anchor="middle" font-weight="bold">LOGO</text>
+
+  <!-- Main Menu Items -->
+  <g transform="translate(80, 25)">
+    <line x1="0" y1="0" x2="20" y2="0" stroke="#374151" stroke-width="1.5" stroke-linecap="round"/>
+    <polyline points="22,-2 24,0 22,2" fill="none" stroke="#374151" stroke-width="1"/>
+
+    <line x1="32" y1="0" x2="52" y2="0" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round"/>
+    <polyline points="54,-2 56,0 54,2" fill="none" stroke="#6b7280" stroke-width="1"/>
+
+    <line x1="64" y1="0" x2="84" y2="0" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round"/>
+    <polyline points="86,-2 88,0 86,2" fill="none" stroke="#6b7280" stroke-width="1"/>
+
+    <line x1="96" y1="0" x2="116" y2="0" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- Action Icons -->
+  <g transform="translate(240, 25)">
+    <!-- Search Icon -->
+    <circle cx="0" cy="0" r="4" fill="none" stroke="#374151" stroke-width="1"/>
+    <line x1="3" y1="3" x2="5" y2="5" stroke="#374151" stroke-width="1"/>
+
+    <!-- Cart Icon -->
+    <g transform="translate(18, 0)">
+      <rect x="-3" y="-2" width="6" height="6" fill="none" stroke="#374151" stroke-width="1" rx="0.5"/>
+      <line x1="-2" y1="-2" x2="-3" y2="-5" stroke="#374151" stroke-width="1"/>
+      <line x1="2" y1="-2" x2="3" y2="-5" stroke="#374151" stroke-width="1"/>
+    </g>
+  </g>
+
+  <!-- Dropdown Menu Level 1 -->
+  <rect x="80" y="48" width="50" height="40" fill="none" stroke="#3b82f6" stroke-width="1.5" rx="4"/>
+  <line x1="104" y1="40" x2="104" y2="48" stroke="#3b82f6" stroke-width="1" stroke-dasharray="2,2"/>
+
+  <!-- Dropdown Items -->
+  <g transform="translate(85, 55)">
+    <line x1="0" y1="0" x2="40" y2="0" stroke="#6b7280" stroke-width="1" stroke-linecap="round"/>
+    <polyline points="37,-1 40,0 37,1" fill="none" stroke="#6b7280" stroke-width="0.8"/>
+
+    <line x1="0" y1="8" x2="40" y2="8" stroke="#9ca3af" stroke-width="1" stroke-linecap="round"/>
+
+    <line x1="0" y1="16" x2="40" y2="16" stroke="#9ca3af" stroke-width="1" stroke-linecap="round"/>
+
+    <line x1="0" y1="24" x2="40" y2="24" stroke="#9ca3af" stroke-width="1" stroke-linecap="round"/>
+  </g>
+
+  <!-- Dropdown Menu Level 2 (Nested) -->
+  <rect x="135" y="53" width="45" height="28" fill="none" stroke="#3b82f6" stroke-width="1" rx="3"/>
+  <line x1="130" y1="55" x2="135" y2="55" stroke="#3b82f6" stroke-width="1" stroke-dasharray="1,1"/>
+
+  <!-- Level 2 Items -->
+  <g transform="translate(140, 60)">
+    <line x1="0" y1="0" x2="30" y2="0" stroke="#6b7280" stroke-width="0.8" stroke-linecap="round"/>
+    <line x1="0" y1="7" x2="30" y2="7" stroke="#9ca3af" stroke-width="0.8" stroke-linecap="round"/>
+    <line x1="0" y1="14" x2="30" y2="14" stroke="#9ca3af" stroke-width="0.8" stroke-linecap="round"/>
+  </g>
+
+  <!-- Mega Menu Indicator -->
+  <rect x="115" y="48" width="70" height="45" fill="none" stroke="#10b981" stroke-width="1.5" rx="4" stroke-dasharray="3,3"/>
+  <line x1="136" y1="40" x2="136" y2="48" stroke="#10b981" stroke-width="1" stroke-dasharray="2,2"/>
+  <text x="150" y="53" font-size="5" fill="#10b981" text-anchor="middle" font-weight="bold">Mega Menu</text>
+
+  <!-- Mega Menu Grid -->
+  <g transform="translate(120, 60)">
+    <!-- Column 1 -->
+    <rect x="0" y="0" width="13" height="25" fill="none" stroke="#d1d5db" stroke-width="0.5"/>
+    <line x1="2" y1="3" x2="11" y2="3" stroke="#6b7280" stroke-width="0.8"/>
+    <line x1="2" y1="7" x2="11" y2="7" stroke="#d1d5db" stroke-width="0.5"/>
+    <line x1="2" y1="10" x2="11" y2="10" stroke="#d1d5db" stroke-width="0.5"/>
+
+    <!-- Column 2 -->
+    <rect x="15" y="0" width="13" height="25" fill="none" stroke="#d1d5db" stroke-width="0.5"/>
+    <line x1="17" y1="3" x2="26" y2="3" stroke="#6b7280" stroke-width="0.8"/>
+    <line x1="17" y1="7" x2="26" y2="7" stroke="#d1d5db" stroke-width="0.5"/>
+    <line x1="17" y1="10" x2="26" y2="10" stroke="#d1d5db" stroke-width="0.5"/>
+
+    <!-- Column 3 -->
+    <rect x="30" y="0" width="13" height="25" fill="none" stroke="#d1d5db" stroke-width="0.5"/>
+    <line x1="32" y1="3" x2="41" y2="3" stroke="#6b7280" stroke-width="0.8"/>
+    <line x1="32" y1="7" x2="41" y2="7" stroke="#d1d5db" stroke-width="0.5"/>
+    <line x1="32" y1="10" x2="41" y2="10" stroke="#d1d5db" stroke-width="0.5"/>
+
+    <!-- Column 4 -->
+    <rect x="45" y="0" width="13" height="25" fill="none" stroke="#d1d5db" stroke-width="0.5"/>
+    <line x1="47" y1="3" x2="56" y2="3" stroke="#6b7280" stroke-width="0.8"/>
+    <line x1="47" y1="7" x2="56" y2="7" stroke="#d1d5db" stroke-width="0.5"/>
+    <line x1="47" y1="10" x2="56" y2="10" stroke="#d1d5db" stroke-width="0.5"/>
+  </g>
+
+  <!-- Labels -->
+  <text x="105" y="97" font-size="5" fill="#9ca3af" text-anchor="middle">Level 1</text>
+  <text x="157" y="85" font-size="4" fill="#9ca3af" text-anchor="middle">Level 2</text>
+</svg>

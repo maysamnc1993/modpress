@@ -1,0 +1,143 @@
+{
+    "name": "video-bg",
+    "title": "Video Background Footer",
+    "description": "Footer with video or image background and overlay content",
+    "version": "1.0.0",
+    "author": "Developer Starter",
+    "settings": {
+        "bg_type": {
+            "type": "select",
+            "label": "Background Type",
+            "default": "video",
+            "options": {
+                "video": "Video Background",
+                "image": "Image Background"
+            }
+        },
+        "bg_url": {
+            "type": "text",
+            "label": "Background URL",
+            "default": ""
+        },
+        "fallback_image": {
+            "type": "text",
+            "label": "Fallback Image URL",
+            "default": ""
+        },
+        "overlay_color": {
+            "type": "color",
+            "label": "Overlay Color",
+            "default": "#000000"
+        },
+        "overlay_opacity": {
+            "type": "select",
+            "label": "Overlay Opacity",
+            "default": "0.7",
+            "options": {
+                "0.3": "30%",
+                "0.5": "50%",
+                "0.7": "70%",
+                "0.8": "80%",
+                "0.9": "90%"
+            }
+        },
+        "text_color": {
+            "type": "color",
+            "label": "Text Color",
+            "default": "#ffffff"
+        },
+        "heading_color": {
+            "type": "color",
+            "label": "Heading Color",
+            "default": "#ffffff"
+        },
+        "accent_color": {
+            "type": "color",
+            "label": "Accent Color",
+            "default": "#06b6d4"
+        },
+        "show_cta": {
+            "type": "checkbox",
+            "label": "Show CTA Section",
+            "default": true,
+            "checkbox_label": "Display call-to-action section"
+        },
+        "cta_title": {
+            "type": "text",
+            "label": "CTA Title",
+            "default": "Ready to Get Started?"
+        },
+        "cta_text": {
+            "type": "textarea",
+            "label": "CTA Description",
+            "default": "Join thousands of satisfied customers and take your business to the next level"
+        },
+        "cta_button_text": {
+            "type": "text",
+            "label": "CTA Button Text",
+            "default": "Get Started Today"
+        },
+        "cta_button_url": {
+            "type": "text",
+            "label": "CTA Button URL",
+            "default": "#"
+        },
+        "video_autoplay": {
+            "type": "checkbox",
+            "label": "Video Autoplay",
+            "default": true,
+            "checkbox_label": "Autoplay background video"
+        },
+        "video_loop": {
+            "type": "checkbox",
+            "label": "Video Loop",
+            "default": true,
+            "checkbox_label": "Loop background video"
+        },
+        "video_muted": {
+            "type": "checkbox",
+            "label": "Video Muted",
+            "default": true,
+            "checkbox_label": "Mute background video"
+        },
+        "show_logo": {
+            "type": "checkbox",
+            "label": "Show Logo",
+            "default": true,
+            "checkbox_label": "Display logo in footer"
+        },
+        "show_social": {
+            "type": "checkbox",
+            "label": "Show Social Icons",
+            "default": true,
+            "checkbox_label": "Display social media icons"
+        },
+        "show_contact": {
+            "type": "checkbox",
+            "label": "Show Contact Info",
+            "default": true,
+            "checkbox_label": "Display contact information"
+        },
+        "columns": {
+            "type": "select",
+            "label": "Number of Columns",
+            "default": "4",
+            "options": {
+                "2": "2 Columns",
+                "3": "3 Columns",
+                "4": "4 Columns"
+            }
+        },
+        "show_copyright": {
+            "type": "checkbox",
+            "label": "Show Copyright",
+            "default": true,
+            "checkbox_label": "Display copyright text"
+        },
+        "copyright_text": {
+            "type": "text",
+            "label": "Custom Copyright Text",
+            "default": "All rights reserved."
+        }
+    }
+}

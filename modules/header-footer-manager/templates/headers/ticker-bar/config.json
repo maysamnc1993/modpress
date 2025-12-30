@@ -1,0 +1,111 @@
+{
+    "name": "ticker-bar",
+    "title": "News Ticker Header",
+    "description": "Header with scrolling news/announcement ticker bar at the top and main navigation below",
+    "version": "1.0.0",
+    "author": "Developer Starter",
+    "supports": ["sticky", "ticker", "announcements"],
+    "settings": {
+        "sticky": {
+            "type": "checkbox",
+            "label": "Sticky Header",
+            "default": true,
+            "checkbox_label": "Enable sticky header on scroll"
+        },
+        "show_ticker": {
+            "type": "checkbox",
+            "label": "Show Ticker Bar",
+            "default": true,
+            "checkbox_label": "Display scrolling ticker bar"
+        },
+        "ticker_text": {
+            "type": "textarea",
+            "label": "Ticker Text",
+            "default": "Breaking News: New Product Launch | Special Offer: 20% Off All Items | Free Shipping Worldwide"
+        },
+        "ticker_speed": {
+            "type": "select",
+            "label": "Ticker Speed",
+            "default": "medium",
+            "options": {
+                "slow": "Slow",
+                "medium": "Medium",
+                "fast": "Fast"
+            }
+        },
+        "ticker_bg_color": {
+            "type": "color",
+            "label": "Ticker Background Color",
+            "default": "#000000"
+        },
+        "ticker_text_color": {
+            "type": "color",
+            "label": "Ticker Text Color",
+            "default": "#ffffff"
+        },
+        "ticker_pausable": {
+            "type": "checkbox",
+            "label": "Pause on Hover",
+            "default": true,
+            "checkbox_label": "Pause ticker animation on hover"
+        },
+        "bg_color": {
+            "type": "color",
+            "label": "Header Background Color",
+            "default": "#ffffff"
+        },
+        "text_color": {
+            "type": "color",
+            "label": "Header Text Color",
+            "default": "#000000"
+        },
+        "show_search": {
+            "type": "checkbox",
+            "label": "Show Search",
+            "default": true,
+            "checkbox_label": "Display search icon"
+        },
+        "show_cart": {
+            "type": "checkbox",
+            "label": "Show Cart",
+            "default": true,
+            "checkbox_label": "Display cart icon"
+        },
+        "show_account": {
+            "type": "checkbox",
+            "label": "Show Account",
+            "default": false,
+            "checkbox_label": "Display account icon"
+        },
+        "menu_style": {
+            "type": "select",
+            "label": "Menu Style",
+            "default": "inline",
+            "options": {
+                "inline": "Inline Menu",
+                "hamburger": "Hamburger Menu"
+            }
+        },
+        "ticker_separator": {
+            "type": "text",
+            "label": "Ticker Separator",
+            "default": " | "
+        },
+        "ticker_font_size": {
+            "type": "select",
+            "label": "Ticker Font Size",
+            "default": "sm",
+            "options": {
+                "xs": "Extra Small",
+                "sm": "Small",
+                "base": "Base"
+            }
+        },
+        "ticker_dismissible": {
+            "type": "checkbox",
+            "label": "Dismissible Ticker",
+            "default": false,
+            "checkbox_label": "Allow users to close ticker bar"
+        }
+    }
+}

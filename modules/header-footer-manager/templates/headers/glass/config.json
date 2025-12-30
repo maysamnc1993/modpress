@@ -1,0 +1,124 @@
+{
+    "name": "glass",
+    "title": "Glassmorphism",
+    "description": "Modern glassmorphism effect with backdrop blur and semi-transparent background",
+    "version": "1.0.0",
+    "author": "Developer Starter",
+    "supports": ["sticky", "transparent", "blur"],
+    "settings": {
+        "sticky": {
+            "type": "checkbox",
+            "label": "Sticky Header",
+            "default": true,
+            "checkbox_label": "Enable sticky header on scroll"
+        },
+        "blur_amount": {
+            "type": "select",
+            "label": "Blur Amount",
+            "default": "md",
+            "options": {
+                "sm": "Small",
+                "md": "Medium",
+                "lg": "Large",
+                "xl": "Extra Large"
+            }
+        },
+        "opacity": {
+            "type": "select",
+            "label": "Background Opacity",
+            "default": "80",
+            "options": {
+                "60": "60%",
+                "70": "70%",
+                "80": "80%",
+                "90": "90%",
+                "95": "95%"
+            }
+        },
+        "bg_color": {
+            "type": "color",
+            "label": "Background Color",
+            "default": "#ffffff"
+        },
+        "text_color": {
+            "type": "color",
+            "label": "Text Color",
+            "default": "#000000"
+        },
+        "border_color": {
+            "type": "color",
+            "label": "Border Color",
+            "default": "#ffffff"
+        },
+        "border_opacity": {
+            "type": "select",
+            "label": "Border Opacity",
+            "default": "20",
+            "options": {
+                "10": "10%",
+                "20": "20%",
+                "30": "30%",
+                "40": "40%"
+            }
+        },
+        "show_search": {
+            "type": "checkbox",
+            "label": "Show Search",
+            "default": true,
+            "checkbox_label": "Display search icon"
+        },
+        "show_cart": {
+            "type": "checkbox",
+            "label": "Show Cart",
+            "default": true,
+            "checkbox_label": "Display cart icon"
+        },
+        "show_account": {
+            "type": "checkbox",
+            "label": "Show Account",
+            "default": true,
+            "checkbox_label": "Display account icon"
+        },
+        "show_wishlist": {
+            "type": "checkbox",
+            "label": "Show Wishlist",
+            "default": false,
+            "checkbox_label": "Display wishlist icon"
+        },
+        "logo_position": {
+            "type": "select",
+            "label": "Logo Position",
+            "default": "left",
+            "options": {
+                "left": "Left",
+                "center": "Center"
+            }
+        },
+        "menu_position": {
+            "type": "select",
+            "label": "Menu Position",
+            "default": "right",
+            "options": {
+                "left": "Left",
+                "center": "Center",
+                "right": "Right"
+            }
+        },
+        "show_social": {
+            "type": "checkbox",
+            "label": "Show Social Icons",
+            "default": true,
+            "checkbox_label": "Display social media icons"
+        },
+        "glass_style": {
+            "type": "select",
+            "label": "Glass Style",
+            "default": "modern",
+            "options": {
+                "modern": "Modern",
+                "frosted": "Frosted",
+                "minimal": "Minimal"
+            }
+        }
+    }
+}

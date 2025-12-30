@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100">
+  <!-- Background -->
+  <rect width="300" height="100" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- Header Container -->
+  <rect x="10" y="25" width="280" height="30" fill="none" stroke="#d1d5db" stroke-width="1" rx="2"/>
+
+  <!-- Logo -->
+  <rect x="20" y="33" width="40" height="14" fill="none" stroke="#3b82f6" stroke-width="1.5" rx="2"/>
+  <text x="40" y="43" font-size="6" fill="#3b82f6" text-anchor="middle" font-weight="bold">LOGO</text>
+
+  <!-- Menu Items with Animation Indicators -->
+  <g transform="translate(90, 40)">
+    <!-- Menu Item 1 with underline animation -->
+    <line x1="0" y1="-5" x2="25" y2="-5" stroke="#374151" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="0" y1="2" x2="25" y2="2" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
+
+    <!-- Menu Item 2 -->
+    <line x1="35" y1="-5" x2="60" y2="-5" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="35" y1="2" x2="42" y2="2" stroke="#d1d5db" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="2,2"/>
+
+    <!-- Menu Item 3 -->
+    <line x1="70" y1="-5" x2="90" y2="-5" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round"/>
+
+    <!-- Menu Item 4 -->
+    <line x1="100" y1="-5" x2="130" y2="-5" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- Action Icons -->
+  <g transform="translate(240, 40)">
+    <!-- Search Icon -->
+    <circle cx="0" cy="0" r="4" fill="none" stroke="#374151" stroke-width="1"/>
+    <line x1="3" y1="3" x2="5" y2="5" stroke="#374151" stroke-width="1"/>
+  </g>
+
+  <g transform="translate(260, 40)">
+    <!-- Cart Icon -->
+    <rect x="-3" y="-2" width="6" height="6" fill="none" stroke="#374151" stroke-width="1" rx="0.5"/>
+    <line x1="-2" y1="-2" x2="-3" y2="-5" stroke="#374151" stroke-width="1"/>
+    <line x1="2" y1="-2" x2="3" y2="-5" stroke="#374151" stroke-width="1"/>
+  </g>
+
+  <!-- Animation Indicator -->
+  <g transform="translate(100, 65)">
+    <text x="0" y="0" font-size="6" fill="#3b82f6" text-anchor="middle">Hover Animation</text>
+    <!-- Wave indicator -->
+    <path d="M -20,5 Q -15,2 -10,5 T 0,5 T 10,5 T 20,5" fill="none" stroke="#3b82f6" stroke-width="1" opacity="0.5"/>
+  </g>
+
+  <!-- Underline style example -->
+  <g transform="translate(115, 78)">
+    <line x1="-8" y1="0" x2="8" y2="0" stroke="#d1d5db" stroke-width="1"/>
+    <text x="0" y="-2" font-size="4" fill="#9ca3af" text-anchor="middle">underline</text>
+  </g>
+
+  <!-- Highlight style example -->
+  <g transform="translate(145, 78)">
+    <rect x="-8" y="-5" width="16" height="8" fill="none" stroke="#d1d5db" stroke-width="1" rx="2"/>
+    <text x="0" y="-2" font-size="4" fill="#9ca3af" text-anchor="middle">highlight</text>
+  </g>
+
+  <!-- Scale style example -->
+  <g transform="translate(175, 78)">
+    <text x="0" y="-2" font-size="4" fill="#9ca3af" text-anchor="middle">scale</text>
+    <polyline points="-6,-5 -8,-7 -6,-7" fill="none" stroke="#d1d5db" stroke-width="0.5"/>
+    <polyline points="6,-5 8,-7 6,-7" fill="none" stroke="#d1d5db" stroke-width="0.5"/>
+  </g>
+</svg>

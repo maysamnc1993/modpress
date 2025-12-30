@@ -1,0 +1,109 @@
+{
+    "name": "wave",
+    "title": "Wave Footer",
+    "description": "Footer with decorative wave or curved top border SVG design",
+    "version": "1.0.0",
+    "author": "Developer Starter",
+    "settings": {
+        "wave_style": {
+            "type": "select",
+            "label": "Wave Style",
+            "default": "wave1",
+            "options": {
+                "wave1": "Smooth Wave",
+                "wave2": "Sharp Wave",
+                "wave3": "Multi-layer Wave",
+                "curve": "Simple Curve",
+                "triangle": "Triangle Pattern"
+            }
+        },
+        "wave_color": {
+            "type": "color",
+            "label": "Wave Color",
+            "default": "#ffffff"
+        },
+        "bg_color": {
+            "type": "color",
+            "label": "Footer Background Color",
+            "default": "#1e40af"
+        },
+        "text_color": {
+            "type": "color",
+            "label": "Footer Text Color",
+            "default": "#ffffff"
+        },
+        "heading_color": {
+            "type": "color",
+            "label": "Heading Color",
+            "default": "#ffffff"
+        },
+        "link_color": {
+            "type": "color",
+            "label": "Link Color",
+            "default": "#93c5fd"
+        },
+        "link_hover_color": {
+            "type": "color",
+            "label": "Link Hover Color",
+            "default": "#ffffff"
+        },
+        "show_social": {
+            "type": "checkbox",
+            "label": "Show Social Icons",
+            "default": true,
+            "checkbox_label": "Display social media icons"
+        },
+        "social_style": {
+            "type": "select",
+            "label": "Social Icons Style",
+            "default": "circle",
+            "options": {
+                "circle": "Circle",
+                "square": "Square",
+                "rounded": "Rounded Square"
+            }
+        },
+        "show_contact": {
+            "type": "checkbox",
+            "label": "Show Contact Info",
+            "default": true,
+            "checkbox_label": "Display contact information"
+        },
+        "columns": {
+            "type": "select",
+            "label": "Number of Columns",
+            "default": "4",
+            "options": {
+                "2": "2 Columns",
+                "3": "3 Columns",
+                "4": "4 Columns"
+            }
+        },
+        "wave_height": {
+            "type": "select",
+            "label": "Wave Height",
+            "default": "medium",
+            "options": {
+                "small": "Small (80px)",
+                "medium": "Medium (120px)",
+                "large": "Large (160px)"
+            }
+        },
+        "wave_flip": {
+            "type": "checkbox",
+            "label": "Flip Wave",
+            "default": false,
+            "checkbox_label": "Flip wave vertically"
+        },
+        "bottom_bg_color": {
+            "type": "color",
+            "label": "Bottom Bar Background Color",
+            "default": "#1e3a8a"
+        },
+        "copyright_text": {
+            "type": "text",
+            "label": "Copyright Text",
+            "default": "All rights reserved."
+        }
+    }
+}

@@ -1,0 +1,135 @@
+{
+    "name": "overlay-menu",
+    "title": "Fullscreen Overlay Menu",
+    "description": "Minimal header with logo and hamburger that opens a fullscreen dark overlay with large menu items",
+    "version": "1.0.0",
+    "author": "Developer Starter",
+    "supports": ["sticky", "minimal", "overlay"],
+    "settings": {
+        "sticky": {
+            "type": "checkbox",
+            "label": "Sticky Header",
+            "default": true,
+            "checkbox_label": "Enable sticky header on scroll"
+        },
+        "bg_color": {
+            "type": "color",
+            "label": "Header Background Color",
+            "default": "#ffffff"
+        },
+        "text_color": {
+            "type": "color",
+            "label": "Header Text Color",
+            "default": "#000000"
+        },
+        "overlay_bg_color": {
+            "type": "color",
+            "label": "Overlay Background Color",
+            "default": "#000000"
+        },
+        "overlay_text_color": {
+            "type": "color",
+            "label": "Overlay Text Color",
+            "default": "#ffffff"
+        },
+        "menu_font_size": {
+            "type": "select",
+            "label": "Menu Font Size",
+            "default": "3xl",
+            "options": {
+                "2xl": "2XL",
+                "3xl": "3XL",
+                "4xl": "4XL",
+                "5xl": "5XL"
+            }
+        },
+        "menu_alignment": {
+            "type": "select",
+            "label": "Menu Alignment",
+            "default": "left",
+            "options": {
+                "left": "Left",
+                "center": "Center",
+                "right": "Right"
+            }
+        },
+        "show_social": {
+            "type": "checkbox",
+            "label": "Show Social Icons",
+            "default": true,
+            "checkbox_label": "Display social icons in overlay"
+        },
+        "show_contact": {
+            "type": "checkbox",
+            "label": "Show Contact Info",
+            "default": true,
+            "checkbox_label": "Display contact info in overlay"
+        },
+        "hamburger_style": {
+            "type": "select",
+            "label": "Hamburger Icon Style",
+            "default": "minimal",
+            "options": {
+                "minimal": "Minimal",
+                "bold": "Bold",
+                "rounded": "Rounded"
+            }
+        },
+        "logo_position": {
+            "type": "select",
+            "label": "Logo Position",
+            "default": "center",
+            "options": {
+                "left": "Left",
+                "center": "Center"
+            }
+        },
+        "animation_speed": {
+            "type": "select",
+            "label": "Overlay Animation Speed",
+            "default": "normal",
+            "options": {
+                "fast": "Fast (200ms)",
+                "normal": "Normal (300ms)",
+                "slow": "Slow (500ms)"
+            }
+        },
+        "menu_hover_color": {
+            "type": "color",
+            "label": "Menu Item Hover Color",
+            "default": "#999999"
+        },
+        "show_search": {
+            "type": "checkbox",
+            "label": "Show Search in Overlay",
+            "default": true,
+            "checkbox_label": "Display search form in overlay"
+        },
+        "overlay_opacity": {
+            "type": "select",
+            "label": "Overlay Opacity",
+            "default": "95",
+            "options": {
+                "90": "90%",
+                "95": "95%",
+                "100": "100%"
+            }
+        },
+        "show_cta": {
+            "type": "checkbox",
+            "label": "Show CTA in Overlay",
+            "default": true,
+            "checkbox_label": "Display CTA button in overlay"
+        },
+        "cta_text": {
+            "type": "text",
+            "label": "CTA Button Text",
+            "default": "Get Started"
+        },
+        "cta_url": {
+            "type": "url",
+            "label": "CTA Button URL",
+            "default": "/contact"
+        }
+    }
+}

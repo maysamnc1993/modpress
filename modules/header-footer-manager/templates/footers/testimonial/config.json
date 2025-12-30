@@ -1,0 +1,129 @@
+{
+    "name": "testimonial",
+    "title": "Testimonial Footer",
+    "description": "Footer with testimonials section featuring client reviews and standard footer content",
+    "version": "1.0.0",
+    "author": "Developer Starter",
+    "settings": {
+        "bg_color": {
+            "type": "color",
+            "label": "Background Color",
+            "default": "#ffffff"
+        },
+        "testimonial_bg": {
+            "type": "color",
+            "label": "Testimonial Section Background",
+            "default": "#f8fafc"
+        },
+        "text_color": {
+            "type": "color",
+            "label": "Text Color",
+            "default": "#475569"
+        },
+        "heading_color": {
+            "type": "color",
+            "label": "Heading Color",
+            "default": "#1e293b"
+        },
+        "accent_color": {
+            "type": "color",
+            "label": "Accent Color",
+            "default": "#3b82f6"
+        },
+        "show_testimonials": {
+            "type": "checkbox",
+            "label": "Show Testimonials",
+            "default": true,
+            "checkbox_label": "Display testimonials section"
+        },
+        "testimonials_count": {
+            "type": "select",
+            "label": "Number of Testimonials",
+            "default": "3",
+            "options": {
+                "2": "2 Testimonials",
+                "3": "3 Testimonials",
+                "4": "4 Testimonials",
+                "6": "6 Testimonials"
+            }
+        },
+        "show_avatars": {
+            "type": "checkbox",
+            "label": "Show Avatars",
+            "default": true,
+            "checkbox_label": "Display customer avatars"
+        },
+        "show_ratings": {
+            "type": "checkbox",
+            "label": "Show Ratings",
+            "default": true,
+            "checkbox_label": "Display star ratings"
+        },
+        "carousel_autoplay": {
+            "type": "checkbox",
+            "label": "Carousel Autoplay",
+            "default": true,
+            "checkbox_label": "Enable automatic carousel rotation"
+        },
+        "carousel_speed": {
+            "type": "select",
+            "label": "Carousel Speed",
+            "default": "5000",
+            "options": {
+                "3000": "3 seconds",
+                "5000": "5 seconds",
+                "7000": "7 seconds",
+                "10000": "10 seconds"
+            }
+        },
+        "testimonial_title": {
+            "type": "text",
+            "label": "Testimonials Title",
+            "default": "What Our Clients Say"
+        },
+        "testimonial_subtitle": {
+            "type": "textarea",
+            "label": "Testimonials Subtitle",
+            "default": "Trusted by thousands of customers worldwide"
+        },
+        "show_logo": {
+            "type": "checkbox",
+            "label": "Show Logo",
+            "default": true,
+            "checkbox_label": "Display logo in footer"
+        },
+        "show_social": {
+            "type": "checkbox",
+            "label": "Show Social Icons",
+            "default": true,
+            "checkbox_label": "Display social media icons"
+        },
+        "show_contact": {
+            "type": "checkbox",
+            "label": "Show Contact Info",
+            "default": true,
+            "checkbox_label": "Display contact information"
+        },
+        "columns": {
+            "type": "select",
+            "label": "Number of Columns",
+            "default": "4",
+            "options": {
+                "2": "2 Columns",
+                "3": "3 Columns",
+                "4": "4 Columns"
+            }
+        },
+        "show_copyright": {
+            "type": "checkbox",
+            "label": "Show Copyright",
+            "default": true,
+            "checkbox_label": "Display copyright text"
+        },
+        "copyright_text": {
+            "type": "text",
+            "label": "Custom Copyright Text",
+            "default": "All rights reserved."
+        }
+    }
+}

@@ -1,0 +1,130 @@
+{
+    "name": "stats",
+    "title": "Statistics Footer",
+    "description": "Footer with company statistics and animated counters",
+    "version": "1.0.0",
+    "author": "Developer Starter",
+    "settings": {
+        "bg_color": {
+            "type": "color",
+            "label": "Background Color",
+            "default": "#0f172a"
+        },
+        "text_color": {
+            "type": "color",
+            "label": "Text Color",
+            "default": "#cbd5e1"
+        },
+        "heading_color": {
+            "type": "color",
+            "label": "Heading Color",
+            "default": "#f1f5f9"
+        },
+        "accent_color": {
+            "type": "color",
+            "label": "Accent Color",
+            "default": "#06b6d4"
+        },
+        "stat_number_color": {
+            "type": "color",
+            "label": "Stat Number Color",
+            "default": "#06b6d4"
+        },
+        "stat1_number": {
+            "type": "text",
+            "label": "Stat 1 Number",
+            "default": "500+"
+        },
+        "stat1_label": {
+            "type": "text",
+            "label": "Stat 1 Label",
+            "default": "Happy Clients"
+        },
+        "stat2_number": {
+            "type": "text",
+            "label": "Stat 2 Number",
+            "default": "1000+"
+        },
+        "stat2_label": {
+            "type": "text",
+            "label": "Stat 2 Label",
+            "default": "Projects Completed"
+        },
+        "stat3_number": {
+            "type": "text",
+            "label": "Stat 3 Number",
+            "default": "15+"
+        },
+        "stat3_label": {
+            "type": "text",
+            "label": "Stat 3 Label",
+            "default": "Years Experience"
+        },
+        "stat4_number": {
+            "type": "text",
+            "label": "Stat 4 Number",
+            "default": "50+"
+        },
+        "stat4_label": {
+            "type": "text",
+            "label": "Stat 4 Label",
+            "default": "Team Members"
+        },
+        "enable_animation": {
+            "type": "checkbox",
+            "label": "Enable Counter Animation",
+            "default": true,
+            "checkbox_label": "Animate numbers on scroll"
+        },
+        "stats_heading": {
+            "type": "text",
+            "label": "Stats Section Heading",
+            "default": "Our Impact in Numbers"
+        },
+        "stats_description": {
+            "type": "textarea",
+            "label": "Stats Section Description",
+            "default": "Trusted by businesses worldwide to deliver exceptional results and innovative solutions."
+        },
+        "show_logo": {
+            "type": "checkbox",
+            "label": "Show Logo",
+            "default": true,
+            "checkbox_label": "Display logo in footer"
+        },
+        "show_menu": {
+            "type": "checkbox",
+            "label": "Show Footer Menu",
+            "default": true,
+            "checkbox_label": "Display footer navigation menu"
+        },
+        "show_social": {
+            "type": "checkbox",
+            "label": "Show Social Icons",
+            "default": true,
+            "checkbox_label": "Display social media icons"
+        },
+        "show_copyright": {
+            "type": "checkbox",
+            "label": "Show Copyright",
+            "default": true,
+            "checkbox_label": "Display copyright text"
+        },
+        "copyright_text": {
+            "type": "text",
+            "label": "Custom Copyright Text",
+            "default": "All rights reserved."
+        },
+        "divider_style": {
+            "type": "select",
+            "label": "Divider Style",
+            "default": "gradient",
+            "options": {
+                "none": "None",
+                "simple": "Simple Line",
+                "gradient": "Gradient Line",
+                "dotted": "Dotted Line"
+            }
+        }
+    }
+}

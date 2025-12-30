@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 160">
+  <!-- Background -->
+  <rect x="0" y="0" width="800" height="160" fill="none" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- Top Row: Logo and Actions -->
+  <!-- Small Logo (Left) -->
+  <rect x="30" y="20" width="70" height="20" rx="3" fill="none" stroke="#94a3b8" stroke-width="2"/>
+  <text x="65" y="33" font-size="9" fill="#94a3b8" text-anchor="middle" font-weight="600">LOGO</text>
+
+  <!-- Actions (Right) -->
+  <!-- Account -->
+  <g transform="translate(690, 25)">
+    <circle cx="0" cy="0" r="7" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+    <circle cx="0" cy="-2" r="2.5" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+    <path d="M -4 3 Q 0 1 4 3" stroke="#94a3b8" stroke-width="1.5" fill="none"/>
+    <text x="0" y="17" font-size="7" fill="#94a3b8" text-anchor="middle">Account</text>
+  </g>
+
+  <!-- Cart -->
+  <g transform="translate(750, 25)">
+    <rect x="-6" y="-6" width="12" height="8" rx="1" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+    <line x1="-4" y1="-6" x2="-5" y2="-9" stroke="#94a3b8" stroke-width="1.5"/>
+    <line x1="4" y1="-6" x2="5" y2="-9" stroke="#94a3b8" stroke-width="1.5"/>
+    <circle cx="5" cy="-8" r="4" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="0" y="17" font-size="7" fill="#94a3b8" text-anchor="middle">Cart</text>
+  </g>
+
+  <!-- Large Search Bar -->
+  <rect x="100" y="55" width="600" height="50" rx="8" fill="none" stroke="#94a3b8" stroke-width="2"/>
+
+  <!-- Categories Dropdown -->
+  <rect x="110" y="65" width="90" height="30" rx="4" fill="none" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="155" y="83" font-size="9" fill="#94a3b8" text-anchor="middle">Categories</text>
+  <path d="M 192 78 L 196 82 L 200 78" stroke="#94a3b8" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Search Input Area -->
+  <line x1="220" y1="80" x2="450" y2="80" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="335" y="83" font-size="10" fill="#cbd5e1" text-anchor="middle">What are you looking for?</text>
+
+  <!-- Search Button -->
+  <rect x="620" y="65" width="70" height="30" rx="4" fill="none" stroke="#3b82f6" stroke-width="2"/>
+  <circle cx="640" cy="80" r="6" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
+  <line x1="644" y1="84" x2="647" y2="87" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"/>
+  <text x="665" y="83" font-size="9" fill="#3b82f6" text-anchor="middle" font-weight="600">Search</text>
+
+  <!-- Search Suggestions -->
+  <g transform="translate(150, 120)">
+    <text x="0" y="0" font-size="8" fill="#94a3b8" font-weight="500">Popular:</text>
+
+    <!-- Pill tags -->
+    <rect x="45" y="-8" width="55" height="16" rx="8" fill="none" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="72" y="3" font-size="7" fill="#94a3b8" text-anchor="middle">T-shirts</text>
+
+    <rect x="110" y="-8" width="45" height="16" rx="8" fill="none" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="132" y="3" font-size="7" fill="#94a3b8" text-anchor="middle">Shoes</text>
+
+    <rect x="165" y="-8" width="55" height="16" rx="8" fill="none" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="192" y="3" font-size="7" fill="#94a3b8" text-anchor="middle">Laptops</text>
+
+    <rect x="230" y="-8" width="45" height="16" rx="8" fill="none" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="252" y="3" font-size="7" fill="#94a3b8" text-anchor="middle">Books</text>
+  </g>
+
+  <!-- Navigation Menu -->
+  <line x1="0" y1="135" x2="800" y2="135" stroke="#e5e7eb" stroke-width="1"/>
+
+  <g transform="translate(280, 148)">
+    <line x1="0" y1="0" x2="40" y2="0" stroke="#94a3b8" stroke-width="1.5"/>
+    <line x1="60" y1="0" x2="100" y2="0" stroke="#94a3b8" stroke-width="1.5"/>
+    <line x1="120" y1="0" x2="160" y2="0" stroke="#94a3b8" stroke-width="1.5"/>
+    <line x1="180" y1="0" x2="220" y2="0" stroke="#94a3b8" stroke-width="1.5"/>
+  </g>
+</svg>

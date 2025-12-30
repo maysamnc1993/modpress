@@ -1,0 +1,118 @@
+{
+    "name": "sidebar-toggle",
+    "title": "سایدبار کامل",
+    "description": "هدر با سایدبار کامل قابل باز شدن - همبرگر همیشه نمایان",
+    "version": "1.0.0",
+    "author": "Developer Starter",
+    "supports": ["woocommerce", "search", "sticky"],
+    "settings": {
+        "sticky": {
+            "type": "checkbox",
+            "label": "هدر چسبان",
+            "default": true,
+            "checkbox_label": "فعال کردن حالت Sticky"
+        },
+        "sidebar_position": {
+            "type": "select",
+            "label": "موقعیت سایدبار",
+            "default": "right",
+            "options": {
+                "right": "راست",
+                "left": "چپ"
+            }
+        },
+        "sidebar_width": {
+            "type": "number",
+            "label": "عرض سایدبار (پیکسل)",
+            "default": 400,
+            "min": 300,
+            "max": 600
+        },
+        "sidebar_bg_color": {
+            "type": "color",
+            "label": "رنگ پس‌زمینه سایدبار",
+            "default": "#ffffff"
+        },
+        "sidebar_overlay_color": {
+            "type": "color",
+            "label": "رنگ overlay سایدبار",
+            "default": "#000000"
+        },
+        "sidebar_overlay_opacity": {
+            "type": "number",
+            "label": "شفافیت overlay (0-100)",
+            "default": 50,
+            "min": 0,
+            "max": 100
+        },
+        "show_categories": {
+            "type": "checkbox",
+            "label": "نمایش دسته‌بندی‌ها",
+            "default": true,
+            "checkbox_label": "نمایش دسته‌بندی‌ها در سایدبار"
+        },
+        "show_search": {
+            "type": "checkbox",
+            "label": "نمایش جستجو",
+            "default": true,
+            "checkbox_label": "نمایش جستجو در سایدبار"
+        },
+        "show_cart": {
+            "type": "checkbox",
+            "label": "نمایش سبد خرید",
+            "default": true,
+            "checkbox_label": "نمایش آیکون سبد خرید"
+        },
+        "show_account": {
+            "type": "checkbox",
+            "label": "نمایش حساب کاربری",
+            "default": true,
+            "checkbox_label": "نمایش پروفایل کاربر در سایدبار"
+        },
+        "show_social": {
+            "type": "checkbox",
+            "label": "نمایش شبکه‌های اجتماعی",
+            "default": true,
+            "checkbox_label": "نمایش آیکون‌های شبکه اجتماعی"
+        },
+        "show_contact": {
+            "type": "checkbox",
+            "label": "نمایش اطلاعات تماس",
+            "default": true,
+            "checkbox_label": "نمایش تلفن و ایمیل"
+        },
+        "bg_color": {
+            "type": "color",
+            "label": "رنگ پس‌زمینه هدر",
+            "default": "#ffffff"
+        },
+        "text_color": {
+            "type": "color",
+            "label": "رنگ متن",
+            "default": "#1f2937"
+        },
+        "hamburger_style": {
+            "type": "select",
+            "label": "استایل همبرگر منو",
+            "default": "default",
+            "options": {
+                "default": "پیش‌فرض",
+                "dots": "نقطه‌ای",
+                "arrow": "فلش"
+            }
+        },
+        "animation_speed": {
+            "type": "number",
+            "label": "سرعت انیمیشن (میلی‌ثانیه)",
+            "default": 300,
+            "min": 100,
+            "max": 1000
+        },
+        "show_logo_in_sidebar": {
+            "type": "checkbox",
+            "label": "نمایش لوگو در سایدبار",
+            "default": true,
+            "checkbox_label": "نمایش لوگو در هدر سایدبار"
+        }
+    }
+}

@@ -1,0 +1,119 @@
+{
+    "name": "cta-banner",
+    "title": "CTA Banner Header",
+    "description": "Header with integrated dismissible call-to-action banner on top and main navigation below",
+    "version": "1.0.0",
+    "author": "Developer Starter",
+    "supports": ["sticky", "banner", "cta"],
+    "settings": {
+        "sticky": {
+            "type": "checkbox",
+            "label": "Sticky Header",
+            "default": true,
+            "checkbox_label": "Enable sticky header on scroll"
+        },
+        "show_banner": {
+            "type": "checkbox",
+            "label": "Show CTA Banner",
+            "default": true,
+            "checkbox_label": "Display CTA banner"
+        },
+        "banner_text": {
+            "type": "text",
+            "label": "Banner Text",
+            "default": "🎉 Limited Time Offer: Get 50% Off Your First Order!"
+        },
+        "banner_link": {
+            "type": "url",
+            "label": "Banner Link URL",
+            "default": "/shop"
+        },
+        "banner_cta_text": {
+            "type": "text",
+            "label": "Banner CTA Button Text",
+            "default": "Shop Now"
+        },
+        "banner_bg_color": {
+            "type": "color",
+            "label": "Banner Background Color",
+            "default": "#000000"
+        },
+        "banner_text_color": {
+            "type": "color",
+            "label": "Banner Text Color",
+            "default": "#ffffff"
+        },
+        "banner_dismissible": {
+            "type": "checkbox",
+            "label": "Dismissible Banner",
+            "default": true,
+            "checkbox_label": "Allow users to close the banner"
+        },
+        "banner_style": {
+            "type": "select",
+            "label": "Banner Style",
+            "default": "default",
+            "options": {
+                "default": "Default",
+                "gradient": "Gradient",
+                "outlined": "Outlined"
+            }
+        },
+        "bg_color": {
+            "type": "color",
+            "label": "Header Background Color",
+            "default": "#ffffff"
+        },
+        "text_color": {
+            "type": "color",
+            "label": "Header Text Color",
+            "default": "#000000"
+        },
+        "show_search": {
+            "type": "checkbox",
+            "label": "Show Search",
+            "default": true,
+            "checkbox_label": "Display search icon"
+        },
+        "show_cart": {
+            "type": "checkbox",
+            "label": "Show Cart",
+            "default": true,
+            "checkbox_label": "Display cart icon"
+        },
+        "show_account": {
+            "type": "checkbox",
+            "label": "Show Account",
+            "default": false,
+            "checkbox_label": "Display account icon"
+        },
+        "menu_style": {
+            "type": "select",
+            "label": "Menu Style",
+            "default": "inline",
+            "options": {
+                "inline": "Inline Menu",
+                "hamburger": "Hamburger Menu"
+            }
+        },
+        "banner_animation": {
+            "type": "select",
+            "label": "Banner Animation",
+            "default": "slide",
+            "options": {
+                "slide": "Slide Down",
+                "fade": "Fade In",
+                "none": "No Animation"
+            }
+        },
+        "banner_position": {
+            "type": "select",
+            "label": "Banner Position",
+            "default": "top",
+            "options": {
+                "top": "Above Header",
+                "below": "Below Header"
+            }
+        }
+    }
+}

@@ -1,0 +1,127 @@
+{
+    "name": "floating",
+    "title": "Floating Pill",
+    "description": "Floating pill-shaped header that hovers over content with smooth scroll transitions",
+    "version": "1.0.0",
+    "author": "Developer Starter",
+    "supports": ["sticky", "transparent", "minimal"],
+    "settings": {
+        "sticky": {
+            "type": "checkbox",
+            "label": "Sticky Header",
+            "default": true,
+            "checkbox_label": "Enable floating sticky header"
+        },
+        "float_margin": {
+            "type": "select",
+            "label": "Float Margin",
+            "default": "md",
+            "options": {
+                "sm": "Small (10px)",
+                "md": "Medium (20px)",
+                "lg": "Large (30px)",
+                "xl": "Extra Large (40px)"
+            }
+        },
+        "pill_radius": {
+            "type": "select",
+            "label": "Pill Border Radius",
+            "default": "full",
+            "options": {
+                "lg": "Large",
+                "xl": "Extra Large",
+                "2xl": "2X Large",
+                "full": "Full Rounded"
+            }
+        },
+        "transparent_start": {
+            "type": "checkbox",
+            "label": "Transparent on Top",
+            "default": true,
+            "checkbox_label": "Start transparent, become solid on scroll"
+        },
+        "bg_color": {
+            "type": "color",
+            "label": "Background Color",
+            "default": "#ffffff"
+        },
+        "text_color": {
+            "type": "color",
+            "label": "Text Color",
+            "default": "#000000"
+        },
+        "shadow_color": {
+            "type": "color",
+            "label": "Shadow Color",
+            "default": "#000000"
+        },
+        "shadow_opacity": {
+            "type": "select",
+            "label": "Shadow Opacity",
+            "default": "10",
+            "options": {
+                "5": "5%",
+                "10": "10%",
+                "15": "15%",
+                "20": "20%",
+                "25": "25%"
+            }
+        },
+        "show_search": {
+            "type": "checkbox",
+            "label": "Show Search",
+            "default": true,
+            "checkbox_label": "Display search icon"
+        },
+        "show_cart": {
+            "type": "checkbox",
+            "label": "Show Cart",
+            "default": true,
+            "checkbox_label": "Display cart icon"
+        },
+        "show_account": {
+            "type": "checkbox",
+            "label": "Show Account",
+            "default": false,
+            "checkbox_label": "Display account icon"
+        },
+        "nav_position": {
+            "type": "select",
+            "label": "Navigation Position",
+            "default": "center",
+            "options": {
+                "left": "Left",
+                "center": "Center",
+                "right": "Right"
+            }
+        },
+        "max_width": {
+            "type": "select",
+            "label": "Maximum Width",
+            "default": "1200",
+            "options": {
+                "900": "900px",
+                "1000": "1000px",
+                "1100": "1100px",
+                "1200": "1200px",
+                "1400": "1400px"
+            }
+        },
+        "show_cta": {
+            "type": "checkbox",
+            "label": "Show CTA Button",
+            "default": true,
+            "checkbox_label": "Display call-to-action button"
+        },
+        "cta_text": {
+            "type": "text",
+            "label": "CTA Button Text",
+            "default": "Get Started"
+        },
+        "cta_url": {
+            "type": "url",
+            "label": "CTA Button URL",
+            "default": "/contact"
+        }
+    }
+}

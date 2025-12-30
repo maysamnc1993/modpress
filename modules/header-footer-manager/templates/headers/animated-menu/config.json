@@ -1,0 +1,123 @@
+{
+    "name": "animated-menu",
+    "title": "منوی متحرک",
+    "description": "هدر با انیمیشن‌های زیبا برای منو - افکت‌های هاور متحرک",
+    "version": "1.0.0",
+    "author": "Developer Starter",
+    "supports": ["woocommerce", "search", "sticky", "mega-menu"],
+    "settings": {
+        "sticky": {
+            "type": "checkbox",
+            "label": "هدر چسبان",
+            "default": true,
+            "checkbox_label": "فعال کردن حالت Sticky"
+        },
+        "animation_style": {
+            "type": "select",
+            "label": "نوع انیمیشن",
+            "default": "underline",
+            "options": {
+                "underline": "خط زیرین",
+                "highlight": "هایلایت پس‌زمینه",
+                "slide": "اسلاید از چپ",
+                "scale": "بزرگ‌نمایی",
+                "bounce": "پرش",
+                "glow": "درخشش"
+            }
+        },
+        "animation_duration": {
+            "type": "number",
+            "label": "مدت زمان انیمیشن (میلی‌ثانیه)",
+            "default": 300,
+            "min": 100,
+            "max": 1000
+        },
+        "underline_color": {
+            "type": "color",
+            "label": "رنگ خط زیرین",
+            "default": "#3b82f6"
+        },
+        "underline_thickness": {
+            "type": "number",
+            "label": "ضخامت خط زیرین (پیکسل)",
+            "default": 2,
+            "min": 1,
+            "max": 6
+        },
+        "highlight_color": {
+            "type": "color",
+            "label": "رنگ هایلایت",
+            "default": "#eff6ff"
+        },
+        "hover_text_color": {
+            "type": "color",
+            "label": "رنگ متن در هاور",
+            "default": "#3b82f6"
+        },
+        "show_search": {
+            "type": "checkbox",
+            "label": "نمایش جستجو",
+            "default": true,
+            "checkbox_label": "نمایش آیکون جستجو"
+        },
+        "show_cart": {
+            "type": "checkbox",
+            "label": "نمایش سبد خرید",
+            "default": true,
+            "checkbox_label": "نمایش آیکون سبد خرید"
+        },
+        "show_account": {
+            "type": "checkbox",
+            "label": "نمایش حساب کاربری",
+            "default": true,
+            "checkbox_label": "نمایش آیکون حساب کاربری"
+        },
+        "show_wishlist": {
+            "type": "checkbox",
+            "label": "نمایش علاقه‌مندی‌ها",
+            "default": true,
+            "checkbox_label": "نمایش آیکون علاقه‌مندی‌ها"
+        },
+        "bg_color": {
+            "type": "color",
+            "label": "رنگ پس‌زمینه",
+            "default": "#ffffff"
+        },
+        "text_color": {
+            "type": "color",
+            "label": "رنگ متن",
+            "default": "#1f2937"
+        },
+        "menu_spacing": {
+            "type": "number",
+            "label": "فاصله بین آیتم‌های منو (پیکسل)",
+            "default": 32,
+            "min": 16,
+            "max": 64
+        },
+        "menu_font_size": {
+            "type": "number",
+            "label": "اندازه فونت منو (پیکسل)",
+            "default": 16,
+            "min": 12,
+            "max": 24
+        },
+        "menu_font_weight": {
+            "type": "select",
+            "label": "وزن فونت منو",
+            "default": "medium",
+            "options": {
+                "normal": "معمولی",
+                "medium": "متوسط",
+                "semibold": "نیمه‌بولد",
+                "bold": "بولد"
+            }
+        },
+        "enable_dropdown_animation": {
+            "type": "checkbox",
+            "label": "انیمیشن برای زیرمنوها",
+            "default": true,
+            "checkbox_label": "فعال کردن انیمیشن برای منوهای کشویی"
+        }
+    }
+}
