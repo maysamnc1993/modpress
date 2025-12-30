@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 120">
+  <!-- Top Info Bar -->
+  <rect width="300" height="16" fill="#f8fafc"/>
+  <text x="10" y="11" font-size="6" fill="#64748b">📅 دوشنبه، 15 بهمن 1403</text>
+  <text x="120" y="11" font-size="6" fill="#64748b">☁️ تهران: 22°C</text>
+  <circle cx="270" cy="8" r="3" fill="#3b82f6"/>
+  <circle cx="280" cy="8" r="3" fill="#ef4444"/>
+  <circle cx="290" cy="8" r="3" fill="#10b981"/>
+
+  <!-- Breaking News Ticker -->
+  <rect y="16" width="300" height="18" fill="#dc2626"/>
+  <rect x="10" y="20" width="45" height="10" rx="3" fill="#ffffff" fill-opacity="0.3"/>
+  <text x="32" y="28" font-size="6" fill="white" text-anchor="middle" font-weight="bold">خبر فوری</text>
+  <text x="70" y="28" font-size="6" fill="white">خبر مهم امروز • رویداد بزرگ • آخرین اخبار</text>
+
+  <!-- Main Header -->
+  <rect y="34" width="300" height="50" fill="#ffffff"/>
+
+  <!-- Logo -->
+  <rect x="10" y="45" width="70" height="26" rx="3" fill="#1e293b"/>
+  <text x="45" y="60" font-size="10" fill="white" text-anchor="middle" font-weight="bold">MAGAZINE</text>
+
+  <!-- Navigation -->
+  <text x="120" y="60" font-size="7" fill="#1e293b">اخبار</text>
+  <text x="150" y="60" font-size="7" fill="#1e293b">ورزش</text>
+  <text x="180" y="60" font-size="7" fill="#1e293b">اقتصاد</text>
+  <text x="215" y="60" font-size="7" fill="#1e293b">فرهنگ</text>
+
+  <!-- Icons -->
+  <circle cx="260" cy="58" r="8" fill="#f1f5f9"/>
+  <path d="M 257 58 L 263 58 M 260 55 L 260 61" stroke="#64748b" stroke-width="1.5"/>
+
+  <circle cx="280" cy="58" r="8" fill="#f1f5f9"/>
+  <circle cx="280" cy="58" r="3" fill="#64748b"/>
+
+  <!-- Categories Bar -->
+  <rect y="84" width="300" height="24" fill="#f8fafc"/>
+  <line x1="0" y1="84" x2="300" y2="84" stroke="#e2e8f0" stroke-width="1"/>
+
+  <text x="30" y="98" font-size="6" fill="#64748b" text-anchor="middle">سیاسی</text>
+  <text x="70" y="98" font-size="6" fill="#64748b" text-anchor="middle">اقتصاد</text>
+  <text x="110" y="98" font-size="6" fill="#64748b" text-anchor="middle">ورزشی</text>
+  <text x="150" y="98" font-size="6" fill="#64748b" text-anchor="middle">فناوری</text>
+  <text x="190" y="98" font-size="6" fill="#64748b" text-anchor="middle">فرهنگ</text>
+  <text x="230" y="98" font-size="6" fill="#64748b" text-anchor="middle">هنر</text>
+  <text x="270" y="98" font-size="6" fill="#64748b" text-anchor="middle">سرگرمی</text>
+
+  <!-- Borders -->
+  <line x1="0" y1="84" x2="300" y2="84" stroke="#e2e8f0" stroke-width="1"/>
+  <line x1="0" y1="108" x2="300" y2="108" stroke="#e2e8f0" stroke-width="1"/>
+</svg>

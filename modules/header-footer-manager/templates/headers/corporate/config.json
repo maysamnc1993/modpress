@@ -1,0 +1,103 @@
+{
+    "name": "corporate",
+    "title": "شرکتی",
+    "description": "هدر حرفه‌ای شرکتی با نوار تماس، منوی چند سطحی و دکمه CTA",
+    "version": "1.0.0",
+    "author": "Developer Starter",
+    "supports": ["sticky", "multi-level-menu", "contact-bar", "cta"],
+    "settings": {
+        "sticky": {
+            "type": "checkbox",
+            "label": "هدر چسبان",
+            "default": true,
+            "checkbox_label": "فعال کردن حالت Sticky"
+        },
+        "show_topbar": {
+            "type": "checkbox",
+            "label": "نمایش نوار بالا",
+            "default": true,
+            "checkbox_label": "نمایش نوار اطلاعات تماس"
+        },
+        "topbar_bg_color": {
+            "type": "color",
+            "label": "رنگ پس‌زمینه نوار بالا",
+            "default": "#1e293b"
+        },
+        "topbar_text_color": {
+            "type": "color",
+            "label": "رنگ متن نوار بالا",
+            "default": "#ffffff"
+        },
+        "show_search": {
+            "type": "checkbox",
+            "label": "نمایش جستجو",
+            "default": true,
+            "checkbox_label": "نمایش فرم جستجو"
+        },
+        "show_cart": {
+            "type": "checkbox",
+            "label": "نمایش سبد خرید",
+            "default": true,
+            "checkbox_label": "نمایش آیکون سبد خرید"
+        },
+        "show_account": {
+            "type": "checkbox",
+            "label": "نمایش حساب کاربری",
+            "default": true,
+            "checkbox_label": "نمایش آیکون حساب کاربری"
+        },
+        "show_wishlist": {
+            "type": "checkbox",
+            "label": "نمایش علاقه‌مندی‌ها",
+            "default": false,
+            "checkbox_label": "نمایش آیکون علاقه‌مندی"
+        },
+        "bg_color": {
+            "type": "color",
+            "label": "رنگ پس‌زمینه",
+            "default": "#ffffff"
+        },
+        "text_color": {
+            "type": "color",
+            "label": "رنگ متن",
+            "default": "#1e293b"
+        },
+        "show_cta": {
+            "type": "checkbox",
+            "label": "نمایش دکمه CTA",
+            "default": true,
+            "checkbox_label": "نمایش دکمه اقدام"
+        },
+        "cta_text": {
+            "type": "text",
+            "label": "متن دکمه CTA",
+            "default": "تماس با ما"
+        },
+        "cta_url": {
+            "type": "url",
+            "label": "لینک دکمه CTA",
+            "default": "/contact"
+        },
+        "cta_style": {
+            "type": "select",
+            "label": "استایل دکمه CTA",
+            "options": {
+                "primary": "اصلی",
+                "secondary": "فرعی",
+                "outline": "خطی"
+            },
+            "default": "primary"
+        },
+        "show_departments": {
+            "type": "checkbox",
+            "label": "نمایش منوی دپارتمان",
+            "default": true,
+            "checkbox_label": "نمایش منوی کشویی دپارتمان‌ها"
+        },
+        "departments_title": {
+            "type": "text",
+            "label": "عنوان دپارتمان‌ها",
+            "default": "دپارتمان‌ها"
+        }
+    }
+}

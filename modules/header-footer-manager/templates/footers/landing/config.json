@@ -1,0 +1,185 @@
+{
+    "name": "landing",
+    "title": "فوتر صفحه فرود",
+    "description": "فوتر مینیمال صفحه فرود با لوگو، شبکه‌های اجتماعی، کپی‌رایت و لینک‌های قانونی (حریم خصوصی، شرایط)",
+    "version": "1.0.0",
+    "author": "Developer Starter",
+    "supports": ["minimal", "legal-links", "social", "clean"],
+    "settings": {
+        "bg_color": {
+            "type": "color",
+            "label": "رنگ پس‌زمینه",
+            "default": "#ffffff"
+        },
+        "text_color": {
+            "type": "color",
+            "label": "رنگ متن",
+            "default": "#64748b"
+        },
+        "link_color": {
+            "type": "color",
+            "label": "رنگ لینک",
+            "default": "#64748b"
+        },
+        "link_hover_color": {
+            "type": "color",
+            "label": "رنگ لینک در هاور",
+            "default": "#1e293b"
+        },
+        "show_logo": {
+            "type": "checkbox",
+            "label": "نمایش لوگو",
+            "default": true,
+            "checkbox_label": "نمایش لوگوی سایت"
+        },
+        "show_description": {
+            "type": "checkbox",
+            "label": "نمایش توضیحات",
+            "default": false,
+            "checkbox_label": "نمایش متن توضیحات"
+        },
+        "description_text": {
+            "type": "textarea",
+            "label": "متن توضیحات",
+            "default": "راهکار ساده و قدرتمند برای کسب‌وکار شما"
+        },
+        "show_social": {
+            "type": "checkbox",
+            "label": "نمایش شبکه‌های اجتماعی",
+            "default": true,
+            "checkbox_label": "نمایش آیکون‌های شبکه‌های اجتماعی"
+        },
+        "show_newsletter": {
+            "type": "checkbox",
+            "label": "نمایش خبرنامه",
+            "default": false,
+            "checkbox_label": "نمایش فرم ثبت‌نام خبرنامه"
+        },
+        "newsletter_title": {
+            "type": "text",
+            "label": "عنوان خبرنامه",
+            "default": "عضویت در خبرنامه"
+        },
+        "newsletter_text": {
+            "type": "text",
+            "label": "متن خبرنامه",
+            "default": "آخرین اخبار را دریافت کنید"
+        },
+        "show_contact": {
+            "type": "checkbox",
+            "label": "نمایش اطلاعات تماس",
+            "default": false,
+            "checkbox_label": "نمایش اطلاعات تماس"
+        },
+        "columns": {
+            "type": "select",
+            "label": "تعداد ستون‌ها",
+            "options": {
+                "2": "2 ستون",
+                "3": "3 ستون",
+                "4": "4 ستون",
+                "5": "5 ستون"
+            },
+            "default": "3"
+        },
+        "show_menu1": {
+            "type": "checkbox",
+            "label": "نمایش منوی اول",
+            "default": false,
+            "checkbox_label": "نمایش منوی لینک‌ها"
+        },
+        "menu1_title": {
+            "type": "text",
+            "label": "عنوان منوی اول",
+            "default": "لینک‌ها"
+        },
+        "show_menu2": {
+            "type": "checkbox",
+            "label": "نمایش منوی دوم",
+            "default": false,
+            "checkbox_label": "نمایش منوی دوم"
+        },
+        "menu2_title": {
+            "type": "text",
+            "label": "عنوان منوی دوم",
+            "default": "منابع"
+        },
+        "show_copyright": {
+            "type": "checkbox",
+            "label": "نمایش کپی‌رایت",
+            "default": true,
+            "checkbox_label": "نمایش متن کپی‌رایت"
+        },
+        "copyright_text": {
+            "type": "text",
+            "label": "متن کپی‌رایت",
+            "default": "تمامی حقوق محفوظ است"
+        },
+        "show_payment_icons": {
+            "type": "checkbox",
+            "label": "نمایش آیکون‌های پرداخت",
+            "default": false,
+            "checkbox_label": "نمایش لوگوهای روش‌های پرداخت"
+        },
+        "show_back_to_top": {
+            "type": "checkbox",
+            "label": "نمایش دکمه بازگشت به بالا",
+            "default": false,
+            "checkbox_label": "نمایش دکمه اسکرول به بالا"
+        },
+        "show_legal_links": {
+            "type": "checkbox",
+            "label": "نمایش لینک‌های قانونی",
+            "default": true,
+            "checkbox_label": "نمایش لینک‌های حریم خصوصی و شرایط"
+        },
+        "show_privacy_link": {
+            "type": "checkbox",
+            "label": "نمایش لینک حریم خصوصی",
+            "default": true,
+            "checkbox_label": "نمایش لینک سیاست حریم خصوصی"
+        },
+        "privacy_url": {
+            "type": "url",
+            "label": "لینک حریم خصوصی",
+            "default": "/privacy-policy"
+        },
+        "show_terms_link": {
+            "type": "checkbox",
+            "label": "نمایش لینک شرایط",
+            "default": true,
+            "checkbox_label": "نمایش لینک شرایط استفاده"
+        },
+        "terms_url": {
+            "type": "url",
+            "label": "لینک شرایط",
+            "default": "/terms-of-service"
+        },
+        "show_cookies_link": {
+            "type": "checkbox",
+            "label": "نمایش لینک کوکی‌ها",
+            "default": false,
+            "checkbox_label": "نمایش لینک سیاست کوکی‌ها"
+        },
+        "cookies_url": {
+            "type": "url",
+            "label": "لینک کوکی‌ها",
+            "default": "/cookies-policy"
+        },
+        "layout_style": {
+            "type": "select",
+            "label": "طرح‌بندی",
+            "options": {
+                "centered": "متمرکز",
+                "spread": "پخش شده"
+            },
+            "default": "centered"
+        },
+        "border_top": {
+            "type": "checkbox",
+            "label": "خط بالایی",
+            "default": true,
+            "checkbox_label": "نمایش خط جداکننده در بالای فوتر"
+        }
+    }
+}

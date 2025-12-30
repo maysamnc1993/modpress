@@ -1,0 +1,130 @@
+{
+    "name": "blog",
+    "title": "Blog & Magazine",
+    "description": "Blog footer with popular posts, categories, tags cloud, author info, and subscribe section",
+    "version": "1.0.0",
+    "author": "Developer Starter",
+    "settings": {
+        "bg_color": {
+            "type": "color",
+            "label": "Background Color",
+            "default": "#1f2937"
+        },
+        "text_color": {
+            "type": "color",
+            "label": "Text Color",
+            "default": "#9ca3af"
+        },
+        "link_color": {
+            "type": "color",
+            "label": "Link Color",
+            "default": "#f3f4f6"
+        },
+        "link_hover_color": {
+            "type": "color",
+            "label": "Link Hover Color",
+            "default": "#f59e0b"
+        },
+        "show_logo": {
+            "type": "checkbox",
+            "label": "Show Logo",
+            "default": true,
+            "checkbox_label": "Display logo in footer"
+        },
+        "show_description": {
+            "type": "checkbox",
+            "label": "Show Description",
+            "default": true,
+            "checkbox_label": "Display site description"
+        },
+        "description_text": {
+            "type": "textarea",
+            "label": "Custom Description",
+            "default": "Sharing stories, insights, and inspiration from around the world."
+        },
+        "show_social": {
+            "type": "checkbox",
+            "label": "Show Social Icons",
+            "default": true,
+            "checkbox_label": "Display social media icons"
+        },
+        "show_newsletter": {
+            "type": "checkbox",
+            "label": "Show Newsletter",
+            "default": true,
+            "checkbox_label": "Display newsletter signup form"
+        },
+        "newsletter_title": {
+            "type": "text",
+            "label": "Newsletter Title",
+            "default": "Subscribe to Our Newsletter"
+        },
+        "newsletter_text": {
+            "type": "text",
+            "label": "Newsletter Description",
+            "default": "Get the latest articles and updates delivered to your inbox."
+        },
+        "show_contact": {
+            "type": "checkbox",
+            "label": "Show Contact Info",
+            "default": false,
+            "checkbox_label": "Display contact information"
+        },
+        "columns": {
+            "type": "select",
+            "label": "Number of Columns",
+            "default": "4",
+            "options": {
+                "2": "2 Columns",
+                "3": "3 Columns",
+                "4": "4 Columns",
+                "5": "5 Columns"
+            }
+        },
+        "show_menu1": {
+            "type": "checkbox",
+            "label": "Show Categories Menu",
+            "default": true,
+            "checkbox_label": "Display categories menu column"
+        },
+        "menu1_title": {
+            "type": "text",
+            "label": "Categories Menu Title",
+            "default": "Categories"
+        },
+        "show_menu2": {
+            "type": "checkbox",
+            "label": "Show Quick Links Menu",
+            "default": true,
+            "checkbox_label": "Display quick links menu column"
+        },
+        "menu2_title": {
+            "type": "text",
+            "label": "Quick Links Menu Title",
+            "default": "Quick Links"
+        },
+        "show_copyright": {
+            "type": "checkbox",
+            "label": "Show Copyright",
+            "default": true,
+            "checkbox_label": "Display copyright text"
+        },
+        "copyright_text": {
+            "type": "text",
+            "label": "Custom Copyright Text",
+            "default": "All rights reserved."
+        },
+        "show_payment_icons": {
+            "type": "checkbox",
+            "label": "Show Payment Icons",
+            "default": false,
+            "checkbox_label": "Display payment method icons"
+        },
+        "show_back_to_top": {
+            "type": "checkbox",
+            "label": "Show Back to Top",
+            "default": true,
+            "checkbox_label": "Display back to top button"
+        }
+    }
+}

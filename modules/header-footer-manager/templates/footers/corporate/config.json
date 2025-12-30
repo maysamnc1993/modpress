@@ -1,0 +1,175 @@
+{
+    "name": "corporate",
+    "title": "فوتر شرکتی",
+    "description": "فوتر چند بخشی شرکتی با دپارتمان‌ها، موقعیت مکانی، پیوند شغل‌ها و روابط سرمایه‌گذار",
+    "version": "1.0.0",
+    "author": "Developer Starter",
+    "supports": ["departments", "locations", "careers", "investor-relations"],
+    "settings": {
+        "bg_color": {
+            "type": "color",
+            "label": "رنگ پس‌زمینه",
+            "default": "#1e293b"
+        },
+        "text_color": {
+            "type": "color",
+            "label": "رنگ متن",
+            "default": "#ffffff"
+        },
+        "link_color": {
+            "type": "color",
+            "label": "رنگ لینک",
+            "default": "#94a3b8"
+        },
+        "link_hover_color": {
+            "type": "color",
+            "label": "رنگ لینک در هاور",
+            "default": "#ffffff"
+        },
+        "show_logo": {
+            "type": "checkbox",
+            "label": "نمایش لوگو",
+            "default": true,
+            "checkbox_label": "نمایش لوگوی سایت"
+        },
+        "show_description": {
+            "type": "checkbox",
+            "label": "نمایش توضیحات",
+            "default": true,
+            "checkbox_label": "نمایش متن توضیحات"
+        },
+        "description_text": {
+            "type": "textarea",
+            "label": "متن توضیحات",
+            "default": "ما یک شرکت پیشرو در ارائه راهکارهای نوآورانه برای کسب‌وکارها هستیم. ماموریت ما کمک به رشد و موفقیت شما است."
+        },
+        "show_social": {
+            "type": "checkbox",
+            "label": "نمایش شبکه‌های اجتماعی",
+            "default": true,
+            "checkbox_label": "نمایش آیکون‌های شبکه‌های اجتماعی"
+        },
+        "show_newsletter": {
+            "type": "checkbox",
+            "label": "نمایش خبرنامه",
+            "default": true,
+            "checkbox_label": "نمایش فرم ثبت‌نام خبرنامه"
+        },
+        "newsletter_title": {
+            "type": "text",
+            "label": "عنوان خبرنامه",
+            "default": "عضویت در خبرنامه"
+        },
+        "newsletter_text": {
+            "type": "text",
+            "label": "متن خبرنامه",
+            "default": "آخرین اخبار و به‌روزرسانی‌ها را در ایمیل خود دریافت کنید"
+        },
+        "show_contact": {
+            "type": "checkbox",
+            "label": "نمایش اطلاعات تماس",
+            "default": true,
+            "checkbox_label": "نمایش آدرس، تلفن و ایمیل"
+        },
+        "columns": {
+            "type": "select",
+            "label": "تعداد ستون‌ها",
+            "options": {
+                "2": "2 ستون",
+                "3": "3 ستون",
+                "4": "4 ستون",
+                "5": "5 ستون"
+            },
+            "default": "4"
+        },
+        "show_menu1": {
+            "type": "checkbox",
+            "label": "نمایش منوی اول",
+            "default": true,
+            "checkbox_label": "نمایش منوی لینک‌های سریع"
+        },
+        "menu1_title": {
+            "type": "text",
+            "label": "عنوان منوی اول",
+            "default": "لینک‌های سریع"
+        },
+        "show_menu2": {
+            "type": "checkbox",
+            "label": "نمایش منوی دوم",
+            "default": true,
+            "checkbox_label": "نمایش منوی خدمات"
+        },
+        "menu2_title": {
+            "type": "text",
+            "label": "عنوان منوی دوم",
+            "default": "خدمات"
+        },
+        "show_copyright": {
+            "type": "checkbox",
+            "label": "نمایش کپی‌رایت",
+            "default": true,
+            "checkbox_label": "نمایش متن کپی‌رایت"
+        },
+        "copyright_text": {
+            "type": "text",
+            "label": "متن کپی‌رایت",
+            "default": "تمامی حقوق محفوظ است"
+        },
+        "show_payment_icons": {
+            "type": "checkbox",
+            "label": "نمایش آیکون‌های پرداخت",
+            "default": false,
+            "checkbox_label": "نمایش لوگوهای روش‌های پرداخت"
+        },
+        "show_back_to_top": {
+            "type": "checkbox",
+            "label": "نمایش دکمه بازگشت به بالا",
+            "default": true,
+            "checkbox_label": "نمایش دکمه اسکرول به بالا"
+        },
+        "show_departments": {
+            "type": "checkbox",
+            "label": "نمایش دپارتمان‌ها",
+            "default": true,
+            "checkbox_label": "نمایش لیست دپارتمان‌ها"
+        },
+        "departments_title": {
+            "type": "text",
+            "label": "عنوان دپارتمان‌ها",
+            "default": "دپارتمان‌ها"
+        },
+        "show_locations": {
+            "type": "checkbox",
+            "label": "نمایش موقعیت‌ها",
+            "default": true,
+            "checkbox_label": "نمایش موقعیت‌های شعب"
+        },
+        "locations_title": {
+            "type": "text",
+            "label": "عنوان موقعیت‌ها",
+            "default": "شعب ما"
+        },
+        "show_careers": {
+            "type": "checkbox",
+            "label": "نمایش فرصت‌های شغلی",
+            "default": true,
+            "checkbox_label": "نمایش لینک فرصت‌های شغلی"
+        },
+        "careers_url": {
+            "type": "url",
+            "label": "لینک فرصت‌های شغلی",
+            "default": "/careers"
+        },
+        "show_investors": {
+            "type": "checkbox",
+            "label": "نمایش روابط سرمایه‌گذار",
+            "default": true,
+            "checkbox_label": "نمایش لینک روابط سرمایه‌گذار"
+        },
+        "investors_url": {
+            "type": "url",
+            "label": "لینک روابط سرمایه‌گذار",
+            "default": "/investors"
+        }
+    }
+}

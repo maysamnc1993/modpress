@@ -1,0 +1,180 @@
+{
+    "name": "magazine",
+    "title": "فوتر مجله‌ای",
+    "description": "فوتر خبری/مجله‌ای با آخرین مقالات، دسته‌بندی‌های محبوب، نویسندگان برتر و فید شبکه‌های اجتماعی",
+    "version": "1.0.0",
+    "author": "Developer Starter",
+    "supports": ["latest-posts", "popular-categories", "authors", "social-feed"],
+    "settings": {
+        "bg_color": {
+            "type": "color",
+            "label": "رنگ پس‌زمینه",
+            "default": "#0f172a"
+        },
+        "text_color": {
+            "type": "color",
+            "label": "رنگ متن",
+            "default": "#ffffff"
+        },
+        "link_color": {
+            "type": "color",
+            "label": "رنگ لینک",
+            "default": "#94a3b8"
+        },
+        "link_hover_color": {
+            "type": "color",
+            "label": "رنگ لینک در هاور",
+            "default": "#f59e0b"
+        },
+        "show_logo": {
+            "type": "checkbox",
+            "label": "نمایش لوگو",
+            "default": true,
+            "checkbox_label": "نمایش لوگوی سایت"
+        },
+        "show_description": {
+            "type": "checkbox",
+            "label": "نمایش توضیحات",
+            "default": true,
+            "checkbox_label": "نمایش متن توضیحات"
+        },
+        "description_text": {
+            "type": "textarea",
+            "label": "متن توضیحات",
+            "default": "منبع خبری معتبر با پوشش جامع رویدادها، تحلیل‌های عمیق و گزارش‌های ویژه."
+        },
+        "show_social": {
+            "type": "checkbox",
+            "label": "نمایش شبکه‌های اجتماعی",
+            "default": true,
+            "checkbox_label": "نمایش آیکون‌های شبکه‌های اجتماعی"
+        },
+        "show_newsletter": {
+            "type": "checkbox",
+            "label": "نمایش خبرنامه",
+            "default": true,
+            "checkbox_label": "نمایش فرم ثبت‌نام خبرنامه"
+        },
+        "newsletter_title": {
+            "type": "text",
+            "label": "عنوان خبرنامه",
+            "default": "خبرنامه روزانه"
+        },
+        "newsletter_text": {
+            "type": "text",
+            "label": "متن خبرنامه",
+            "default": "اخبار مهم روز را مستقیماً در ایمیل خود دریافت کنید"
+        },
+        "show_contact": {
+            "type": "checkbox",
+            "label": "نمایش اطلاعات تماس",
+            "default": true,
+            "checkbox_label": "نمایش اطلاعات تماس"
+        },
+        "columns": {
+            "type": "select",
+            "label": "تعداد ستون‌ها",
+            "options": {
+                "2": "2 ستون",
+                "3": "3 ستون",
+                "4": "4 ستون",
+                "5": "5 ستون"
+            },
+            "default": "4"
+        },
+        "show_menu1": {
+            "type": "checkbox",
+            "label": "نمایش منوی اول",
+            "default": true,
+            "checkbox_label": "نمایش منوی دسته‌بندی‌ها"
+        },
+        "menu1_title": {
+            "type": "text",
+            "label": "عنوان منوی اول",
+            "default": "دسته‌بندی‌ها"
+        },
+        "show_menu2": {
+            "type": "checkbox",
+            "label": "نمایش منوی دوم",
+            "default": true,
+            "checkbox_label": "نمایش منوی سایر بخش‌ها"
+        },
+        "menu2_title": {
+            "type": "text",
+            "label": "عنوان منوی دوم",
+            "default": "بخش‌های سایت"
+        },
+        "show_copyright": {
+            "type": "checkbox",
+            "label": "نمایش کپی‌رایت",
+            "default": true,
+            "checkbox_label": "نمایش متن کپی‌رایت"
+        },
+        "copyright_text": {
+            "type": "text",
+            "label": "متن کپی‌رایت",
+            "default": "تمامی حقوق محفوظ است"
+        },
+        "show_payment_icons": {
+            "type": "checkbox",
+            "label": "نمایش آیکون‌های پرداخت",
+            "default": false,
+            "checkbox_label": "نمایش لوگوهای روش‌های پرداخت"
+        },
+        "show_back_to_top": {
+            "type": "checkbox",
+            "label": "نمایش دکمه بازگشت به بالا",
+            "default": true,
+            "checkbox_label": "نمایش دکمه اسکرول به بالا"
+        },
+        "show_latest_posts": {
+            "type": "checkbox",
+            "label": "نمایش آخرین مطالب",
+            "default": true,
+            "checkbox_label": "نمایش لیست آخرین مقالات"
+        },
+        "latest_posts_title": {
+            "type": "text",
+            "label": "عنوان آخرین مطالب",
+            "default": "تازه‌ترین مطالب"
+        },
+        "latest_posts_count": {
+            "type": "select",
+            "label": "تعداد آخرین مطالب",
+            "options": {
+                "3": "3 مطلب",
+                "4": "4 مطلب",
+                "5": "5 مطلب",
+                "6": "6 مطلب"
+            },
+            "default": "4"
+        },
+        "show_popular_categories": {
+            "type": "checkbox",
+            "label": "نمایش دسته‌های محبوب",
+            "default": true,
+            "checkbox_label": "نمایش دسته‌بندی‌های پربازدید"
+        },
+        "popular_categories_title": {
+            "type": "text",
+            "label": "عنوان دسته‌های محبوب",
+            "default": "موضوعات پرطرفدار"
+        },
+        "show_authors": {
+            "type": "checkbox",
+            "label": "نمایش نویسندگان",
+            "default": true,
+            "checkbox_label": "نمایش معرفی نویسندگان برتر"
+        },
+        "authors_title": {
+            "type": "text",
+            "label": "عنوان نویسندگان",
+            "default": "نویسندگان ما"
+        },
+        "accent_color": {
+            "type": "color",
+            "label": "رنگ تاکیدی",
+            "default": "#f59e0b"
+        }
+    }
+}

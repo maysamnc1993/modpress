@@ -1,0 +1,130 @@
+{
+    "name": "shop",
+    "title": "E-Commerce Shop",
+    "description": "E-commerce footer with product categories, customer service links, payment icons, and trust badges",
+    "version": "1.0.0",
+    "author": "Developer Starter",
+    "settings": {
+        "bg_color": {
+            "type": "color",
+            "label": "Background Color",
+            "default": "#111827"
+        },
+        "text_color": {
+            "type": "color",
+            "label": "Text Color",
+            "default": "#9ca3af"
+        },
+        "link_color": {
+            "type": "color",
+            "label": "Link Color",
+            "default": "#e5e7eb"
+        },
+        "link_hover_color": {
+            "type": "color",
+            "label": "Link Hover Color",
+            "default": "#10b981"
+        },
+        "show_logo": {
+            "type": "checkbox",
+            "label": "Show Logo",
+            "default": true,
+            "checkbox_label": "Display logo in footer"
+        },
+        "show_description": {
+            "type": "checkbox",
+            "label": "Show Description",
+            "default": true,
+            "checkbox_label": "Display site description"
+        },
+        "description_text": {
+            "type": "textarea",
+            "label": "Custom Description",
+            "default": "Your trusted online store for quality products at great prices. Fast shipping worldwide."
+        },
+        "show_social": {
+            "type": "checkbox",
+            "label": "Show Social Icons",
+            "default": true,
+            "checkbox_label": "Display social media icons"
+        },
+        "show_newsletter": {
+            "type": "checkbox",
+            "label": "Show Newsletter",
+            "default": true,
+            "checkbox_label": "Display newsletter signup form"
+        },
+        "newsletter_title": {
+            "type": "text",
+            "label": "Newsletter Title",
+            "default": "Join Our Newsletter"
+        },
+        "newsletter_text": {
+            "type": "text",
+            "label": "Newsletter Description",
+            "default": "Subscribe for exclusive deals and new arrivals."
+        },
+        "show_contact": {
+            "type": "checkbox",
+            "label": "Show Contact Info",
+            "default": true,
+            "checkbox_label": "Display contact information"
+        },
+        "columns": {
+            "type": "select",
+            "label": "Number of Columns",
+            "default": "4",
+            "options": {
+                "2": "2 Columns",
+                "3": "3 Columns",
+                "4": "4 Columns",
+                "5": "5 Columns"
+            }
+        },
+        "show_menu1": {
+            "type": "checkbox",
+            "label": "Show Shop Menu",
+            "default": true,
+            "checkbox_label": "Display shop menu column"
+        },
+        "menu1_title": {
+            "type": "text",
+            "label": "Shop Menu Title",
+            "default": "Shop"
+        },
+        "show_menu2": {
+            "type": "checkbox",
+            "label": "Show Customer Service Menu",
+            "default": true,
+            "checkbox_label": "Display customer service menu column"
+        },
+        "menu2_title": {
+            "type": "text",
+            "label": "Customer Service Menu Title",
+            "default": "Customer Service"
+        },
+        "show_copyright": {
+            "type": "checkbox",
+            "label": "Show Copyright",
+            "default": true,
+            "checkbox_label": "Display copyright text"
+        },
+        "copyright_text": {
+            "type": "text",
+            "label": "Custom Copyright Text",
+            "default": "All rights reserved."
+        },
+        "show_payment_icons": {
+            "type": "checkbox",
+            "label": "Show Payment Icons",
+            "default": true,
+            "checkbox_label": "Display payment method icons"
+        },
+        "show_back_to_top": {
+            "type": "checkbox",
+            "label": "Show Back to Top",
+            "default": true,
+            "checkbox_label": "Display back to top button"
+        }
+    }
+}

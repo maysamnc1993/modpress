@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 130">
+  <!-- Background -->
+  <rect width="400" height="130" fill="#0f172a"/>
+
+  <!-- Newsletter Bar -->
+  <rect width="400" height="40" fill="#1e293b"/>
+  <circle cx="160" cy="20" r="8" fill="#f59e0b"/>
+  <text x="160" y="23" font-size="5" fill="#ffffff" text-anchor="middle">✉</text>
+  <text x="200" y="23" font-size="9" fill="#ffffff" text-anchor="middle" font-weight="bold">خبرنامه روزانه</text>
+  <text x="200" y="32" font-size="5" fill="#94a3b8" text-anchor="middle">اخبار مهم روز را مستقیماً در ایمیل خود دریافت کنید</text>
+
+  <!-- Newsletter Form -->
+  <rect x="130" y="36" width="100" height="10" rx="5" fill="#ffffff" opacity="0.1"/>
+  <rect x="235" y="36" width="35" height="10" rx="5" fill="#f59e0b"/>
+  <text x="252" y="43" font-size="5" fill="#ffffff" text-anchor="middle" font-weight="bold">اشتراک</text>
+
+  <!-- Main Footer Content - 4 Columns -->
+  <g transform="translate(0, 50)">
+    <!-- Column 1: Latest Posts -->
+    <text x="20" y="10" font-size="7" fill="#ffffff" font-weight="bold">تازه‌ترین مطالب</text>
+    <line x1="20" y1="13" x2="85" y2="13" stroke="#f59e0b" stroke-width="2"/>
+
+    <!-- Post 1 -->
+    <rect x="20" y="18" width="15" height="15" rx="2" fill="#334155"/>
+    <text x="38" y="24" font-size="4.5" fill="#ffffff">عنوان مقاله اول که...</text>
+    <text x="38" y="29" font-size="3.5" fill="#94a3b8">1403/10/09 • سیاسی</text>
+
+    <!-- Post 2 -->
+    <rect x="20" y="36" width="15" height="15" rx="2" fill="#334155"/>
+    <text x="38" y="42" font-size="4.5" fill="#ffffff">تحلیل اقتصادی جدید...</text>
+    <text x="38" y="47" font-size="3.5" fill="#94a3b8">1403/10/08 • اقتصاد</text>
+
+    <!-- Post 3 -->
+    <rect x="20" y="54" width="15" height="15" rx="2" fill="#334155"/>
+    <text x="38" y="60" font-size="4.5" fill="#ffffff">گزارش ویژه از...</text>
+    <text x="38" y="65" font-size="3.5" fill="#94a3b8">1403/10/07 • اجتماعی</text>
+
+    <!-- Column 2: Popular Categories -->
+    <text x="110" y="10" font-size="7" fill="#ffffff" font-weight="bold">موضوعات پرطرفدار</text>
+    <line x1="110" y1="13" x2="190" y2="13" stroke="#f59e0b" stroke-width="2"/>
+    <text x="110" y="22" font-size="5" fill="#94a3b8">سیاسی (24)</text>
+    <text x="110" y="29" font-size="5" fill="#94a3b8">اقتصاد (18)</text>
+    <text x="110" y="36" font-size="5" fill="#94a3b8">فرهنگی (15)</text>
+    <text x="110" y="43" font-size="5" fill="#94a3b8">ورزشی (12)</text>
+    <text x="110" y="50" font-size="5" fill="#94a3b8">علمی (10)</text>
+    <text x="110" y="57" font-size="5" fill="#94a3b8">بین‌الملل (9)</text>
+    <text x="110" y="64" font-size="5" fill="#94a3b8">فناوری (8)</text>
+
+    <!-- Column 3: Sections -->
+    <text x="200" y="10" font-size="7" fill="#ffffff" font-weight="bold">بخش‌های سایت</text>
+    <line x1="200" y1="13" x2="270" y2="13" stroke="#f59e0b" stroke-width="2"/>
+    <text x="200" y="22" font-size="5" fill="#94a3b8">اخبار</text>
+    <text x="200" y="29" font-size="5" fill="#94a3b8">تحلیل و گزارش</text>
+    <text x="200" y="36" font-size="5" fill="#94a3b8">مصاحبه‌ها</text>
+    <text x="200" y="43" font-size="5" fill="#94a3b8">یادداشت‌ها</text>
+    <text x="200" y="50" font-size="5" fill="#94a3b8">چندرسانه‌ای</text>
+    <text x="200" y="57" font-size="5" fill="#94a3b8">گزارش‌های ویژه</text>
+    <text x="200" y="64" font-size="5" fill="#94a3b8">آرشیو</text>
+
+    <!-- Column 4: About & Authors -->
+    <rect x="285" y="5" width="50" height="6" rx="3" fill="#ffffff" opacity="0.9"/>
+    <text x="285" y="21" font-size="4.5" fill="#94a3b8">منبع خبری معتبر با پوشش</text>
+    <text x="285" y="26" font-size="4.5" fill="#94a3b8">جامع رویدادها و تحلیل‌های</text>
+    <text x="285" y="31" font-size="4.5" fill="#94a3b8">عمیق</text>
+
+    <!-- Authors -->
+    <text x="285" y="40" font-size="5.5" fill="#ffffff" font-weight="bold">نویسندگان ما</text>
+    <circle cx="288" cy="48" r="5" fill="#334155"/>
+    <circle cx="298" cy="48" r="5" fill="#334155"/>
+    <circle cx="308" cy="48" r="5" fill="#334155"/>
+    <circle cx="318" cy="48" r="5" fill="#334155"/>
+
+    <!-- Contact -->
+    <text x="285" y="60" font-size="4.5" fill="#94a3b8">✉️ info@magazine.com</text>
+    <text x="285" y="66" font-size="4.5" fill="#94a3b8">📞 021-1234567</text>
+
+    <!-- Social Icons -->
+    <rect x="285" y="70" width="8" height="8" rx="2" fill="#ffffff" opacity="0.1"/>
+    <rect x="295" y="70" width="8" height="8" rx="2" fill="#ffffff" opacity="0.1"/>
+    <rect x="305" y="70" width="8" height="8" rx="2" fill="#ffffff" opacity="0.1"/>
+    <rect x="315" y="70" width="8" height="8" rx="2" fill="#ffffff" opacity="0.1"/>
+  </g>
+
+  <!-- Bottom Bar -->
+  <line x1="0" y1="115" x2="400" y2="115" stroke="#ffffff" stroke-width="0.5" opacity="0.2"/>
+
+  <!-- Copyright -->
+  <text x="20" y="125" font-size="5" fill="#94a3b8">© 2025 Magazine - تمامی حقوق محفوظ است</text>
+
+  <!-- Links -->
+  <text x="230" y="125" font-size="4.5" fill="#94a3b8">درباره ما</text>
+  <text x="260" y="125" font-size="4.5" fill="#94a3b8">تماس</text>
+  <text x="285" y="125" font-size="4.5" fill="#94a3b8">تبلیغات</text>
+  <text x="315" y="125" font-size="4.5" fill="#94a3b8">حریم خصوصی</text>
+  <text x="360" y="125" font-size="4.5" fill="#94a3b8">📡 RSS</text>
+
+  <!-- Back to Top -->
+  <circle cx="385" cy="122" r="6" fill="#f59e0b"/>
+  <path d="M 385 124 L 385 120 M 383 122 L 385 120 L 387 122" stroke="#ffffff" stroke-width="1" fill="none"/>
+</svg>

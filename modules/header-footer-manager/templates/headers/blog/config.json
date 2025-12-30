@@ -1,0 +1,92 @@
+{
+    "name": "blog",
+    "title": "Blog Optimized",
+    "description": "Blog optimized with categories, search, subscribe button, and author info dropdown",
+    "version": "1.0.0",
+    "author": "Developer Starter",
+    "supports": ["sticky", "search", "categories"],
+    "settings": {
+        "sticky": {
+            "type": "checkbox",
+            "label": "Sticky Header",
+            "default": true,
+            "checkbox_label": "Enable sticky header on scroll"
+        },
+        "show_topbar": {
+            "type": "checkbox",
+            "label": "Show Top Bar",
+            "default": true,
+            "checkbox_label": "Display top bar with social and subscribe"
+        },
+        "topbar_bg_color": {
+            "type": "color",
+            "label": "Top Bar Background Color",
+            "default": "#f9fafb"
+        },
+        "topbar_text_color": {
+            "type": "color",
+            "label": "Top Bar Text Color",
+            "default": "#374151"
+        },
+        "show_search": {
+            "type": "checkbox",
+            "label": "Show Search",
+            "default": true,
+            "checkbox_label": "Display search functionality"
+        },
+        "show_cart": {
+            "type": "checkbox",
+            "label": "Show Cart",
+            "default": false,
+            "checkbox_label": "Display cart icon"
+        },
+        "show_account": {
+            "type": "checkbox",
+            "label": "Show Account",
+            "default": true,
+            "checkbox_label": "Display author/account dropdown"
+        },
+        "show_wishlist": {
+            "type": "checkbox",
+            "label": "Show Wishlist",
+            "default": false,
+            "checkbox_label": "Display wishlist icon"
+        },
+        "bg_color": {
+            "type": "color",
+            "label": "Header Background Color",
+            "default": "#ffffff"
+        },
+        "text_color": {
+            "type": "color",
+            "label": "Header Text Color",
+            "default": "#111827"
+        },
+        "show_cta": {
+            "type": "checkbox",
+            "label": "Show CTA Button",
+            "default": true,
+            "checkbox_label": "Display subscribe/newsletter button"
+        },
+        "cta_text": {
+            "type": "text",
+            "label": "CTA Button Text",
+            "default": "Subscribe"
+        },
+        "cta_url": {
+            "type": "url",
+            "label": "CTA Button URL",
+            "default": "/subscribe"
+        },
+        "cta_style": {
+            "type": "select",
+            "label": "CTA Button Style",
+            "default": "primary",
+            "options": {
+                "primary": "Primary",
+                "secondary": "Secondary",
+                "outline": "Outline"
+            }
+        }
+    }
+}

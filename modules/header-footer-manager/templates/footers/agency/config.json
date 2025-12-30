@@ -1,0 +1,130 @@
+{
+    "name": "agency",
+    "title": "Creative Agency",
+    "description": "Creative agency footer with portfolio categories, services, awards, and large CTA section",
+    "version": "1.0.0",
+    "author": "Developer Starter",
+    "settings": {
+        "bg_color": {
+            "type": "color",
+            "label": "Background Color",
+            "default": "#18181b"
+        },
+        "text_color": {
+            "type": "color",
+            "label": "Text Color",
+            "default": "#a1a1aa"
+        },
+        "link_color": {
+            "type": "color",
+            "label": "Link Color",
+            "default": "#fafafa"
+        },
+        "link_hover_color": {
+            "type": "color",
+            "label": "Link Hover Color",
+            "default": "#a855f7"
+        },
+        "show_logo": {
+            "type": "checkbox",
+            "label": "Show Logo",
+            "default": true,
+            "checkbox_label": "Display logo in footer"
+        },
+        "show_description": {
+            "type": "checkbox",
+            "label": "Show Description",
+            "default": true,
+            "checkbox_label": "Display site description"
+        },
+        "description_text": {
+            "type": "textarea",
+            "label": "Custom Description",
+            "default": "We craft award-winning digital experiences that push boundaries and drive results."
+        },
+        "show_social": {
+            "type": "checkbox",
+            "label": "Show Social Icons",
+            "default": true,
+            "checkbox_label": "Display social media icons"
+        },
+        "show_newsletter": {
+            "type": "checkbox",
+            "label": "Show Newsletter",
+            "default": true,
+            "checkbox_label": "Display newsletter signup form"
+        },
+        "newsletter_title": {
+            "type": "text",
+            "label": "Newsletter Title",
+            "default": "Let's Create Together"
+        },
+        "newsletter_text": {
+            "type": "text",
+            "label": "Newsletter Description",
+            "default": "Have a project in mind? Drop us a line and let's build something amazing."
+        },
+        "show_contact": {
+            "type": "checkbox",
+            "label": "Show Contact Info",
+            "default": true,
+            "checkbox_label": "Display contact information"
+        },
+        "columns": {
+            "type": "select",
+            "label": "Number of Columns",
+            "default": "4",
+            "options": {
+                "2": "2 Columns",
+                "3": "3 Columns",
+                "4": "4 Columns",
+                "5": "5 Columns"
+            }
+        },
+        "show_menu1": {
+            "type": "checkbox",
+            "label": "Show Services Menu",
+            "default": true,
+            "checkbox_label": "Display services menu column"
+        },
+        "menu1_title": {
+            "type": "text",
+            "label": "Services Menu Title",
+            "default": "Services"
+        },
+        "show_menu2": {
+            "type": "checkbox",
+            "label": "Show Portfolio Menu",
+            "default": true,
+            "checkbox_label": "Display portfolio menu column"
+        },
+        "menu2_title": {
+            "type": "text",
+            "label": "Portfolio Menu Title",
+            "default": "Portfolio"
+        },
+        "show_copyright": {
+            "type": "checkbox",
+            "label": "Show Copyright",
+            "default": true,
+            "checkbox_label": "Display copyright text"
+        },
+        "copyright_text": {
+            "type": "text",
+            "label": "Custom Copyright Text",
+            "default": "All rights reserved."
+        },
+        "show_payment_icons": {
+            "type": "checkbox",
+            "label": "Show Payment Icons",
+            "default": false,
+            "checkbox_label": "Display payment method icons"
+        },
+        "show_back_to_top": {
+            "type": "checkbox",
+            "label": "Show Back to Top",
+            "default": true,
+            "checkbox_label": "Display back to top button"
+        }
+    }
+}

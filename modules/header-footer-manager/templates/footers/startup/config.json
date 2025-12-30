@@ -1,0 +1,183 @@
+{
+    "name": "startup",
+    "title": "فوتر استارتاپی",
+    "description": "فوتر مدرن استارتاپی با لینک محصولات، منابع، اطلاعات شرکت و CTA گرادیانت بزرگ برای دمو/آزمایش",
+    "version": "1.0.0",
+    "author": "Developer Starter",
+    "supports": ["products", "resources", "gradient-cta", "demo"],
+    "settings": {
+        "bg_color": {
+            "type": "color",
+            "label": "رنگ پس‌زمینه",
+            "default": "#ffffff"
+        },
+        "text_color": {
+            "type": "color",
+            "label": "رنگ متن",
+            "default": "#1e293b"
+        },
+        "link_color": {
+            "type": "color",
+            "label": "رنگ لینک",
+            "default": "#64748b"
+        },
+        "link_hover_color": {
+            "type": "color",
+            "label": "رنگ لینک در هاور",
+            "default": "#8b5cf6"
+        },
+        "show_logo": {
+            "type": "checkbox",
+            "label": "نمایش لوگو",
+            "default": true,
+            "checkbox_label": "نمایش لوگوی سایت"
+        },
+        "show_description": {
+            "type": "checkbox",
+            "label": "نمایش توضیحات",
+            "default": true,
+            "checkbox_label": "نمایش متن توضیحات"
+        },
+        "description_text": {
+            "type": "textarea",
+            "label": "متن توضیحات",
+            "default": "ما در حال ساخت ابزارهای نوآورانه برای کمک به رشد کسب‌وکار شما هستیم."
+        },
+        "show_social": {
+            "type": "checkbox",
+            "label": "نمایش شبکه‌های اجتماعی",
+            "default": true,
+            "checkbox_label": "نمایش آیکون‌های شبکه‌های اجتماعی"
+        },
+        "show_newsletter": {
+            "type": "checkbox",
+            "label": "نمایش خبرنامه",
+            "default": false,
+            "checkbox_label": "نمایش فرم ثبت‌نام خبرنامه"
+        },
+        "newsletter_title": {
+            "type": "text",
+            "label": "عنوان خبرنامه",
+            "default": "به‌روزرسانی‌های محصول"
+        },
+        "newsletter_text": {
+            "type": "text",
+            "label": "متن خبرنامه",
+            "default": "آخرین ویژگی‌ها و اخبار را دریافت کنید"
+        },
+        "show_contact": {
+            "type": "checkbox",
+            "label": "نمایش اطلاعات تماس",
+            "default": true,
+            "checkbox_label": "نمایش ایمیل و شبکه‌های اجتماعی"
+        },
+        "columns": {
+            "type": "select",
+            "label": "تعداد ستون‌ها",
+            "options": {
+                "2": "2 ستون",
+                "3": "3 ستون",
+                "4": "4 ستون",
+                "5": "5 ستون"
+            },
+            "default": "4"
+        },
+        "show_menu1": {
+            "type": "checkbox",
+            "label": "نمایش منوی محصولات",
+            "default": true,
+            "checkbox_label": "نمایش لیست محصولات"
+        },
+        "menu1_title": {
+            "type": "text",
+            "label": "عنوان منوی محصولات",
+            "default": "محصولات"
+        },
+        "show_menu2": {
+            "type": "checkbox",
+            "label": "نمایش منوی منابع",
+            "default": true,
+            "checkbox_label": "نمایش لیست منابع"
+        },
+        "menu2_title": {
+            "type": "text",
+            "label": "عنوان منوی منابع",
+            "default": "منابع"
+        },
+        "show_copyright": {
+            "type": "checkbox",
+            "label": "نمایش کپی‌رایت",
+            "default": true,
+            "checkbox_label": "نمایش متن کپی‌رایت"
+        },
+        "copyright_text": {
+            "type": "text",
+            "label": "متن کپی‌رایت",
+            "default": "تمامی حقوق محفوظ است"
+        },
+        "show_payment_icons": {
+            "type": "checkbox",
+            "label": "نمایش آیکون‌های پرداخت",
+            "default": false,
+            "checkbox_label": "نمایش لوگوهای روش‌های پرداخت"
+        },
+        "show_back_to_top": {
+            "type": "checkbox",
+            "label": "نمایش دکمه بازگشت به بالا",
+            "default": true,
+            "checkbox_label": "نمایش دکمه اسکرول به بالا"
+        },
+        "show_cta": {
+            "type": "checkbox",
+            "label": "نمایش CTA",
+            "default": true,
+            "checkbox_label": "نمایش بنر دعوت به اقدام"
+        },
+        "cta_title": {
+            "type": "text",
+            "label": "عنوان CTA",
+            "default": "آماده شروع هستید؟"
+        },
+        "cta_text": {
+            "type": "textarea",
+            "label": "متن CTA",
+            "default": "همین الان محصول ما را رایگان امتحان کنید. نیازی به کارت اعتباری نیست."
+        },
+        "cta_button_text": {
+            "type": "text",
+            "label": "متن دکمه CTA",
+            "default": "شروع رایگان"
+        },
+        "cta_button_url": {
+            "type": "url",
+            "label": "لینک دکمه CTA",
+            "default": "/signup"
+        },
+        "show_demo_link": {
+            "type": "checkbox",
+            "label": "نمایش لینک دمو",
+            "default": true,
+            "checkbox_label": "نمایش دکمه درخواست دمو"
+        },
+        "demo_text": {
+            "type": "text",
+            "label": "متن دکمه دمو",
+            "default": "مشاهده دمو"
+        },
+        "demo_url": {
+            "type": "url",
+            "label": "لینک دمو",
+            "default": "/demo"
+        },
+        "gradient_start": {
+            "type": "color",
+            "label": "رنگ شروع گرادیانت",
+            "default": "#8b5cf6"
+        },
+        "gradient_end": {
+            "type": "color",
+            "label": "رنگ پایان گرادیانت",
+            "default": "#ec4899"
+        }
+    }
+}

@@ -1,0 +1,75 @@
+<svg width="800" height="400" viewBox="0 0 800 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="400" fill="#1e293b"/>
+
+  <!-- Main Content Area -->
+  <g transform="translate(60, 40)">
+    <!-- Column 1: About -->
+    <rect x="0" y="0" width="150" height="30" rx="4" fill="#3b82f6"/>
+    <text x="10" y="20" font-family="Arial" font-size="14" font-weight="bold" fill="white">Company Logo</text>
+
+    <text x="0" y="55" font-family="Arial" font-size="10" fill="#94a3b8">Professional business providing</text>
+    <text x="0" y="70" font-family="Arial" font-size="10" fill="#94a3b8">high-quality services to clients</text>
+    <text x="0" y="85" font-family="Arial" font-size="10" fill="#94a3b8">worldwide.</text>
+
+    <!-- Social Icons -->
+    <circle cx="10" cy="110" r="8" fill="#94a3b8"/>
+    <circle cx="35" cy="110" r="8" fill="#94a3b8"/>
+    <circle cx="60" cy="110" r="8" fill="#94a3b8"/>
+    <circle cx="85" cy="110" r="8" fill="#94a3b8"/>
+
+    <!-- Column 2: Services -->
+    <text x="190" y="20" font-family="Arial" font-size="12" font-weight="bold" fill="white">Our Services</text>
+    <text x="190" y="45" font-family="Arial" font-size="10" fill="#94a3b8">• Consulting</text>
+    <text x="190" y="60" font-family="Arial" font-size="10" fill="#94a3b8">• Development</text>
+    <text x="190" y="75" font-family="Arial" font-size="10" fill="#94a3b8">• Design</text>
+    <text x="190" y="90" font-family="Arial" font-size="10" fill="#94a3b8">• Support</text>
+    <text x="190" y="105" font-family="Arial" font-size="10" fill="#94a3b8">• Training</text>
+
+    <!-- Column 3: Company -->
+    <text x="360" y="20" font-family="Arial" font-size="12" font-weight="bold" fill="white">Company</text>
+    <text x="360" y="45" font-family="Arial" font-size="10" fill="#94a3b8">• About Us</text>
+    <text x="360" y="60" font-family="Arial" font-size="10" fill="#94a3b8">• Careers</text>
+    <text x="360" y="75" font-family="Arial" font-size="10" fill="#94a3b8">• Blog</text>
+    <text x="360" y="90" font-family="Arial" font-size="10" fill="#94a3b8">• Press</text>
+    <text x="360" y="105" font-family="Arial" font-size="10" fill="#94a3b8">• Partners</text>
+
+    <!-- Column 4: Contact & Newsletter -->
+    <text x="530" y="20" font-family="Arial" font-size="12" font-weight="bold" fill="white">Contact Us</text>
+
+    <!-- Contact Info -->
+    <circle cx="538" cy="42" r="5" fill="#94a3b8"/>
+    <text x="550" y="47" font-family="Arial" font-size="9" fill="#94a3b8">+1 234 567 890</text>
+
+    <circle cx="538" cy="62" r="5" fill="#94a3b8"/>
+    <text x="550" y="67" font-family="Arial" font-size="9" fill="#94a3b8">info@business.com</text>
+
+    <circle cx="538" cy="82" r="5" fill="#94a3b8"/>
+    <text x="550" y="87" font-family="Arial" font-size="9" fill="#94a3b8">123 Business St</text>
+
+    <!-- Newsletter -->
+    <text x="530" y="120" font-family="Arial" font-size="11" font-weight="bold" fill="white">Newsletter</text>
+    <text x="530" y="138" font-family="Arial" font-size="8" fill="#94a3b8">Get latest updates</text>
+
+    <rect x="530" y="148" width="150" height="24" rx="4" fill="#334155" stroke="#475569" stroke-width="1"/>
+    <text x="538" y="164" font-family="Arial" font-size="9" fill="#94a3b8">your@email.com</text>
+
+    <rect x="610" y="152" width="62" height="16" rx="3" fill="#3b82f6"/>
+    <text x="618" y="163" font-family="Arial" font-size="8" fill="white">Subscribe</text>
+  </g>
+
+  <!-- Bottom Bar -->
+  <line x1="60" y1="260" x2="740" y2="260" stroke="#334155" stroke-width="1"/>
+
+  <text x="60" y="285" font-family="Arial" font-size="10" fill="#94a3b8">© 2025 Business Professional - All rights reserved.</text>
+
+  <!-- Payment Icons -->
+  <text x="540" y="285" font-family="Arial" font-size="9" fill="#94a3b8">We Accept:</text>
+  <rect x="595" y="272" width="35" height="22" rx="2" fill="#252525"/>
+  <rect x="635" y="272" width="35" height="22" rx="2" fill="#0E4C96"/>
+  <rect x="675" y="272" width="35" height="22" rx="2" fill="#00579F"/>
+
+  <!-- Back to Top Button -->
+  <circle cx="720" cy="340" r="18" fill="#3b82f6"/>
+  <path d="M720 332 L720 348 M720 332 L715 337 M720 332 L725 337" stroke="white" stroke-width="2" stroke-linecap="round"/>
+</svg>

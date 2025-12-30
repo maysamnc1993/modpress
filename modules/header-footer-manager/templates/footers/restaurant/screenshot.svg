@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 150">
+  <!-- Background -->
+  <rect width="400" height="150" fill="#1c1917"/>
+
+  <!-- Reservation CTA Bar -->
+  <rect width="400" height="35" fill="#fbbf24"/>
+  <text x="200" y="16" font-size="9" fill="#1c1917" text-anchor="middle" font-weight="bold">میز خود را همین الان رزرو کنید</text>
+  <text x="200" y="24" font-size="5" fill="#292524" text-anchor="middle">برای اطمینان از داشتن میز در زمان مورد نظرتان، از قبل رزرو کنید</text>
+  <rect x="150" y="28" width="50" height="12" rx="6" fill="#1c1917"/>
+  <text x="175" y="36" font-size="5" fill="#ffffff" text-anchor="middle" font-weight="bold">📅 رزرو میز</text>
+  <rect x="205" y="28" width="45" height="12" rx="6" fill="#ffffff" opacity="0.2"/>
+  <text x="227" y="36" font-size="5" fill="#1c1917" text-anchor="middle" font-weight="bold">📞 تماس تلفنی</text>
+
+  <!-- Instagram Feed Section -->
+  <rect y="35" width="400" height="40" fill="#292524"/>
+  <text x="200" y="50" font-size="7" fill="#fbbf24" text-anchor="middle" font-weight="bold">ما را در اینستاگرام دنبال کنید</text>
+  <!-- Instagram Grid -->
+  <rect x="70" y="55" width="18" height="18" rx="2" fill="#44403c"/>
+  <rect x="92" y="55" width="18" height="18" rx="2" fill="#44403c"/>
+  <rect x="114" y="55" width="18" height="18" rx="2" fill="#44403c"/>
+  <rect x="136" y="55" width="18" height="18" rx="2" fill="#44403c"/>
+  <rect x="158" y="55" width="18" height="18" rx="2" fill="#44403c"/>
+  <rect x="180" y="55" width="18" height="18" rx="2" fill="#44403c"/>
+  <rect x="202" y="55" width="18" height="18" rx="2" fill="#44403c"/>
+  <rect x="224" y="55" width="18" height="18" rx="2" fill="#44403c"/>
+  <rect x="246" y="55" width="18" height="18" rx="2" fill="#44403c"/>
+  <rect x="268" y="55" width="18" height="18" rx="2" fill="#44403c"/>
+  <rect x="290" y="55" width="18" height="18" rx="2" fill="#44403c"/>
+  <rect x="312" y="55" width="18" height="18" rx="2" fill="#44403c"/>
+
+  <!-- Main Footer - 4 Columns -->
+  <g transform="translate(0, 80)">
+    <!-- Column 1: About & Social -->
+    <rect x="20" y="5" width="50" height="8" rx="4" fill="#fafaf9"/>
+    <text x="20" y="20" font-size="4.5" fill="#d6d3d1">تجربه‌ای منحصر به فرد از</text>
+    <text x="20" y="25" font-size="4.5" fill="#d6d3d1">طعم‌های اصیل و محیطی</text>
+    <text x="20" y="30" font-size="4.5" fill="#d6d3d1">دلنشین با مواد تازه</text>
+    <!-- Social Icons -->
+    <rect x="20" y="36" width="8" height="8" rx="2" fill="#ffffff" opacity="0.1"/>
+    <rect x="30" y="36" width="8" height="8" rx="2" fill="#ffffff" opacity="0.1"/>
+    <rect x="40" y="36" width="8" height="8" rx="2" fill="#ffffff" opacity="0.1"/>
+    <rect x="50" y="36" width="8" height="8" rx="2" fill="#ffffff" opacity="0.1"/>
+
+    <!-- Column 2: Opening Hours -->
+    <text x="95" y="10" font-size="7" fill="#fbbf24" font-weight="bold">ساعات کاری</text>
+    <text x="95" y="20" font-size="4.5" fill="#d6d3d1">شنبه - چهارشنبه</text>
+    <text x="158" y="20" font-size="4.5" fill="#fafaf9" font-weight="bold">12:00 - 23:00</text>
+    <line x1="95" y1="22" x2="165" y2="22" stroke="#ffffff" stroke-width="0.3" opacity="0.1"/>
+    <text x="95" y="28" font-size="4.5" fill="#d6d3d1">پنج‌شنبه - جمعه</text>
+    <text x="158" y="28" font-size="4.5" fill="#fafaf9" font-weight="bold">11:00 - 24:00</text>
+    <line x1="95" y1="30" x2="165" y2="30" stroke="#ffffff" stroke-width="0.3" opacity="0.1"/>
+    <text x="95" y="38" font-size="4.5" fill="#fbbf24" font-weight="bold">🕐 اکنون باز است</text>
+
+    <!-- Column 3: Location -->
+    <text x="180" y="10" font-size="7" fill="#fbbf24" font-weight="bold">آدرس ما</text>
+    <text x="180" y="19" font-size="4.5" fill="#d6d3d1">📍 تهران، خیابان ولیعصر</text>
+    <text x="180" y="24" font-size="4.5" fill="#d6d3d1">پلاک 123، طبقه همکف</text>
+    <text x="180" y="31" font-size="4.5" fill="#d6d3d1">📞 021-1234567</text>
+    <text x="180" y="37" font-size="4.5" fill="#d6d3d1">✉️ info@restaurant.com</text>
+    <!-- Map Placeholder -->
+    <rect x="180" y="40" width="60" height="20" rx="2" fill="#44403c"/>
+    <text x="210" y="51" font-size="8" fill="#78716c" text-anchor="middle">🗺️</text>
+
+    <!-- Column 4: Menu Highlights -->
+    <text x="265" y="10" font-size="7" fill="#fbbf24" font-weight="bold">غذاهای ویژه</text>
+    <text x="265" y="19" font-size="4.5" fill="#d6d3d1">چلوکباب کوبیده</text>
+    <text x="355" y="19" font-size="4.5" fill="#fbbf24" font-weight="bold">۲۵۰,۰۰۰</text>
+    <line x1="265" y1="21" x2="365" y2="21" stroke="#ffffff" stroke-width="0.3" opacity="0.1"/>
+    <text x="265" y="27" font-size="4.5" fill="#d6d3d1">ماهی شکم پر</text>
+    <text x="355" y="27" font-size="4.5" fill="#fbbf24" font-weight="bold">۳۵۰,۰۰۰</text>
+    <line x1="265" y1="29" x2="365" y2="29" stroke="#ffffff" stroke-width="0.3" opacity="0.1"/>
+    <text x="265" y="35" font-size="4.5" fill="#d6d3d1">خورش فسنجان</text>
+    <text x="355" y="35" font-size="4.5" fill="#fbbf24" font-weight="bold">۱۸۰,۰۰۰</text>
+    <line x1="265" y1="37" x2="365" y2="37" stroke="#ffffff" stroke-width="0.3" opacity="0.1"/>
+    <text x="265" y="43" font-size="4.5" fill="#d6d3d1">استیک گوشت</text>
+    <text x="355" y="43" font-size="4.5" fill="#fbbf24" font-weight="bold">۴۲۰,۰۰۰</text>
+    <text x="265" y="52" font-size="4" fill="#fbbf24">مشاهده منوی کامل →</text>
+  </g>
+
+  <!-- Bottom Bar -->
+  <line x1="0" y1="140" x2="400" y2="140" stroke="#ffffff" stroke-width="0.5" opacity="0.2"/>
+
+  <!-- Copyright -->
+  <text x="20" y="147" font-size="5" fill="#d6d3d1">© 2025 </text>
+  <text x="42" y="147" font-size="5" fill="#fbbf24" font-weight="bold">رستوران</text>
+  <text x="68" y="147" font-size="5" fill="#d6d3d1"> - تمامی حقوق محفوظ است</text>
+
+  <!-- Links -->
+  <text x="220" y="147" font-size="4.5" fill="#d6d3d1">منو</text>
+  <text x="240" y="147" font-size="4.5" fill="#d6d3d1">درباره ما</text>
+  <text x="270" y="147" font-size="4.5" fill="#d6d3d1">گالری</text>
+  <text x="295" y="147" font-size="4.5" fill="#d6d3d1">تماس</text>
+
+  <!-- Payment -->
+  <rect x="350" y="141" width="12" height="8" rx="1.5" fill="#ffffff" opacity="0.2"/>
+  <rect x="364" y="141" width="12" height="8" rx="1.5" fill="#ffffff" opacity="0.2"/>
+
+  <!-- Back to Top -->
+  <circle cx="388" cy="145" r="6" fill="#fbbf24"/>
+  <path d="M 388 147 L 388 143 M 386 145 L 388 143 L 390 145" stroke="#1c1917" stroke-width="1" fill="none"/>
+</svg>

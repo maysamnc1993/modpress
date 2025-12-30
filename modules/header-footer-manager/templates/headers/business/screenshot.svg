@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 120">
+  <!-- Top Bar -->
+  <rect width="300" height="25" fill="#1e293b"/>
+  <text x="10" y="16" font-size="6" fill="#ffffff">✉ info@business.com</text>
+  <text x="90" y="16" font-size="6" fill="#ffffff">☎ +1-234-567-890</text>
+  <circle cx="270" cy="12" r="5" fill="#ffffff" opacity="0.8"/>
+  <circle cx="282" cy="12" r="5" fill="#ffffff" opacity="0.8"/>
+  <circle cx="294" cy="12" r="5" fill="#ffffff" opacity="0.8"/>
+
+  <!-- Main Header -->
+  <rect y="25" width="300" height="95" fill="#ffffff"/>
+
+  <!-- Logo -->
+  <rect x="15" y="50" width="55" height="30" rx="4" fill="#2563eb"/>
+  <text x="42" y="70" font-size="10" fill="white" text-anchor="middle" font-weight="bold">LOGO</text>
+
+  <!-- Navigation Menu -->
+  <rect x="95" y="60" width="130" height="10" rx="2" fill="#e5e7eb"/>
+  <text x="160" y="68" font-size="7" fill="#6b7280" text-anchor="middle">Home · About · Services · Contact</text>
+
+  <!-- CTA Button -->
+  <rect x="240" y="57" width="50" height="16" rx="8" fill="#2563eb"/>
+  <text x="265" y="68" font-size="8" fill="white" text-anchor="middle" font-weight="bold">Get Started</text>
+
+  <!-- Border -->
+  <line x1="0" y1="25" x2="300" y2="25" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="0" y1="120" x2="300" y2="120" stroke="#e5e7eb" stroke-width="1"/>
+</svg>

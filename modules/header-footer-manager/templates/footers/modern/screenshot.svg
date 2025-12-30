@@ -1,0 +1,76 @@
+<svg width="800" height="500" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="500" fill="#0f172a"/>
+
+  <!-- Newsletter Section (Large Featured) -->
+  <g transform="translate(100, 50)">
+    <text x="300" y="20" font-family="Arial" font-size="28" font-weight="bold" fill="#f1f5f9" text-anchor="middle">Stay Updated</text>
+    <text x="300" y="55" font-family="Arial" font-size="14" fill="#cbd5e1" text-anchor="middle">Join our community and never miss out on the latest news and updates.</text>
+
+    <!-- Email Input -->
+    <rect x="100" y="75" width="260" height="48" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+    <text x="120" y="105" font-family="Arial" font-size="12" fill="#94a3b8">Enter your email address</text>
+
+    <!-- Subscribe Button -->
+    <defs>
+      <linearGradient id="modernGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#0891b2;stop-opacity:1" />
+      </linearGradient>
+    </defs>
+    <rect x="370" y="75" width="130" height="48" rx="12" fill="url(#modernGradient)"/>
+    <text x="435" y="105" font-family="Arial" font-size="13" font-weight="bold" fill="white" text-anchor="middle">Subscribe</text>
+
+    <!-- Privacy Text -->
+    <text x="300" y="145" font-family="Arial" font-size="10" fill="#94a3b8" text-anchor="middle">We respect your privacy. Unsubscribe at any time.</text>
+  </g>
+
+  <line x1="60" y1="230" x2="740" y2="230" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- Main Footer Content -->
+  <g transform="translate(100, 270)">
+    <!-- Column 1: Brand & Social -->
+    <rect x="0" y="0" width="160" height="36" rx="6" fill="#06b6d4"/>
+    <text x="15" y="24" font-family="Arial" font-size="16" font-weight="bold" fill="white">Modern Brand</text>
+
+    <text x="0" y="60" font-family="Arial" font-size="12" fill="#cbd5e1">Creating beautiful digital</text>
+    <text x="0" y="77" font-family="Arial" font-size="12" fill="#cbd5e1">experiences that inspire</text>
+    <text x="0" y="94" font-family="Arial" font-size="12" fill="#cbd5e1">and engage.</text>
+
+    <!-- Social Icons (Rounded Boxes) -->
+    <rect x="0" y="115" width="36" height="36" rx="8" fill="#1e293b"/>
+    <circle cx="18" cy="133" r="9" fill="#cbd5e1"/>
+
+    <rect x="44" y="115" width="36" height="36" rx="8" fill="#1e293b"/>
+    <circle cx="62" cy="133" r="9" fill="#cbd5e1"/>
+
+    <rect x="88" y="115" width="36" height="36" rx="8" fill="#1e293b"/>
+    <circle cx="106" cy="133" r="9" fill="#cbd5e1"/>
+
+    <rect x="132" y="115" width="36" height="36" rx="8" fill="#1e293b"/>
+    <circle cx="150" cy="133" r="9" fill="#cbd5e1"/>
+
+    <!-- Column 2: Quick Links -->
+    <text x="240" y="24" font-family="Arial" font-size="14" font-weight="bold" fill="#f1f5f9">Quick Links</text>
+    <text x="240" y="52" font-family="Arial" font-size="12" fill="#cbd5e1">• Home</text>
+    <text x="240" y="72" font-family="Arial" font-size="12" fill="#cbd5e1">• About</text>
+    <text x="240" y="92" font-family="Arial" font-size="12" fill="#cbd5e1">• Services</text>
+    <text x="240" y="112" font-family="Arial" font-size="12" fill="#cbd5e1">• Contact</text>
+
+    <!-- Column 3: Resources -->
+    <text x="400" y="24" font-family="Arial" font-size="14" font-weight="bold" fill="#f1f5f9">Resources</text>
+    <text x="400" y="52" font-family="Arial" font-size="12" fill="#cbd5e1">• Blog</text>
+    <text x="400" y="72" font-family="Arial" font-size="12" fill="#cbd5e1">• Documentation</text>
+    <text x="400" y="92" font-family="Arial" font-size="12" fill="#cbd5e1">• Support</text>
+    <text x="400" y="112" font-family="Arial" font-size="12" fill="#cbd5e1">• Privacy Policy</text>
+  </g>
+
+  <!-- Bottom Bar -->
+  <line x1="60" y1="430" x2="740" y2="430" stroke="#1e293b" stroke-width="1"/>
+
+  <text x="100" y="460" font-family="Arial" font-size="11" fill="#cbd5e1">© 2025 Modern Brand - All rights reserved.</text>
+
+  <!-- Back to Top Button (Gradient Circle) -->
+  <circle cx="720" cy="460" r="22" fill="url(#modernGradient)"/>
+  <path d="M720 450 L720 470 M720 450 L714 456 M720 450 L726 456" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+</svg>
