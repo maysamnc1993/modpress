@@ -42,9 +42,21 @@ class DST_Admin_Menu_Manager {
     private $others_menus = [];
     
     /**
-     * تنظیمات مخفی کردن منوها
+     * منوهایی که در سایدبار اصلی نمایش داده شوند
      */
-    private $hidden_menus = [];
+    private $main_sidebar_menus = [];
+
+    /**
+     * منوهای پیش‌فرض سایدبار اصلی
+     */
+    private $default_main_menus = [
+        'index.php',
+        'edit.php',
+        'upload.php',
+        'edit.php?post_type=page',
+        'users.php',
+        'nav-menus.php',
+    ];
 
     /**
      * سازنده
@@ -58,8 +70,9 @@ class DST_Admin_Menu_Manager {
         $this->module_path = $module['path'];
         $this->module_url  = $module['url'];
 
-        // بارگذاری تنظیمات
-        $this->hidden_menus = get_option('dst_hidden_menus', []);
+        // بارگذاری تنظیمات - اگر ذخیره نشده، از پیش‌فرض استفاده کن
+        $saved = get_option('dst_main_sidebar_menus', null);
+        $this->main_sidebar_menus = $saved !== null ? $saved : $this->default_main_menus;
 
         // هوک‌ها
         add_action('admin_menu', [$this, 'reorganize_admin_menu'], 9999);
@@ -73,7 +86,7 @@ class DST_Admin_Menu_Manager {
      * ثبت تنظیمات
      */
     public function register_settings() {
-        register_setting('dst_menu_settings', 'dst_hidden_menus');
+        register_setting('dst_menu_settings', 'dst_main_sidebar_menus');
     }
 
     /**
@@ -250,8 +263,8 @@ class DST_Admin_Menu_Manager {
     private function restore_menu_item($original_menu, $slug, $position) {
         global $menu;
 
-        // بررسی اگر منو مخفی است
-        if (in_array($slug, $this->hidden_menus)) {
+        // فقط منوهایی که در سایدبار اصلی هستند نمایش داده شوند
+        if (!in_array($slug, $this->main_sidebar_menus)) {
             return false;
         }
 
@@ -271,14 +284,8 @@ class DST_Admin_Menu_Manager {
     private function collect_other_menus($original_menu, $original_submenu) {
         global $submenu;
 
-        // منوهایی که نباید در سایر باشند
-        $excluded = [
-            'index.php',           // پیشخوان
-            'edit.php',            // نوشته‌ها
-            'upload.php',          // رسانه
-            'edit.php?post_type=page', // برگه‌ها
-            'users.php',           // کاربران
-            'nav-menus.php',       // فهرست‌ها (جداگانه اضافه شده)
+        // منوهایی که نباید در سایر باشند (همیشه مخفی)
+        $always_excluded = [
             'dst-header-footer',   // هدر و فوتر (زیرمنوی تنظیمات وب‌سایت)
             'dst-theme-settings',  // تنظیمات قالب
             'separator1',
@@ -292,11 +299,13 @@ class DST_Admin_Menu_Manager {
 
             $slug = $item[2];
 
-            // رد کردن منوهای اصلی و جداکننده‌ها
-            if (in_array($slug, $excluded)) continue;
+            // رد کردن جداکننده‌ها و منوهای همیشه مخفی
+            if (in_array($slug, $always_excluded)) continue;
             if (strpos($slug, 'separator') !== false) continue;
             if (strpos($slug, 'dst-') === 0) continue; // منوهای خود قالب
-            if (in_array($slug, $this->hidden_menus)) continue; // منوهای مخفی
+
+            // اگر در سایدبار اصلی هست، در سایر نباشد
+            if (in_array($slug, $this->main_sidebar_menus)) continue;
 
             // ساخت URL صحیح
             $url = $this->build_menu_url($slug);
@@ -667,7 +676,7 @@ class DST_Admin_Menu_Manager {
 
         // لیست همه منوها
         $all_menus = $this->get_all_menu_items();
-        $hidden = $this->hidden_menus;
+        $in_sidebar = $this->main_sidebar_menus;
         ?>
         <div class="wrap dst-menu-settings-wrap">
             <div class="dst-menu-settings-header">
@@ -675,7 +684,7 @@ class DST_Admin_Menu_Manager {
                     <i data-lucide="settings-2"></i>
                     تنظیمات منو
                 </h1>
-                <p class="description">منوهایی که می‌خواهید مخفی شوند را انتخاب کنید</p>
+                <p class="description">منوهایی که تیک دارند در سایدبار اصلی نمایش داده می‌شوند. بقیه در بخش «سایر» قابل دسترسی هستند.</p>
             </div>
 
             <form method="post" action="" id="dst-menu-settings-form">
@@ -684,23 +693,25 @@ class DST_Admin_Menu_Manager {
                 <div class="dst-menu-settings-grid">
                     <?php foreach ($all_menus as $menu_item):
                         $slug = $menu_item['slug'];
-                        $is_hidden = in_array($slug, $hidden);
+                        $is_in_sidebar = in_array($slug, $in_sidebar);
                         $lucide_icon = $this->get_lucide_icon($slug);
                         ?>
-                        <div class="dst-menu-settings-item <?php echo $is_hidden ? 'is-hidden' : ''; ?>">
+                        <div class="dst-menu-settings-item <?php echo $is_in_sidebar ? 'is-active' : 'is-other'; ?>">
                             <label class="dst-menu-toggle">
                                 <input type="checkbox"
-                                       name="dst_hidden_menus[]"
+                                       name="dst_main_sidebar_menus[]"
                                        value="<?php echo esc_attr($slug); ?>"
-                                       <?php checked($is_hidden); ?>>
+                                       <?php checked($is_in_sidebar); ?>>
                                 <span class="dst-menu-toggle-slider"></span>
                             </label>
                             <span class="dst-menu-icon">
                                 <i data-lucide="<?php echo esc_attr($lucide_icon); ?>"></i>
                             </span>
                             <span class="dst-menu-name"><?php echo esc_html($menu_item['title']); ?></span>
-                            <?php if ($is_hidden): ?>
-                                <span class="dst-menu-badge">مخفی</span>
+                            <?php if ($is_in_sidebar): ?>
+                                <span class="dst-menu-badge dst-badge-active">سایدبار</span>
+                            <?php else: ?>
+                                <span class="dst-menu-badge dst-badge-other">سایر</span>
                             <?php endif; ?>
                         </div>
                     <?php endforeach; ?>
@@ -763,9 +774,13 @@ class DST_Admin_Menu_Manager {
                 border-color: #cbd5e1;
                 box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             }
-            .dst-menu-settings-item.is-hidden {
-                background: #fef2f2;
-                border-color: #fecaca;
+            .dst-menu-settings-item.is-active {
+                background: #f0fdf4;
+                border-color: #86efac;
+            }
+            .dst-menu-settings-item.is-other {
+                background: #f8fafc;
+                border-color: #e2e8f0;
             }
             .dst-menu-toggle {
                 position: relative;
@@ -785,7 +800,7 @@ class DST_Admin_Menu_Manager {
                 left: 0;
                 right: 0;
                 bottom: 0;
-                background-color: #10b981;
+                background-color: #94a3b8;
                 border-radius: 24px;
                 transition: 0.3s;
             }
@@ -801,7 +816,7 @@ class DST_Admin_Menu_Manager {
                 transition: 0.3s;
             }
             .dst-menu-toggle input:checked + .dst-menu-toggle-slider {
-                background-color: #ef4444;
+                background-color: #10b981;
             }
             .dst-menu-toggle input:checked + .dst-menu-toggle-slider:before {
                 transform: translateX(20px);
@@ -820,11 +835,11 @@ class DST_Admin_Menu_Manager {
                 height: 18px;
                 stroke: #64748b;
             }
-            .dst-menu-settings-item.is-hidden .dst-menu-icon {
-                background: #fee2e2;
+            .dst-menu-settings-item.is-active .dst-menu-icon {
+                background: #dcfce7;
             }
-            .dst-menu-settings-item.is-hidden .dst-menu-icon svg {
-                stroke: #ef4444;
+            .dst-menu-settings-item.is-active .dst-menu-icon svg {
+                stroke: #10b981;
             }
             .dst-menu-name {
                 flex: 1;
@@ -835,9 +850,15 @@ class DST_Admin_Menu_Manager {
             .dst-menu-badge {
                 font-size: 11px;
                 padding: 4px 8px;
-                background: #ef4444;
-                color: #fff;
                 border-radius: 4px;
+            }
+            .dst-badge-active {
+                background: #10b981;
+                color: #fff;
+            }
+            .dst-badge-other {
+                background: #94a3b8;
+                color: #fff;
             }
             .dst-menu-settings-footer {
                 display: flex;
@@ -874,14 +895,16 @@ class DST_Admin_Menu_Manager {
             // Toggle visual state
             $('.dst-menu-toggle input').on('change', function() {
                 var $item = $(this).closest('.dst-menu-settings-item');
+                var $badge = $item.find('.dst-menu-badge');
+
                 if (this.checked) {
-                    $item.addClass('is-hidden');
-                    if (!$item.find('.dst-menu-badge').length) {
-                        $item.append('<span class="dst-menu-badge">مخفی</span>');
-                    }
+                    // در سایدبار اصلی
+                    $item.removeClass('is-other').addClass('is-active');
+                    $badge.removeClass('dst-badge-other').addClass('dst-badge-active').text('سایدبار');
                 } else {
-                    $item.removeClass('is-hidden');
-                    $item.find('.dst-menu-badge').remove();
+                    // در سایر
+                    $item.removeClass('is-active').addClass('is-other');
+                    $badge.removeClass('dst-badge-active').addClass('dst-badge-other').text('سایر');
                 }
             });
 
@@ -902,7 +925,7 @@ class DST_Admin_Menu_Manager {
                     data: {
                         action: 'dst_save_menu_settings',
                         nonce: $('#dst_menu_nonce').val(),
-                        hidden_menus: $form.find('input[name="dst_hidden_menus[]"]:checked').map(function() {
+                        main_sidebar_menus: $form.find('input[name="dst_main_sidebar_menus[]"]:checked').map(function() {
                             return $(this).val();
                         }).get()
                     },
@@ -1032,8 +1055,8 @@ class DST_Admin_Menu_Manager {
             }
         }
 
-        // اضافه کردن منوهای مخفی شده
-        foreach ($this->hidden_menus as $slug) {
+        // اضافه کردن منوهای سایدبار اصلی که ممکن است در لیست نباشند
+        foreach ($this->main_sidebar_menus as $slug) {
             if (!isset($items[$slug])) {
                 $title = isset($known_menus[$slug]) ? $known_menus[$slug] : $slug;
                 $items[$slug] = [
@@ -1061,9 +1084,9 @@ class DST_Admin_Menu_Manager {
             wp_send_json_error(['message' => 'Access denied']);
         }
 
-        // ذخیره تنظیمات
-        $hidden_menus = isset($_POST['hidden_menus']) ? array_map('sanitize_text_field', $_POST['hidden_menus']) : [];
-        update_option('dst_hidden_menus', $hidden_menus);
+        // ذخیره تنظیمات - منوهایی که در سایدبار اصلی نمایش داده شوند
+        $main_sidebar_menus = isset($_POST['main_sidebar_menus']) ? array_map('sanitize_text_field', $_POST['main_sidebar_menus']) : [];
+        update_option('dst_main_sidebar_menus', $main_sidebar_menus);
 
         wp_send_json_success(['message' => 'Settings saved']);
     }
