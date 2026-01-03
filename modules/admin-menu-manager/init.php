@@ -968,9 +968,9 @@ class DST_Admin_Menu_Manager {
             ];
         }
 
-        // اضافه کردن منوهای مخفی شده که الان در لیست نیستند
-        $hidden_menus = $this->hidden_menus;
+        // لیست کامل منوهای شناخته شده وردپرس و پلاگین‌ها
         $known_menus = [
+            // منوهای اصلی وردپرس
             'index.php' => 'پیشخوان',
             'edit.php' => 'نوشته‌ها',
             'upload.php' => 'رسانه',
@@ -982,13 +982,58 @@ class DST_Admin_Menu_Manager {
             'tools.php' => 'ابزارها',
             'options-general.php' => 'تنظیمات',
             'nav-menus.php' => 'فهرست‌ها',
+            'widgets.php' => 'ابزارک‌ها',
+            'customize.php' => 'سفارشی‌سازی',
+            'update-core.php' => 'به‌روزرسانی‌ها',
+            'site-health.php' => 'سلامت سایت',
+
+            // ووکامرس
             'woocommerce' => 'ووکامرس',
             'edit.php?post_type=product' => 'محصولات',
-            'wc-admin&path=/analytics/overview' => 'تحلیل‌ها',
+            'edit.php?post_type=shop_order' => 'سفارشات',
+            'wc-admin' => 'تحلیل‌ها',
+            'wc-admin&path=/analytics/overview' => 'گزارشات',
+
+            // ACF
             'edit.php?post_type=acf-field-group' => 'فیلدهای ACF',
+
+            // سئو
+            'wpseo_dashboard' => 'یواست سئو',
+            'rank-math' => 'رنک مث',
+
+            // فرم‌ها
+            'wpcf7' => 'فرم تماس 7',
+            'wpforms-overview' => 'WP Forms',
+            'gf_edit_forms' => 'گرویتی فرمز',
+
+            // المنتور
+            'elementor' => 'المنتور',
+            'edit.php?post_type=elementor_library' => 'قالب‌های المنتور',
+
+            // سایر پلاگین‌ها
+            'jetpack' => 'جت‌پک',
+            'wordfence' => 'وردفنس',
+            'updraftplus' => 'آپدرافت پلاس',
+            'redirection.php' => 'ریدایرکشن',
+            'smush' => 'اسماش',
+            'w3tc_dashboard' => 'کش W3',
+            'wp-rocket' => 'راکت',
+            'litespeed' => 'لایت‌اسپید',
         ];
 
-        foreach ($hidden_menus as $slug) {
+        // اضافه کردن همه منوهای شناخته شده که در لیست نیستند
+        foreach ($known_menus as $slug => $title) {
+            if (!isset($items[$slug])) {
+                $items[$slug] = [
+                    'title' => $title,
+                    'slug' => $slug,
+                    'icon' => 'dashicons-admin-generic',
+                ];
+            }
+        }
+
+        // اضافه کردن منوهای مخفی شده
+        foreach ($this->hidden_menus as $slug) {
             if (!isset($items[$slug])) {
                 $title = isset($known_menus[$slug]) ? $known_menus[$slug] : $slug;
                 $items[$slug] = [
