@@ -80,6 +80,30 @@ class DST_Admin_Menu_Manager {
         add_action('admin_enqueue_scripts', [$this, 'enqueue_assets']);
         add_action('admin_init', [$this, 'register_settings']);
         add_action('wp_ajax_dst_save_menu_settings', [$this, 'ajax_save_settings']);
+
+        // DEBUG: نمایش اطلاعات دیباگ در صفحه تنظیمات
+        add_action('admin_notices', [$this, 'show_debug_notice']);
+    }
+
+    /**
+     * نمایش اطلاعات دیباگ
+     */
+    public function show_debug_notice() {
+        // فقط در صفحه تنظیمات منو نمایش بده
+        if (!isset($_GET['page']) || $_GET['page'] !== 'dst-menu-settings') {
+            return;
+        }
+
+        $saved_option = get_option('dst_main_sidebar_menus', []);
+        ?>
+        <div class="notice notice-info" style="background: #f0f9ff; border-left-color: #3b82f6; margin: 20px 0;">
+            <h3 style="margin: 10px 0 5px;">🔍 اطلاعات دیباگ</h3>
+            <p><strong>منوهای ذخیره شده در دیتابیس (dst_main_sidebar_menus):</strong></p>
+            <pre style="background: #fff; padding: 10px; border: 1px solid #e5e7eb; border-radius: 4px; direction: ltr; text-align: left; overflow: auto;"><?php print_r($saved_option); ?></pre>
+            <p><strong>منوهای در حافظه ($this->main_sidebar_menus):</strong></p>
+            <pre style="background: #fff; padding: 10px; border: 1px solid #e5e7eb; border-radius: 4px; direction: ltr; text-align: left; overflow: auto;"><?php print_r($this->main_sidebar_menus); ?></pre>
+        </div>
+        <?php
     }
 
     /**
@@ -132,6 +156,15 @@ class DST_Admin_Menu_Manager {
         // ذخیره منوهای فعلی
         $original_menu = $menu;
         $original_submenu = $submenu;
+
+        // DEBUG: نمایش اطلاعات برای دیباگ
+        // ثبت منوهای اصلی وردپرس
+        $original_slugs = [];
+        foreach ($original_menu as $item) {
+            if (isset($item[2])) {
+                $original_slugs[] = $item[2];
+            }
+        }
 
         // پاک کردن منوی فعلی
         $menu = [];
