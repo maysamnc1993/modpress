@@ -1,0 +1,105 @@
+/**
+ * Contact Footer Styles
+ */
+
+.hf-footer-contact .hf-footer-contact-section {
+    padding: 50px 0;
+}
+
+.hf-footer-contact .hf-contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.hf-footer-contact .hf-contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.hf-footer-contact .hf-contact-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--hf-accent, #3C50E0);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    flex-shrink: 0;
+}
+
+.hf-footer-contact .hf-contact-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.hf-footer-contact .hf-contact-label {
+    font-size: 13px;
+    opacity: 0.7;
+}
+
+.hf-footer-contact .hf-contact-value {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.hf-footer-contact a.hf-contact-value:hover {
+    color: var(--hf-accent, #3C50E0);
+}
+
+/* Bottom Bar */
+.hf-footer-contact .hf-footer-bottom {
+    padding: 20px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hf-footer-contact .hf-footer-bottom-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.hf-footer-contact .hf-copyright {
+    font-size: 14px;
+}
+
+.hf-footer-contact .hf-footer-socials {
+    display: flex;
+    gap: 10px;
+}
+
+.hf-footer-contact .hf-footer-socials a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: inherit;
+    transition: all 0.2s ease;
+}
+
+.hf-footer-contact .hf-footer-socials a:hover {
+    background: var(--hf-accent, #3C50E0);
+    color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .hf-footer-contact .hf-contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hf-footer-contact .hf-footer-bottom-inner {
+        flex-direction: column;
+        text-align: center;
+    }
+}

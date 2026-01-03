@@ -1,23 +1,19 @@
 <?php
 /**
- * Header Template: Sticky
- * هدر چسبان - ثابت هنگام اسکرول
+ * Header Template: Simple
+ * هدر ساده - لوگو راست، منو چپ
  */
 defined('ABSPATH') || exit;
 
 $settings = dst_get_header_setting();
 $bg_color = $settings['bg_color'] ?? '#ffffff';
 $text_color = $settings['text_color'] ?? '#1f2937';
-$scroll_bg_color = $settings['scroll_bg_color'] ?? '#ffffff';
-$show_shadow = $settings['show_shadow'] ?? true;
 $show_cta = $settings['show_cta'] ?? false;
-$cta_text = $settings['cta_text'] ?? 'شروع کنید';
+$cta_text = $settings['cta_text'] ?? 'تماس با ما';
 $cta_url = $settings['cta_url'] ?? '/contact';
 ?>
 
-<header class="hf-header hf-header-sticky <?php echo $show_shadow ? 'hf-with-shadow' : ''; ?>"
-        style="background-color: <?php echo esc_attr($bg_color); ?>; color: <?php echo esc_attr($text_color); ?>;"
-        data-scroll-bg="<?php echo esc_attr($scroll_bg_color); ?>">
+<header class="hf-header hf-header-simple" style="background-color: <?php echo esc_attr($bg_color); ?>; color: <?php echo esc_attr($text_color); ?>;">
     <div class="hf-container">
         <div class="hf-header-inner">
             <!-- Logo -->
@@ -38,21 +34,19 @@ $cta_url = $settings['cta_url'] ?? '/contact';
                 ?>
             </nav>
 
-            <!-- Actions -->
-            <div class="hf-actions">
-                <?php if ($show_cta && $cta_text): ?>
-                    <a href="<?php echo esc_url($cta_url); ?>" class="hf-btn hf-btn-primary">
-                        <?php echo esc_html($cta_text); ?>
-                    </a>
-                <?php endif; ?>
+            <!-- CTA Button -->
+            <?php if ($show_cta && $cta_text): ?>
+                <a href="<?php echo esc_url($cta_url); ?>" class="hf-btn hf-btn-primary hf-cta-desktop">
+                    <?php echo esc_html($cta_text); ?>
+                </a>
+            <?php endif; ?>
 
-                <!-- Mobile Menu Toggle -->
-                <button class="hf-mobile-toggle" aria-label="منو" onclick="document.body.classList.toggle('hf-mobile-open')">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
+            <!-- Mobile Menu Toggle -->
+            <button class="hf-mobile-toggle" aria-label="منو" onclick="document.body.classList.toggle('hf-mobile-open')">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </div>
 
@@ -65,6 +59,7 @@ $cta_url = $settings['cta_url'] ?? '/contact';
                 'container' => false,
                 'menu_class' => 'hf-mobile-menu-list',
                 'fallback_cb' => false,
+                'depth' => 2,
             ]);
             ?>
         </nav>

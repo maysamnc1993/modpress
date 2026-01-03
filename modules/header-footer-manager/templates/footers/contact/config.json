@@ -1,0 +1,54 @@
+{
+    "name": "contact",
+    "title": "تماس",
+    "description": "فوتر با اطلاعات تماس برجسته - تلفن، ایمیل و آدرس",
+    "version": "1.0.0",
+    "settings": {
+        "bg_color": {
+            "type": "color",
+            "label": "رنگ پس‌زمینه",
+            "default": "#1f2937"
+        },
+        "text_color": {
+            "type": "color",
+            "label": "رنگ متن",
+            "default": "#9ca3af"
+        },
+        "accent_color": {
+            "type": "color",
+            "label": "رنگ تأکیدی",
+            "default": "#3C50E0"
+        },
+        "phone": {
+            "type": "text",
+            "label": "شماره تلفن",
+            "default": ""
+        },
+        "email": {
+            "type": "text",
+            "label": "ایمیل",
+            "default": ""
+        },
+        "address": {
+            "type": "textarea",
+            "label": "آدرس",
+            "default": ""
+        },
+        "working_hours": {
+            "type": "text",
+            "label": "ساعت کاری",
+            "default": ""
+        },
+        "show_socials": {
+            "type": "checkbox",
+            "label": "شبکه‌های اجتماعی",
+            "default": true,
+            "checkbox_label": "نمایش آیکون‌ها"
+        },
+        "copyright_text": {
+            "type": "text",
+            "label": "متن کپی‌رایت",
+            "default": "تمامی حقوق محفوظ است."
+        }
+    }
+}

@@ -1,33 +1,34 @@
 {
     "name": "centered",
-    "title": "مرکزی",
-    "description": "هدر با لوگو در مرکز - طراحی مینیمال و شیک",
-    "version": "2.0.0",
-    "author": "Developer Starter",
-    "supports": ["woocommerce", "search", "sticky"],
+    "title": "وسط‌چین",
+    "description": "هدر با لوگو در وسط و منو پایین آن - مناسب سایت‌های شرکتی",
+    "version": "1.0.0",
     "settings": {
-        "sticky": {
-            "type": "checkbox",
-            "label": "هدر چسبان",
-            "default": true,
-            "checkbox_label": "فعال کردن حالت Sticky"
-        },
-        "show_search": {
-            "type": "checkbox",
-            "label": "نمایش جستجو",
-            "default": true,
-            "checkbox_label": "نمایش فرم جستجو"
-        },
-        "show_cart": {
-            "type": "checkbox",
-            "label": "نمایش سبد خرید",
-            "default": true,
-            "checkbox_label": "نمایش آیکون سبد خرید"
-        },
         "bg_color": {
             "type": "color",
             "label": "رنگ پس‌زمینه",
             "default": "#ffffff"
+        },
+        "text_color": {
+            "type": "color",
+            "label": "رنگ متن",
+            "default": "#1f2937"
+        },
+        "show_topbar": {
+            "type": "checkbox",
+            "label": "نوار بالا",
+            "default": true,
+            "checkbox_label": "نمایش نوار اطلاعات تماس"
+        },
+        "phone": {
+            "type": "text",
+            "label": "شماره تلفن",
+            "default": ""
+        },
+        "email": {
+            "type": "text",
+            "label": "ایمیل",
+            "default": ""
         }
     }
 }

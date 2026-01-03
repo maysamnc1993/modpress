@@ -1,0 +1,59 @@
+/**
+ * Minimal Footer Styles
+ */
+
+.hf-footer-minimal {
+    padding: 20px 0;
+}
+
+.hf-footer-minimal.hf-with-border {
+    border-top: 1px solid #e5e7eb;
+}
+
+.hf-footer-minimal .hf-footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.hf-footer-minimal .hf-footer-logo img {
+    height: 30px;
+    width: auto;
+}
+
+.hf-footer-minimal .hf-footer-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.hf-footer-minimal .hf-footer-menu a {
+    color: inherit;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+.hf-footer-minimal .hf-footer-menu a:hover {
+    color: var(--dst-primary, #3C50E0);
+}
+
+.hf-footer-minimal .hf-copyright {
+    font-size: 14px;
+}
+
+@media (max-width: 600px) {
+    .hf-footer-minimal .hf-footer-inner {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hf-footer-minimal .hf-footer-menu {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}

@@ -72,6 +72,18 @@ class DST_Header_Footer_Manager {
             return;
         }
 
+        // مخفی کردن ادمین بار در پیش‌نمایش
+        add_filter('show_admin_bar', '__return_false');
+
+        // اضافه کردن استایل برای حذف کامل ادمین بار
+        add_action('wp_head', function() {
+            echo '<style>
+                html { margin-top: 0 !important; }
+                #wpadminbar { display: none !important; }
+                body.admin-bar { margin-top: 0 !important; padding-top: 0 !important; }
+            </style>';
+        }, 999);
+
         // اگر هدر پیش‌نمایش تنظیم شده
         if (isset($_GET['preview_header'])) {
             $preview_header = sanitize_text_field($_GET['preview_header']);
@@ -557,6 +569,56 @@ class DST_Header_Footer_Manager {
                             <?php endif; ?>
                         </div>
 
+                        <!-- بخش تنظیمات هدر -->
+                        <?php foreach ($headers as $name => $config): ?>
+                            <?php if (!empty($config['settings'])): ?>
+                                <div class="settings-section header-settings" id="settings-header-<?php echo esc_attr($name); ?>" style="<?php echo $active_header === $name ? '' : 'display:none;'; ?>">
+                                    <div class="section-title">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                                        <span>تنظیمات هدر <?php echo esc_html($config['title']); ?></span>
+                                    </div>
+                                    <div class="settings-fields">
+                                        <?php
+                                        $header_settings = $this->get_header_settings($name);
+                                        foreach ($config['settings'] as $field_key => $field_config):
+                                            $field_name = 'header_' . $name . '_' . $field_key;
+                                            $field_value = isset($header_settings[$field_key]) ? $header_settings[$field_key] : ($field_config['default'] ?? '');
+                                        ?>
+                                            <div class="setting-field">
+                                                <label for="<?php echo esc_attr($field_name); ?>"><?php echo esc_html($field_config['label']); ?></label>
+                                                <?php $this->render_field($field_config, $field_name, $field_value); ?>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+
+                        <!-- بخش تنظیمات فوتر -->
+                        <?php foreach ($footers as $name => $config): ?>
+                            <?php if (!empty($config['settings'])): ?>
+                                <div class="settings-section footer-settings" id="settings-footer-<?php echo esc_attr($name); ?>" style="<?php echo $active_footer === $name ? '' : 'display:none;'; ?>">
+                                    <div class="section-title">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                                        <span>تنظیمات فوتر <?php echo esc_html($config['title']); ?></span>
+                                    </div>
+                                    <div class="settings-fields">
+                                        <?php
+                                        $footer_settings = $this->get_footer_settings($name);
+                                        foreach ($config['settings'] as $field_key => $field_config):
+                                            $field_name = 'footer_' . $name . '_' . $field_key;
+                                            $field_value = isset($footer_settings[$field_key]) ? $footer_settings[$field_key] : ($field_config['default'] ?? '');
+                                        ?>
+                                            <div class="setting-field">
+                                                <label for="<?php echo esc_attr($field_name); ?>"><?php echo esc_html($field_config['label']); ?></label>
+                                                <?php $this->render_field($field_config, $field_name, $field_value); ?>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+
                     </div>
 
                     <!-- پنل راست: پیش‌نمایش -->
@@ -644,6 +706,8 @@ class DST_Header_Footer_Manager {
             $('.template-item').on('click', function() {
                 var $this = $(this);
                 var $section = $this.closest('.selector-section');
+                var type = $this.data('type');
+                var name = $this.data('name');
 
                 // آپدیت UI
                 $section.find('.template-item').removeClass('active');
@@ -651,6 +715,15 @@ class DST_Header_Footer_Manager {
 
                 // انتخاب radio
                 $this.find('input[type="radio"]').prop('checked', true);
+
+                // نمایش تنظیمات مرتبط
+                if (type === 'header') {
+                    $('.header-settings').hide();
+                    $('#settings-header-' + name).slideDown(200);
+                } else if (type === 'footer') {
+                    $('.footer-settings').hide();
+                    $('#settings-footer-' + name).slideDown(200);
+                }
 
                 // آپدیت پیش‌نمایش با تأخیر
                 clearTimeout(previewTimeout);

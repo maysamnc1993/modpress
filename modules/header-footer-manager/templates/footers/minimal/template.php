@@ -1,48 +1,45 @@
 <?php
 /**
- * فوتر مینیمال
- * ساده یک خطی
+ * Footer Template: Minimal
+ * فوتر مینیمال - یک خطی
  */
+defined('ABSPATH') || exit;
+
+$settings = dst_get_footer_setting();
+$bg_color = $settings['bg_color'] ?? '#f9fafb';
+$text_color = $settings['text_color'] ?? '#6b7280';
+$border_top = $settings['border_top'] ?? true;
+$show_logo = $settings['show_logo'] ?? false;
+$copyright_text = $settings['copyright_text'] ?? 'تمامی حقوق محفوظ است.';
 ?>
-<footer class="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 py-6" dir="rtl">
-    <div class="hf-container max-w-7xl mx-auto px-4">
 
-        <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
-
-            <!-- کپی‌رایت -->
-            <p class="text-gray-600 dark:text-gray-400 text-sm text-center sm:text-right">
-                &copy; <?php echo date('Y'); ?>
-                <a href="<?php echo esc_url(home_url('/')); ?>" class="font-medium hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
-                    <?php bloginfo('name'); ?>
-                </a>
-            </p>
-
-            <!-- شبکه‌های اجتماعی -->
-            <div class="hf-social-icons flex gap-4">
-                <a href="#" class="text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors" aria-label="اینستاگرام">
-                    <?php echo dst_get_icon('instagram', 'w-5 h-5'); ?>
-                </a>
-                <a href="#" class="text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors" aria-label="تلگرام">
-                    <?php echo dst_get_icon('telegram', 'w-5 h-5'); ?>
-                </a>
-                <a href="#" class="text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors" aria-label="واتساپ">
-                    <?php echo dst_get_icon('whatsapp', 'w-5 h-5'); ?>
-                </a>
-                <a href="#" class="text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors" aria-label="لینکدین">
-                    <?php echo dst_get_icon('linkedin', 'w-5 h-5'); ?>
-                </a>
-            </div>
-
-            <!-- لینک‌های سریع -->
-            <?php if (dst_is_woocommerce_active()): ?>
-                <div class="flex gap-4 text-sm">
-                    <a href="<?php echo esc_url(dst_get_shop_url()); ?>" class="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">فروشگاه</a>
-                    <a href="<?php echo esc_url(dst_get_cart_url()); ?>" class="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">سبد خرید</a>
-                    <a href="<?php echo esc_url(dst_get_account_url()); ?>" class="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">حساب کاربری</a>
+<footer class="hf-footer hf-footer-minimal <?php echo $border_top ? 'hf-with-border' : ''; ?>"
+        style="background-color: <?php echo esc_attr($bg_color); ?>; color: <?php echo esc_attr($text_color); ?>;">
+    <div class="hf-container">
+        <div class="hf-footer-inner">
+            <?php if ($show_logo): ?>
+                <div class="hf-footer-logo">
+                    <?php dst_logo(); ?>
                 </div>
             <?php endif; ?>
 
-        </div>
+            <?php if (has_nav_menu('footer')): ?>
+                <nav class="hf-footer-nav">
+                    <?php
+                    wp_nav_menu([
+                        'theme_location' => 'footer',
+                        'container' => false,
+                        'menu_class' => 'hf-footer-menu',
+                        'depth' => 1,
+                    ]);
+                    ?>
+                </nav>
+            <?php endif; ?>
 
+            <div class="hf-copyright">
+                &copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?>.
+                <?php echo esc_html($copyright_text); ?>
+            </div>
+        </div>
     </div>
 </footer>
