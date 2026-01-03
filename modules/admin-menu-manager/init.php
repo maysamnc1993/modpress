@@ -62,8 +62,8 @@ class DST_Admin_Menu_Manager {
         $this->hidden_menus = get_option('dst_hidden_menus', []);
 
         // هوک‌ها
-        add_action('admin_menu', [$this, 'add_settings_page'], 99);
         add_action('admin_menu', [$this, 'reorganize_admin_menu'], 9999);
+        add_action('admin_menu', [$this, 'add_settings_page'], 10000); // بعد از reorganize
         add_action('admin_enqueue_scripts', [$this, 'enqueue_assets']);
         add_action('admin_init', [$this, 'register_settings']);
         add_action('wp_ajax_dst_save_menu_settings', [$this, 'ajax_save_settings']);
