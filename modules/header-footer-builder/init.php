@@ -863,6 +863,15 @@ class DST_Header_Footer_Builder {
         }
 
         if (empty($menu_value)) {
+            // اگه منو انتخاب نشده، منوی primary رو نشون بده
+            if (has_nav_menu('primary')) {
+                wp_nav_menu([
+                    'theme_location' => 'primary',
+                    'container' => 'nav',
+                    'container_class' => 'builder-nav style-' . $style,
+                    'fallback_cb' => false,
+                ]);
+            }
             return;
         }
 
@@ -870,6 +879,7 @@ class DST_Header_Footer_Builder {
             'container' => 'nav',
             'container_class' => 'builder-nav style-' . $style,
             'fallback_cb' => false,
+            'echo' => true,
         ];
 
         // چک کنید که location هست یا menu
@@ -882,8 +892,19 @@ class DST_Header_Footer_Builder {
             $menu_id = str_replace('menu:', '', $menu_value);
             $menu_args['menu'] = intval($menu_id);
         } else {
-            // Fallback - try as slug
-            $menu_args['menu'] = $menu_value;
+            // فرمت قدیمی - اول به عنوان slug، بعد name، بعد ID امتحان کن
+            $menu = wp_get_nav_menu_object($menu_value);
+            if ($menu) {
+                $menu_args['menu'] = $menu->term_id;
+            } else {
+                // شاید theme location باشه
+                if (has_nav_menu($menu_value)) {
+                    $menu_args['theme_location'] = $menu_value;
+                } else {
+                    // آخرین تلاش - مستقیم بده
+                    $menu_args['menu'] = $menu_value;
+                }
+            }
         }
 
         wp_nav_menu($menu_args);
