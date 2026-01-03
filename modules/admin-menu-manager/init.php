@@ -945,6 +945,7 @@ class DST_Admin_Menu_Manager {
 
         if (!is_array($menu)) return $items;
 
+        // منوهای فعلی
         foreach ($menu as $item) {
             if (!isset($item[2]) || empty($item[0])) continue;
 
@@ -960,14 +961,45 @@ class DST_Admin_Menu_Manager {
             }
             if ($skip) continue;
 
-            $items[] = [
+            $items[$slug] = [
                 'title' => strip_tags($item[0]),
                 'slug' => $slug,
                 'icon' => $item[6] ?? 'dashicons-admin-generic',
             ];
         }
 
-        return $items;
+        // اضافه کردن منوهای مخفی شده که الان در لیست نیستند
+        $hidden_menus = $this->hidden_menus;
+        $known_menus = [
+            'index.php' => 'پیشخوان',
+            'edit.php' => 'نوشته‌ها',
+            'upload.php' => 'رسانه',
+            'edit.php?post_type=page' => 'برگه‌ها',
+            'edit-comments.php' => 'دیدگاه‌ها',
+            'themes.php' => 'نمایش',
+            'plugins.php' => 'افزونه‌ها',
+            'users.php' => 'کاربران',
+            'tools.php' => 'ابزارها',
+            'options-general.php' => 'تنظیمات',
+            'nav-menus.php' => 'فهرست‌ها',
+            'woocommerce' => 'ووکامرس',
+            'edit.php?post_type=product' => 'محصولات',
+            'wc-admin&path=/analytics/overview' => 'تحلیل‌ها',
+            'edit.php?post_type=acf-field-group' => 'فیلدهای ACF',
+        ];
+
+        foreach ($hidden_menus as $slug) {
+            if (!isset($items[$slug])) {
+                $title = isset($known_menus[$slug]) ? $known_menus[$slug] : $slug;
+                $items[$slug] = [
+                    'title' => $title,
+                    'slug' => $slug,
+                    'icon' => 'dashicons-admin-generic',
+                ];
+            }
+        }
+
+        return array_values($items);
     }
 
     /**
