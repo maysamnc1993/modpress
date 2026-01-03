@@ -122,28 +122,26 @@ class DST_Admin_Menu_Manager {
             true
         );
     }
-    
+
     /**
      * بازسازی کامل منوی ادمین
      */
     public function reorganize_admin_menu() {
         global $menu, $submenu;
-        
+
         // ذخیره منوهای فعلی
         $original_menu = $menu;
         $original_submenu = $submenu;
-        
+
         // پاک کردن منوی فعلی
         $menu = [];
-        
-        // === بخش اول: منوهای اصلی ===
-        
-        // 1. پیشخوان
-        $this->restore_menu_item($original_menu, 'index.php', 2);
-        
+
+        // === بخش اول: منوهای ثابت قالب ===
+
+        // 1. پیشخوان (همیشه نمایش داده می‌شود)
+        $this->force_restore_menu_item($original_menu, 'index.php', 2);
+
         // 2. ماژول‌ها
-        // این منو فقط برای نمایش در سایدبار است
-        // لینک واقعی با فیلتر admin_url تنظیم می‌شود
         global $menu;
         $menu[3] = [
             'ماژول‌ها',
@@ -154,7 +152,7 @@ class DST_Admin_Menu_Manager {
             'menu-modules',
             'dashicons-screenoptions'
         ];
-        
+
         // 3. تنظیمات وب‌سایت
         add_menu_page(
             'تنظیمات وب‌سایت',
@@ -165,7 +163,7 @@ class DST_Admin_Menu_Manager {
             'dashicons-admin-generic',
             4
         );
-        
+
         // زیرمنوهای تنظیمات وب‌سایت
         add_submenu_page(
             'dst-website-settings',
@@ -174,8 +172,7 @@ class DST_Admin_Menu_Manager {
             'manage_options',
             'dst-website-settings'
         );
-        
-        // هدر و فوتر - لینک به صفحه ماژول header-footer-manager
+
         add_submenu_page(
             'dst-website-settings',
             'هدر و فوتر',
@@ -183,8 +180,7 @@ class DST_Admin_Menu_Manager {
             'manage_options',
             'admin.php?page=dst-header-footer'
         );
-        
-        // تنظیمات قالب
+
         add_submenu_page(
             'dst-website-settings',
             'تنظیمات قالب',
@@ -192,7 +188,7 @@ class DST_Admin_Menu_Manager {
             'manage_options',
             'admin.php?page=dst-theme-settings'
         );
-        
+
         add_submenu_page(
             'dst-website-settings',
             'هویت سایت',
@@ -200,46 +196,26 @@ class DST_Admin_Menu_Manager {
             'manage_options',
             'customize.php?autofocus[section]=title_tagline'
         );
-        
+
         // === جداکننده 1 ===
         $menu[5] = ['', 'read', 'separator1', '', 'wp-menu-separator'];
-        
-        // === بخش دوم: محتوا ===
-        
-        // 4. نوشته‌ها
-        $this->restore_menu_item($original_menu, 'edit.php', 10);
-        
-        // 5. رسانه
-        $this->restore_menu_item($original_menu, 'upload.php', 15);
-        
-        // 6. برگه‌ها
-        $this->restore_menu_item($original_menu, 'edit.php?post_type=page', 20);
-        
-        // 7. فهرست‌ها
-        add_menu_page(
-            'فهرست‌ها',
-            'فهرست‌ها',
-            'edit_theme_options',
-            'nav-menus.php',
-            '',
-            'dashicons-menu',
-            25
-        );
-        
+
+        // === بخش دوم: منوهای انتخاب شده توسط کاربر ===
+        $position = 10;
+        foreach ($this->main_sidebar_menus as $slug) {
+            // پیشخوان رو قبلاً اضافه کردیم
+            if ($slug === 'index.php') continue;
+
+            // بازیابی منو از لیست اصلی
+            if ($this->force_restore_menu_item($original_menu, $slug, $position)) {
+                $position += 5;
+            }
+        }
+
         // === جداکننده 2 ===
-        $menu[26] = ['', 'read', 'separator2', '', 'wp-menu-separator'];
-        
-        // === بخش سوم: کاربران ===
-        
-        // 8. کاربران
-        $this->restore_menu_item($original_menu, 'users.php', 30);
-        
-        // === جداکننده 3 ===
-        $menu[35] = ['', 'read', 'separator3', '', 'wp-menu-separator'];
-        
-        // === بخش چهارم: سایر ===
-        
-        // 9. سایر - منوی والد
+        $menu[95] = ['', 'read', 'separator2', '', 'wp-menu-separator'];
+
+        // === بخش سوم: سایر ===
         add_menu_page(
             'سایر',
             'سایر',
@@ -249,12 +225,28 @@ class DST_Admin_Menu_Manager {
             'dashicons-ellipsis',
             100
         );
-        
+
         // جمع‌آوری بقیه منوها برای "سایر"
         $this->collect_other_menus($original_menu, $original_submenu);
-        
+
         // مرتب‌سازی منو
         ksort($menu);
+    }
+
+    /**
+     * بازگرداندن یک آیتم منو (بدون چک کردن main_sidebar_menus)
+     */
+    private function force_restore_menu_item($original_menu, $slug, $position) {
+        global $menu;
+
+        foreach ($original_menu as $item) {
+            if (isset($item[2]) && $item[2] === $slug) {
+                $menu[$position] = $item;
+                return true;
+            }
+        }
+
+        return false;
     }
     
     /**
