@@ -274,6 +274,8 @@ class DST_Admin_Menu_Manager {
      * جمع‌آوری همه منوها برای صفحه "همه امکانات"
      */
     private function collect_all_menus($original_menu) {
+        global $submenu;
+
         // منوهایی که نباید نمایش داده شوند
         $excluded = [
             'dst-header-footer',
@@ -296,6 +298,24 @@ class DST_Admin_Menu_Manager {
             // ساخت URL صحیح
             $url = $this->build_menu_url($slug);
 
+            // جمع‌آوری زیرمنوها
+            $sub_items = [];
+            if (isset($submenu[$slug]) && is_array($submenu[$slug])) {
+                foreach ($submenu[$slug] as $sub) {
+                    if (!isset($sub[2])) continue;
+
+                    $sub_slug = $sub[2];
+                    $sub_url = $this->build_submenu_url($slug, $sub_slug);
+
+                    $sub_items[] = [
+                        'title' => strip_tags($sub[0]),
+                        'capability' => $sub[1],
+                        'slug' => $sub_slug,
+                        'url' => $sub_url,
+                    ];
+                }
+            }
+
             // ذخیره برای نمایش در صفحه همه امکانات
             $this->others_menus[] = [
                 'title' => strip_tags($item[0]),
@@ -303,8 +323,32 @@ class DST_Admin_Menu_Manager {
                 'slug' => $slug,
                 'url' => $url,
                 'icon' => $item[6] ?? 'dashicons-admin-generic',
+                'submenus' => $sub_items,
             ];
         }
+    }
+
+    /**
+     * ساخت URL صحیح برای زیرمنو
+     */
+    private function build_submenu_url($parent_slug, $sub_slug) {
+        // اگر فایل PHP است
+        if (strpos($sub_slug, '.php') !== false) {
+            return admin_url($sub_slug);
+        }
+
+        // اگر URL کامل است
+        if (strpos($sub_slug, 'http') === 0) {
+            return $sub_slug;
+        }
+
+        // اگر پرنت فایل PHP است
+        if (strpos($parent_slug, '.php') !== false) {
+            return admin_url($parent_slug . '?page=' . $sub_slug);
+        }
+
+        // در غیر این صورت admin.php?page=
+        return admin_url('admin.php?page=' . $sub_slug);
     }
 
     /**
@@ -439,16 +483,33 @@ class DST_Admin_Menu_Manager {
                         if (!current_user_can($menu_item['capability'])) continue;
                         $lucide_icon = $this->get_lucide_icon($menu_item['slug']);
                         $is_in_sidebar = in_array($menu_item['slug'], $this->main_sidebar_menus);
+                        $has_submenus = !empty($menu_item['submenus']) && count($menu_item['submenus']) > 1;
                         ?>
-                        <a href="<?php echo esc_url($menu_item['url']); ?>" class="dst-feature-item <?php echo $is_in_sidebar ? 'in-sidebar' : ''; ?>">
-                            <span class="dst-feature-icon">
-                                <i data-lucide="<?php echo esc_attr($lucide_icon); ?>"></i>
-                            </span>
-                            <span class="dst-feature-title"><?php echo esc_html($menu_item['title']); ?></span>
-                            <?php if ($is_in_sidebar): ?>
-                                <span class="dst-feature-badge">در منو</span>
+                        <div class="dst-feature-card <?php echo $is_in_sidebar ? 'in-sidebar' : ''; ?> <?php echo $has_submenus ? 'has-submenus' : ''; ?>">
+                            <a href="<?php echo esc_url($menu_item['url']); ?>" class="dst-feature-item">
+                                <span class="dst-feature-icon">
+                                    <i data-lucide="<?php echo esc_attr($lucide_icon); ?>"></i>
+                                </span>
+                                <span class="dst-feature-title"><?php echo esc_html($menu_item['title']); ?></span>
+                                <?php if ($is_in_sidebar): ?>
+                                    <span class="dst-feature-badge">در منو</span>
+                                <?php endif; ?>
+                            </a>
+                            <?php if ($has_submenus): ?>
+                                <button type="button" class="dst-submenu-toggle" title="زیرمنوها">
+                                    <i data-lucide="chevron-down"></i>
+                                </button>
+                                <div class="dst-submenu-dropdown">
+                                    <?php foreach ($menu_item['submenus'] as $sub):
+                                        if (!current_user_can($sub['capability'])) continue;
+                                    ?>
+                                        <a href="<?php echo esc_url($sub['url']); ?>" class="dst-submenu-item">
+                                            <?php echo esc_html($sub['title']); ?>
+                                        </a>
+                                    <?php endforeach; ?>
+                                </div>
                             <?php endif; ?>
-                        </a>
+                        </div>
                     <?php endforeach; ?>
                 </div>
             <?php endif; ?>
@@ -504,28 +565,31 @@ class DST_Admin_Menu_Manager {
                 grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
                 gap: 16px;
             }
-            .dst-feature-item {
+            .dst-feature-card {
+                position: relative;
                 background: #fff;
                 border: 1px solid #e2e8f0;
                 border-radius: 12px;
+                transition: all 0.2s ease;
+            }
+            .dst-feature-card:hover {
+                border-color: #3C50E0;
+                box-shadow: 0 4px 12px rgba(60, 80, 224, 0.1);
+            }
+            .dst-feature-card.in-sidebar {
+                border-color: #86efac;
+                background: #f0fdf4;
+            }
+            .dst-feature-card.in-sidebar:hover {
+                border-color: #10b981;
+            }
+            .dst-feature-item {
                 padding: 20px;
                 text-decoration: none;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 gap: 12px;
-                transition: all 0.2s ease;
-                position: relative;
-            }
-            .dst-feature-item:hover {
-                border-color: #3C50E0;
-                background: #f8fafc;
-                transform: translateY(-2px);
-                box-shadow: 0 4px 12px rgba(60, 80, 224, 0.1);
-            }
-            .dst-feature-item.in-sidebar {
-                border-color: #86efac;
-                background: #f0fdf4;
             }
             .dst-feature-icon {
                 width: 52px;
@@ -543,16 +607,16 @@ class DST_Admin_Menu_Manager {
                 stroke: #64748b;
                 transition: all 0.2s ease;
             }
-            .dst-feature-item:hover .dst-feature-icon {
+            .dst-feature-card:hover .dst-feature-icon {
                 background: linear-gradient(135deg, #3C50E0 0%, #5B6CE0 100%);
             }
-            .dst-feature-item:hover .dst-feature-icon svg {
+            .dst-feature-card:hover .dst-feature-icon svg {
                 stroke: #fff;
             }
-            .dst-feature-item.in-sidebar .dst-feature-icon {
+            .dst-feature-card.in-sidebar .dst-feature-icon {
                 background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
             }
-            .dst-feature-item.in-sidebar .dst-feature-icon svg {
+            .dst-feature-card.in-sidebar .dst-feature-icon svg {
                 stroke: #fff;
             }
             .dst-feature-title {
@@ -561,7 +625,7 @@ class DST_Admin_Menu_Manager {
                 font-weight: 500;
                 text-align: center;
             }
-            .dst-feature-item:hover .dst-feature-title {
+            .dst-feature-card:hover .dst-feature-title {
                 color: #3C50E0;
             }
             .dst-feature-badge {
@@ -573,6 +637,79 @@ class DST_Admin_Menu_Manager {
                 font-size: 10px;
                 padding: 3px 8px;
                 border-radius: 4px;
+                z-index: 1;
+            }
+            /* زیرمنوها */
+            .dst-submenu-toggle {
+                position: absolute;
+                top: 8px;
+                right: 8px;
+                width: 28px;
+                height: 28px;
+                border: none;
+                background: rgba(60, 80, 224, 0.1);
+                border-radius: 6px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.2s ease;
+                z-index: 2;
+            }
+            .dst-submenu-toggle:hover {
+                background: #3C50E0;
+            }
+            .dst-submenu-toggle svg {
+                width: 16px;
+                height: 16px;
+                stroke: #3C50E0;
+                transition: all 0.2s ease;
+            }
+            .dst-submenu-toggle:hover svg {
+                stroke: #fff;
+            }
+            .dst-feature-card.submenu-open .dst-submenu-toggle {
+                background: #3C50E0;
+            }
+            .dst-feature-card.submenu-open .dst-submenu-toggle svg {
+                stroke: #fff;
+                transform: rotate(180deg);
+            }
+            .dst-submenu-dropdown {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #fff;
+                border: 1px solid #e2e8f0;
+                border-top: none;
+                border-radius: 0 0 12px 12px;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+                z-index: 100;
+                max-height: 300px;
+                overflow-y: auto;
+            }
+            .dst-feature-card.submenu-open .dst-submenu-dropdown {
+                display: block;
+            }
+            .dst-submenu-item {
+                display: block;
+                padding: 12px 16px;
+                color: #475569;
+                text-decoration: none;
+                font-size: 13px;
+                border-bottom: 1px solid #f1f5f9;
+                transition: all 0.15s ease;
+            }
+            .dst-submenu-item:last-child {
+                border-bottom: none;
+                border-radius: 0 0 12px 12px;
+            }
+            .dst-submenu-item:hover {
+                background: #f8fafc;
+                color: #3C50E0;
+                padding-right: 20px;
             }
             @media screen and (max-width: 782px) {
                 .dst-all-features-grid {
@@ -591,6 +728,35 @@ class DST_Admin_Menu_Manager {
             if (typeof lucide !== 'undefined') {
                 lucide.createIcons();
             }
+
+            // زیرمنو toggle
+            document.querySelectorAll('.dst-submenu-toggle').forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    var card = this.closest('.dst-feature-card');
+                    var wasOpen = card.classList.contains('submenu-open');
+
+                    // بستن همه dropdown های دیگر
+                    document.querySelectorAll('.dst-feature-card.submenu-open').forEach(function(c) {
+                        c.classList.remove('submenu-open');
+                    });
+
+                    // باز/بسته کردن این dropdown
+                    if (!wasOpen) {
+                        card.classList.add('submenu-open');
+                    }
+                });
+            });
+
+            // بستن dropdown با کلیک بیرون
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.dst-feature-card')) {
+                    document.querySelectorAll('.dst-feature-card.submenu-open').forEach(function(c) {
+                        c.classList.remove('submenu-open');
+                    });
+                }
+            });
         });
         </script>
         <?php
