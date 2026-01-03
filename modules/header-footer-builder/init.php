@@ -34,8 +34,8 @@ class DST_Header_Footer_Builder {
         // ثبت المان‌ها
         $this->register_elements();
 
-        // هوک‌ها - زیرمنوی تنظیمات وب‌سایت
-        add_action('admin_menu', [$this, 'add_admin_menu'], 20);
+        // هوک‌ها - زیرمنوی تنظیمات وب‌سایت (priority بالاتر از 9999 که parent menu ساخته میشه)
+        add_action('admin_menu', [$this, 'add_admin_menu'], 10001);
         add_action('admin_enqueue_scripts', [$this, 'admin_assets']);
         add_action('wp_enqueue_scripts', [$this, 'frontend_assets']);
         add_action('wp_ajax_dst_builder_save', [$this, 'ajax_save']);
