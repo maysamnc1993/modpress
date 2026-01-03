@@ -495,7 +495,7 @@ class DST_Header_Footer_Manager {
                             <?php else: ?>
                                 <div class="template-list">
                                     <?php foreach ($headers as $name => $config): ?>
-                                        <label class="template-item <?php echo $active_header === $name ? 'active' : ''; ?>" data-type="header" data-name="<?php echo esc_attr($name); ?>">
+                                        <label class="template-item <?php echo $active_header === $name ? 'active' : ''; ?>" data-type="header" data-name="<?php echo esc_attr($name); ?>" data-has-settings="<?php echo !empty($config['settings']) ? '1' : '0'; ?>">
                                             <input type="radio" name="active_header" value="<?php echo esc_attr($name); ?>" <?php checked($active_header, $name); ?>>
 
                                             <div class="template-thumb">
@@ -514,6 +514,12 @@ class DST_Header_Footer_Manager {
                                                     <p><?php echo esc_html($config['description']); ?></p>
                                                 <?php endif; ?>
                                             </div>
+
+                                            <?php if (!empty($config['settings'])): ?>
+                                                <button type="button" class="template-settings-btn" data-type="header" data-name="<?php echo esc_attr($name); ?>" data-title="<?php echo esc_attr($config['title']); ?>" title="تنظیمات">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                                                </button>
+                                            <?php endif; ?>
 
                                             <div class="template-check">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -540,7 +546,7 @@ class DST_Header_Footer_Manager {
                             <?php else: ?>
                                 <div class="template-list">
                                     <?php foreach ($footers as $name => $config): ?>
-                                        <label class="template-item <?php echo $active_footer === $name ? 'active' : ''; ?>" data-type="footer" data-name="<?php echo esc_attr($name); ?>">
+                                        <label class="template-item <?php echo $active_footer === $name ? 'active' : ''; ?>" data-type="footer" data-name="<?php echo esc_attr($name); ?>" data-has-settings="<?php echo !empty($config['settings']) ? '1' : '0'; ?>">
                                             <input type="radio" name="active_footer" value="<?php echo esc_attr($name); ?>" <?php checked($active_footer, $name); ?>>
 
                                             <div class="template-thumb">
@@ -559,6 +565,12 @@ class DST_Header_Footer_Manager {
                                                     <p><?php echo esc_html($config['description']); ?></p>
                                                 <?php endif; ?>
                                             </div>
+
+                                            <?php if (!empty($config['settings'])): ?>
+                                                <button type="button" class="template-settings-btn" data-type="footer" data-name="<?php echo esc_attr($name); ?>" data-title="<?php echo esc_attr($config['title']); ?>" title="تنظیمات">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                                                </button>
+                                            <?php endif; ?>
 
                                             <div class="template-check">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -670,11 +682,30 @@ class DST_Header_Footer_Manager {
             </form>
         </div>
 
+        <!-- Settings Modal -->
+        <div class="settings-modal-overlay" id="settings-modal">
+            <div class="settings-modal">
+                <div class="settings-modal-header">
+                    <h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                        <span id="modal-title">تنظیمات</span>
+                    </h3>
+                    <button type="button" class="settings-modal-close" id="close-settings-modal">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </button>
+                </div>
+                <div class="settings-modal-body" id="modal-body">
+                    <!-- تنظیمات اینجا لود میشه -->
+                </div>
+            </div>
+        </div>
+
         <script>
         jQuery(document).ready(function($) {
             var $iframe = $('#preview-frame');
             var $previewContainer = $('.preview-container');
             var $loader = $('.preview-loader');
+            var $modal = $('#settings-modal');
             var baseUrl = '<?php echo esc_js(home_url('/')); ?>';
             var previewTimeout;
 
@@ -702,12 +733,15 @@ class DST_Header_Footer_Manager {
                 $('#current-footer').text(footersData[footer] || footer);
             }
 
-            // کلیک روی آیتم
-            $('.template-item').on('click', function() {
+            // کلیک روی آیتم تمپلیت (انتخاب)
+            $('.template-item').on('click', function(e) {
+                // اگر روی دکمه تنظیمات کلیک شده، از انتخاب جلوگیری کن
+                if ($(e.target).closest('.template-settings-btn').length) {
+                    return;
+                }
+
                 var $this = $(this);
                 var $section = $this.closest('.selector-section');
-                var type = $this.data('type');
-                var name = $this.data('name');
 
                 // آپدیت UI
                 $section.find('.template-item').removeClass('active');
@@ -716,18 +750,88 @@ class DST_Header_Footer_Manager {
                 // انتخاب radio
                 $this.find('input[type="radio"]').prop('checked', true);
 
-                // نمایش تنظیمات مرتبط
-                if (type === 'header') {
-                    $('.header-settings').hide();
-                    $('#settings-header-' + name).slideDown(200);
-                } else if (type === 'footer') {
-                    $('.footer-settings').hide();
-                    $('#settings-footer-' + name).slideDown(200);
-                }
-
                 // آپدیت پیش‌نمایش با تأخیر
                 clearTimeout(previewTimeout);
                 previewTimeout = setTimeout(updatePreview, 200);
+            });
+
+            var currentSettingsType = '';
+            var currentSettingsName = '';
+
+            // کلیک روی دکمه تنظیمات
+            $('.template-settings-btn').on('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                var type = $(this).data('type');
+                var name = $(this).data('name');
+                var title = $(this).data('title');
+
+                currentSettingsType = type;
+                currentSettingsName = name;
+
+                // تنظیم عنوان مودال
+                var typeLabel = type === 'header' ? 'هدر' : 'فوتر';
+                $('#modal-title').text('تنظیمات ' + typeLabel + ' ' + title);
+
+                // کپی محتوای تنظیمات به مودال
+                var $settingsSection = $('#settings-' + type + '-' + name);
+                if ($settingsSection.length && $settingsSection.find('.settings-fields').length) {
+                    var $fields = $settingsSection.find('.settings-fields').clone(true);
+                    // تغییر نام فیلدها برای مودال
+                    $fields.find('input, textarea, select').each(function() {
+                        var originalName = $(this).attr('name');
+                        if (originalName) {
+                            $(this).attr('data-original-name', originalName);
+                            $(this).attr('name', 'modal_' + originalName);
+                        }
+                    });
+                    $('#modal-body').html($fields);
+                } else {
+                    $('#modal-body').html('<div class="no-settings"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><p>تنظیماتی برای این قالب موجود نیست</p></div>');
+                }
+
+                // نمایش مودال
+                $modal.addClass('show');
+            });
+
+            // تابع سینک کردن مقادیر از مودال به فرم اصلی
+            function syncModalToForm() {
+                $('#modal-body').find('input, textarea, select').each(function() {
+                    var originalName = $(this).attr('data-original-name');
+                    if (originalName) {
+                        var $originalField = $('#dst-hf-form').find('[name="' + originalName + '"]');
+                        if ($originalField.length) {
+                            if ($(this).is(':checkbox')) {
+                                $originalField.prop('checked', $(this).prop('checked'));
+                            } else {
+                                $originalField.val($(this).val());
+                            }
+                        }
+                    }
+                });
+            }
+
+            // بستن مودال
+            function closeModal() {
+                syncModalToForm();
+                $modal.removeClass('show');
+            }
+
+            $('#close-settings-modal').on('click', closeModal);
+
+            // کلیک روی overlay برای بستن
+            $modal.on('click', function(e) {
+                if ($(e.target).is($modal)) {
+                    closeModal();
+                }
+            });
+
+            // ESC برای بستن مودال
+            $(document).on('keydown', function(e) {
+                if (e.key === 'Escape' && $modal.hasClass('show')) {
+                    closeModal();
+                }
             });
 
             // تغییر دستگاه

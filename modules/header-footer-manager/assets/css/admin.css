@@ -1,5 +1,5 @@
 /**
- * Header Footer Manager - Admin Styles v3.0
+ * Header Footer Manager - Admin Styles v3.1
  * استایل جدید با UX بهتر
  */
 
@@ -96,33 +96,23 @@
 }
 
 /* ==================== */
-/* Main Layout */
+/* Main Layout - Fixed */
 /* ==================== */
 
 .dst-hf-main-layout {
-    display: grid;
-    grid-template-columns: 380px 1fr;
+    display: flex;
     gap: 24px;
-    min-height: calc(100vh - 200px);
-}
-
-@media screen and (max-width: 1400px) {
-    .dst-hf-main-layout {
-        grid-template-columns: 340px 1fr;
-    }
-}
-
-@media screen and (max-width: 1100px) {
-    .dst-hf-main-layout {
-        grid-template-columns: 1fr;
-    }
+    position: relative;
+    align-items: flex-start;
 }
 
 /* ==================== */
-/* Selector Panel (Left) */
+/* Selector Panel (Left) - Scrollable */
 /* ==================== */
 
 .dst-hf-selector-panel {
+    width: 380px;
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -168,7 +158,7 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-    max-height: 400px;
+    max-height: 350px;
     overflow-y: auto;
 }
 
@@ -222,8 +212,8 @@
 
 /* Template Thumbnail */
 .template-thumb {
-    width: 80px;
-    height: 50px;
+    width: 70px;
+    height: 45px;
     background: #e5e7eb;
     border-radius: 8px;
     overflow: hidden;
@@ -273,6 +263,34 @@
     text-overflow: ellipsis;
 }
 
+/* Settings Button on Template Item */
+.template-settings-btn {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    color: #6b7280;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.template-item:hover .template-settings-btn,
+.template-item.active .template-settings-btn {
+    opacity: 1;
+}
+
+.template-settings-btn:hover {
+    background: #3C50E0;
+    border-color: #3C50E0;
+    color: #fff;
+}
+
 /* Check Icon */
 .template-check {
     width: 24px;
@@ -315,20 +333,21 @@
 }
 
 /* ==================== */
-/* Preview Panel (Right) */
+/* Preview Panel (Right) - Sticky */
 /* ==================== */
 
 .dst-hf-preview-panel {
+    flex: 1;
+    position: sticky;
+    top: 46px;
+    height: calc(100vh - 180px);
+    min-height: 500px;
     background: #fff;
     border: 1px solid #e5e7eb;
     border-radius: 16px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    position: sticky;
-    top: 46px;
-    height: calc(100vh - 180px);
-    min-height: 500px;
 }
 
 /* Preview Toolbar */
@@ -339,6 +358,7 @@
     padding: 14px 20px;
     background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
     border-bottom: 1px solid #e5e7eb;
+    flex-shrink: 0;
 }
 
 .preview-title {
@@ -480,6 +500,7 @@
     padding: 12px 20px;
     background: #f9fafb;
     border-top: 1px solid #e5e7eb;
+    flex-shrink: 0;
 }
 
 .status-item {
@@ -505,17 +526,221 @@
 }
 
 /* ==================== */
+/* Settings Modal */
+/* ==================== */
+
+.settings-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.settings-modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.settings-modal {
+    background: #fff;
+    border-radius: 16px;
+    width: 480px;
+    max-width: 90vw;
+    max-height: 80vh;
+    overflow: hidden;
+    transform: scale(0.9) translateY(20px);
+    transition: transform 0.3s ease;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+.settings-modal-overlay.show .settings-modal {
+    transform: scale(1) translateY(0);
+}
+
+.settings-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border-bottom: 1px solid #fcd34d;
+}
+
+.settings-modal-header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #92400e;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.settings-modal-header h3 svg {
+    color: #d97706;
+}
+
+.settings-modal-close {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    border-radius: 8px;
+    color: #92400e;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.settings-modal-close:hover {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.settings-modal-body {
+    padding: 24px;
+    overflow-y: auto;
+    max-height: calc(80vh - 140px);
+}
+
+.settings-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.setting-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.setting-field > label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.setting-field input[type="text"],
+.setting-field input[type="url"],
+.setting-field input[type="number"],
+.setting-field textarea,
+.setting-field select {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    background: #f9fafb;
+    transition: all 0.2s ease;
+}
+
+.setting-field input[type="text"]:focus,
+.setting-field input[type="url"]:focus,
+.setting-field input[type="number"]:focus,
+.setting-field textarea:focus,
+.setting-field select:focus {
+    outline: none;
+    border-color: #3C50E0;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(60, 80, 224, 0.1);
+}
+
+.setting-field input[type="color"] {
+    width: 60px;
+    height: 44px;
+    padding: 4px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.setting-field input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #3C50E0;
+    cursor: pointer;
+}
+
+.setting-field label:has(input[type="checkbox"]) {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.setting-field textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.setting-field .description {
+    font-size: 12px;
+    color: #6b7280;
+    margin: 2px 0 0;
+}
+
+/* Color Field Row */
+.setting-field:has(input[type="color"]) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.setting-field:has(input[type="color"]) > label {
+    margin-bottom: 0;
+}
+
+/* Empty Settings */
+.no-settings {
+    text-align: center;
+    padding: 40px 20px;
+    color: #9ca3af;
+}
+
+.no-settings svg {
+    margin-bottom: 12px;
+    opacity: 0.5;
+}
+
+.no-settings p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* ==================== */
+/* Hidden Settings Sections (for form data) */
+/* ==================== */
+
+.settings-section {
+    display: none !important;
+}
+
+/* ==================== */
 /* Responsive */
 /* ==================== */
 
-@media screen and (max-width: 1100px) {
-    .dst-hf-preview-panel {
-        position: static;
-        height: 500px;
-        order: -1;
+@media screen and (max-width: 1200px) {
+    .dst-hf-selector-panel {
+        width: 340px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .dst-hf-main-layout {
+        flex-direction: column;
     }
 
     .dst-hf-selector-panel {
+        width: 100%;
         flex-direction: row;
         flex-wrap: wrap;
     }
@@ -525,8 +750,15 @@
         min-width: 300px;
     }
 
+    .dst-hf-preview-panel {
+        position: static;
+        width: 100%;
+        height: 500px;
+        order: -1;
+    }
+
     .template-list {
-        max-height: 300px;
+        max-height: 280px;
     }
 }
 
@@ -554,6 +786,18 @@
 
     .selector-section {
         min-width: 100%;
+    }
+
+    .settings-modal {
+        width: 100%;
+        max-width: 100%;
+        height: 100%;
+        max-height: 100%;
+        border-radius: 0;
+    }
+
+    .settings-modal-body {
+        max-height: calc(100vh - 140px);
     }
 }
 
@@ -613,143 +857,4 @@
 
 .template-item.active::before {
     opacity: 0;
-}
-
-/* ==================== */
-/* Settings Section */
-/* ==================== */
-
-.settings-section {
-    background: #fff;
-    border: 1px solid #e5e7eb;
-    border-radius: 16px;
-    overflow: hidden;
-    margin-top: 0;
-}
-
-.settings-section .section-title {
-    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-    border-bottom: 1px solid #fcd34d;
-    color: #92400e;
-}
-
-.settings-section .section-title svg {
-    color: #d97706;
-}
-
-.settings-fields {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.setting-field {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.setting-field > label {
-    font-size: 13px;
-    font-weight: 600;
-    color: #374151;
-}
-
-.setting-field input[type="text"],
-.setting-field input[type="url"],
-.setting-field input[type="number"],
-.setting-field textarea,
-.setting-field select {
-    width: 100%;
-    padding: 10px 14px;
-    font-size: 14px;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    background: #f9fafb;
-    transition: all 0.2s ease;
-}
-
-.setting-field input[type="text"]:focus,
-.setting-field input[type="url"]:focus,
-.setting-field input[type="number"]:focus,
-.setting-field textarea:focus,
-.setting-field select:focus {
-    outline: none;
-    border-color: #3C50E0;
-    background: #fff;
-    box-shadow: 0 0 0 3px rgba(60, 80, 224, 0.1);
-}
-
-.setting-field input[type="color"] {
-    width: 60px;
-    height: 40px;
-    padding: 4px;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.setting-field input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    accent-color: #3C50E0;
-    cursor: pointer;
-}
-
-.setting-field label:has(input[type="checkbox"]) {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: 400;
-    cursor: pointer;
-}
-
-.setting-field textarea {
-    min-height: 80px;
-    resize: vertical;
-}
-
-.setting-field .description {
-    font-size: 12px;
-    color: #6b7280;
-    margin: 4px 0 0;
-}
-
-/* Image Field */
-.dst-image-field {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    align-items: center;
-}
-
-.dst-image-preview {
-    width: 100%;
-    margin-bottom: 8px;
-}
-
-.dst-image-preview img {
-    max-width: 200px;
-    max-height: 100px;
-    border-radius: 8px;
-    border: 1px solid #e5e7eb;
-}
-
-.dst-upload-image,
-.dst-remove-image {
-    padding: 8px 16px;
-    font-size: 13px;
-    border-radius: 6px;
-}
-
-/* Color Field Row */
-.setting-field:has(input[type="color"]) {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.setting-field:has(input[type="color"]) > label {
-    margin-bottom: 0;
 }
