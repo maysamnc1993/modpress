@@ -1623,10 +1623,8 @@ body.wp-admin #wpadminbar {
     padding: 0 280px 0 0;
   }
   #adminmenuwrap {
-    z-index: 9999999999 !important;
-    border: 1px solid;
-    margin: -40px 0 0 0;
-    padding: 2px;
+    z-index: 1000 !important;
+    margin: 0;
   }
   * {
     box-sizing: border-box;
@@ -1779,6 +1777,6 @@ body.admin-theme-active #dashboard-widgets > div {
 
 
   #wp-media-modal {
-  z-index: 999999999999999 !important;
-}
+    z-index: 160000 !important;
+  }
 

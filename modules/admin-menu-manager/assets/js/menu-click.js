@@ -162,14 +162,19 @@
 
         /**
          * اگر منوی جدیدی اضافه شد (توسط AJAX یا پلاگین)
-         * دوباره تنظیم کن
+         * دوباره تنظیم کن - با debounce
          */
+        var menuObserverTimeout = null;
         var observer = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutation) {
-                if (mutation.addedNodes.length) {
-                    setupMenuClickBehavior();
-                }
+            var hasNewNodes = mutations.some(function(m) {
+                return m.addedNodes.length > 0;
             });
+
+            if (hasNewNodes) {
+                // Debounce - فقط یک بار اجرا شود
+                if (menuObserverTimeout) clearTimeout(menuObserverTimeout);
+                menuObserverTimeout = setTimeout(setupMenuClickBehavior, 100);
+            }
         });
 
         // شروع نظارت بر تغییرات
@@ -177,7 +182,7 @@
         if (menuElement) {
             observer.observe(menuElement, {
                 childList: true,
-                subtree: true
+                subtree: false // فقط فرزندان مستقیم
             });
         }
 

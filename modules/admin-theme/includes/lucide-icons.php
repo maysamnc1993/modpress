@@ -140,11 +140,12 @@ class DST_Lucide_Icons {
      * لود Lucide از CDN
      */
     public function enqueue_icons() {
+        // استفاده از نسخه مشخص برای جلوگیری از کندی
         wp_enqueue_script(
             'lucide-icons',
-            'https://unpkg.com/lucide@latest',
+            'https://unpkg.com/lucide@0.294.0/dist/umd/lucide.min.js',
             [],
-            null,
+            '0.294.0',
             true
         );
     }
@@ -662,13 +663,33 @@ class DST_Lucide_Icons {
                 }
             }
 
+            // جلوگیری از اجرای مکرر
+            let isInitializing = false;
+            let initTimeout = null;
+
             /**
-             * اجرای اصلی
+             * اجرای اصلی با debounce
              */
             function init() {
+                if (isInitializing) return;
+                isInitializing = true;
+
                 replaceMenuIcons();
                 replaceTopbarIcons();
                 initLucide();
+
+                // اجازه اجرای مجدد بعد از 100ms
+                setTimeout(function() {
+                    isInitializing = false;
+                }, 100);
+            }
+
+            /**
+             * اجرای با تاخیر (debounced)
+             */
+            function debouncedInit() {
+                if (initTimeout) clearTimeout(initTimeout);
+                initTimeout = setTimeout(init, 50);
             }
 
             // اجرا بعد از لود DOM
@@ -678,27 +699,8 @@ class DST_Lucide_Icons {
                 init();
             }
 
-            // اجرای مجدد برای منوهای dynamic
-            setTimeout(init, 300);
-            setTimeout(init, 1000);
-
-            // مشاهده تغییرات DOM برای منوهای جدید
-            const observer = new MutationObserver(function(mutations) {
-                let shouldUpdate = false;
-                mutations.forEach(function(mutation) {
-                    if (mutation.addedNodes.length) {
-                        shouldUpdate = true;
-                    }
-                });
-                if (shouldUpdate) {
-                    init();
-                }
-            });
-
-            const adminMenu = document.getElementById('adminmenu');
-            if (adminMenu) {
-                observer.observe(adminMenu, { childList: true, subtree: true });
-            }
+            // اجرای مجدد یک بار بعد از لود Lucide
+            setTimeout(init, 500);
         })();
         </script>
         <?php
