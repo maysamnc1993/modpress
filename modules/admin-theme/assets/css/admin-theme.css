@@ -1800,7 +1800,7 @@ body.admin-theme-active.block-editor-page #wpbody-content {
 /* کانتینر اصلی گوتنبرگ */
 body.admin-theme-active .interface-interface-skeleton {
     top: 56px !important;
-    right: 0 !important;
+    right: 280px !important;
     left: 0 !important;
 }
 
@@ -1842,6 +1842,7 @@ body.admin-theme-active .editor-post-publish-button:hover {
 /* Fix برای Full Screen Mode */
 body.admin-theme-active.is-fullscreen-mode .interface-interface-skeleton {
     top: 0 !important;
+    right: 0 !important;
 }
 
 body.admin-theme-active.is-fullscreen-mode #wpcontent,
