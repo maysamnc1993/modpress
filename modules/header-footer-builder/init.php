@@ -493,6 +493,101 @@ class DST_Header_Footer_Builder {
             <div class="builder-main">
                 <!-- پنل چپ: المان‌ها -->
                 <div class="builder-sidebar">
+                    <!-- تنظیمات کلی هدر/فوتر -->
+                    <div class="global-settings-panel" id="global-settings-panel">
+                        <div class="panel-header">
+                            <h3>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.26.604.852.997 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                                <span id="global-settings-title">تنظیمات هدر</span>
+                            </h3>
+                        </div>
+                        <div class="global-settings-content">
+                            <!-- تنظیمات هدر -->
+                            <div class="global-settings-group" id="header-global-settings">
+                                <div class="setting-row">
+                                    <label class="setting-toggle">
+                                        <input type="checkbox" id="header-enabled" checked>
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">فعال بودن هدر</span>
+                                    </label>
+                                </div>
+
+                                <div class="setting-row">
+                                    <label>عرض محتوا</label>
+                                    <div class="container-width-options">
+                                        <button type="button" class="width-option" data-width="boxed" data-target="header">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/></svg>
+                                            <span>جعبه‌ای</span>
+                                        </button>
+                                        <button type="button" class="width-option active" data-width="contained" data-target="header">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/></svg>
+                                            <span>محدود</span>
+                                        </button>
+                                        <button type="button" class="width-option" data-width="full" data-target="header">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="8" width="22" height="8"/></svg>
+                                            <span>تمام عرض</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="setting-row container-width-value" id="header-container-width-row">
+                                    <label>عرض کانتینر (px)</label>
+                                    <input type="number" id="header-container-width" value="1200" min="960" max="1920" step="10">
+                                </div>
+
+                                <div class="setting-row">
+                                    <label class="setting-toggle">
+                                        <input type="checkbox" id="header-shadow" checked>
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">سایه زیر هدر</span>
+                                    </label>
+                                </div>
+
+                                <div class="setting-row">
+                                    <label class="setting-toggle">
+                                        <input type="checkbox" id="header-sticky">
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">هدر چسبان (Sticky)</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- تنظیمات فوتر -->
+                            <div class="global-settings-group hidden" id="footer-global-settings">
+                                <div class="setting-row">
+                                    <label class="setting-toggle">
+                                        <input type="checkbox" id="footer-enabled" checked>
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">فعال بودن فوتر</span>
+                                    </label>
+                                </div>
+
+                                <div class="setting-row">
+                                    <label>عرض محتوا</label>
+                                    <div class="container-width-options">
+                                        <button type="button" class="width-option" data-width="boxed" data-target="footer">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/></svg>
+                                            <span>جعبه‌ای</span>
+                                        </button>
+                                        <button type="button" class="width-option active" data-width="contained" data-target="footer">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/></svg>
+                                            <span>محدود</span>
+                                        </button>
+                                        <button type="button" class="width-option" data-width="full" data-target="footer">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="8" width="22" height="8"/></svg>
+                                            <span>تمام عرض</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="setting-row container-width-value" id="footer-container-width-row">
+                                    <label>عرض کانتینر (px)</label>
+                                    <input type="number" id="footer-container-width" value="1200" min="960" max="1920" step="10">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="elements-panel">
                         <div class="panel-header">
                             <h3>المان‌ها</h3>
@@ -703,10 +798,21 @@ class DST_Header_Footer_Builder {
         $settings = $header['settings'] ?? [];
         $classes = ['dst-builder-header'];
 
-        if (!empty($settings['full_width'])) $classes[] = 'full-width';
-        if (!empty($settings['shadow'])) $classes[] = 'has-shadow';
+        // Width type
+        $width_type = $settings['width_type'] ?? 'contained';
+        if ($width_type === 'full') $classes[] = 'full-width';
+        if ($width_type === 'boxed') $classes[] = 'boxed-width';
 
-        echo '<header class="' . esc_attr(implode(' ', $classes)) . '">';
+        if (!empty($settings['shadow'])) $classes[] = 'has-shadow';
+        if (!empty($settings['sticky'])) $classes[] = 'is-sticky';
+
+        // Custom container width
+        $container_style = '';
+        if ($width_type === 'contained' && !empty($settings['container_width'])) {
+            $container_style = '--container-width:' . intval($settings['container_width']) . 'px;';
+        }
+
+        echo '<header class="' . esc_attr(implode(' ', $classes)) . '"' . ($container_style ? ' style="' . $container_style . '"' : '') . '>';
 
         foreach ($header['rows'] as $row) {
             $this->render_row($row, 'header');
@@ -727,9 +833,18 @@ class DST_Header_Footer_Builder {
         $settings = $footer['settings'] ?? [];
         $classes = ['dst-builder-footer'];
 
-        if (!empty($settings['full_width'])) $classes[] = 'full-width';
+        // Width type
+        $width_type = $settings['width_type'] ?? 'contained';
+        if ($width_type === 'full') $classes[] = 'full-width';
+        if ($width_type === 'boxed') $classes[] = 'boxed-width';
 
-        echo '<footer class="' . esc_attr(implode(' ', $classes)) . '">';
+        // Custom container width
+        $container_style = '';
+        if ($width_type === 'contained' && !empty($settings['container_width'])) {
+            $container_style = '--container-width:' . intval($settings['container_width']) . 'px;';
+        }
+
+        echo '<footer class="' . esc_attr(implode(' ', $classes)) . '"' . ($container_style ? ' style="' . $container_style . '"' : '') . '>';
 
         foreach ($footer['rows'] as $row) {
             $this->render_row($row, 'footer');

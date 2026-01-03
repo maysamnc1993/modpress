@@ -28,6 +28,7 @@
             this.renderCanvas('footer');
             this.initDragDrop();
             this.initSortable();
+            this.initGlobalSettings();
         },
 
         /**
@@ -126,6 +127,9 @@
 
             $('.builder-canvas').addClass('hidden');
             $(`#${tab}-canvas`).removeClass('hidden');
+
+            // Update global settings panel
+            this.updateGlobalSettingsPanel(tab);
 
             this.clearSelection();
         },
@@ -539,11 +543,45 @@
          * Show Row Settings
          */
         showRowSettings: function(row, section, rowIndex) {
+            const self = this;
             const settings = row.settings || {};
+            const currentLayout = row.layout || '1';
+
+            // Layout options
+            const layouts = [
+                { layout: '1', columns: 1, label: '1 ستون' },
+                { layout: '1-1', columns: 2, label: '2 ستون' },
+                { layout: '1-2', columns: 2, label: '1/3 - 2/3' },
+                { layout: '2-1', columns: 2, label: '2/3 - 1/3' },
+                { layout: '1-1-1', columns: 3, label: '3 ستون' },
+                { layout: '1-2-1', columns: 3, label: '1/4 - 2/4 - 1/4' },
+                { layout: '1-1-1-1', columns: 4, label: '4 ستون' },
+                { layout: '1-1-1-1-1', columns: 5, label: '5 ستون' },
+                { layout: '1-1-1-1-1-1', columns: 6, label: '6 ستون' }
+            ];
+
+            let layoutOptionsHTML = '';
+            layouts.forEach(item => {
+                const active = item.layout === currentLayout ? ' active' : '';
+                const colSpans = item.layout.split('-').map(n => `<span style="flex:${n}"></span>`).join('');
+                layoutOptionsHTML += `
+                    <button type="button" class="row-layout-btn${active}" data-layout="${item.layout}" data-columns="${item.columns}">
+                        <div class="layout-cols">${colSpans}</div>
+                        <span class="layout-name">${item.label}</span>
+                    </button>
+                `;
+            });
 
             let html = `
                 <div class="settings-section">
-                    <div class="settings-section-title">تنظیمات ردیف</div>
+                    <div class="settings-section-title">چیدمان ستون‌ها</div>
+                    <div class="row-layout-selector">
+                        ${layoutOptionsHTML}
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <div class="settings-section-title">استایل ردیف</div>
 
                     <div class="setting-field">
                         <label>رنگ پس‌زمینه</label>
@@ -575,8 +613,70 @@
 
             $('#settings-content').html(html);
 
+            // Bind layout change
+            $('.row-layout-btn').on('click', function() {
+                const newLayout = $(this).data('layout');
+                const newColumns = $(this).data('columns');
+
+                // Update button states
+                $('.row-layout-btn').removeClass('active');
+                $(this).addClass('active');
+
+                // Update row settings
+                self.changeRowLayout(section, rowIndex, newLayout, newColumns);
+            });
+
             // Bind settings change events
             this.bindSettingsEvents(section, rowIndex, null, null, 'row');
+        },
+
+        /**
+         * Change Row Layout
+         */
+        changeRowLayout: function(section, rowIndex, newLayout, newColumns) {
+            const row = this.settings[section].rows[rowIndex];
+            const oldColumns = row.columns || 1;
+            const oldElements = row.elements || {};
+
+            // Get new column keys
+            const newColKeys = this.getColumnKeys(newColumns);
+            const oldColKeys = Object.keys(oldElements);
+
+            // Redistribute elements
+            const newElements = {};
+            newColKeys.forEach((key, i) => {
+                newElements[key] = [];
+            });
+
+            // Move elements from old columns to new columns
+            let allElements = [];
+            oldColKeys.forEach(key => {
+                allElements = allElements.concat(oldElements[key] || []);
+            });
+
+            // Distribute elements evenly across new columns
+            if (allElements.length > 0) {
+                const elementsPerCol = Math.ceil(allElements.length / newColumns);
+                newColKeys.forEach((key, i) => {
+                    const start = i * elementsPerCol;
+                    const end = Math.min(start + elementsPerCol, allElements.length);
+                    newElements[key] = allElements.slice(start, end);
+                });
+            }
+
+            // Update row
+            row.layout = newLayout;
+            row.columns = newColumns;
+            row.elements = newElements;
+
+            // Re-render
+            this.renderCanvas(section);
+            this.initSortable();
+            this.markDirty();
+
+            // Re-select the row
+            const $newRow = $(`.builder-row[data-type="${section}"][data-row="${rowIndex}"]`);
+            this.selectRow($newRow);
         },
 
         /**
@@ -977,6 +1077,122 @@
                 .replace(/>/g, '&gt;')
                 .replace(/"/g, '&quot;')
                 .replace(/'/g, '&#039;');
+        },
+
+        /**
+         * Initialize Global Settings
+         */
+        initGlobalSettings: function() {
+            const self = this;
+
+            // Load initial values
+            this.loadGlobalSettingsValues('header');
+            this.loadGlobalSettingsValues('footer');
+
+            // Width option buttons
+            $('.width-option').on('click', function() {
+                const target = $(this).data('target');
+                const width = $(this).data('width');
+
+                // Update active state
+                $(`.width-option[data-target="${target}"]`).removeClass('active');
+                $(this).addClass('active');
+
+                // Update settings
+                if (!self.settings[target].settings) {
+                    self.settings[target].settings = {};
+                }
+
+                self.settings[target].settings.width_type = width;
+
+                // Show/hide container width input
+                if (width === 'contained') {
+                    $(`#${target}-container-width-row`).removeClass('hidden');
+                } else {
+                    $(`#${target}-container-width-row`).addClass('hidden');
+                }
+
+                self.markDirty();
+            });
+
+            // Container width input
+            $('#header-container-width, #footer-container-width').on('change', function() {
+                const target = $(this).attr('id').replace('-container-width', '');
+                const value = parseInt($(this).val()) || 1200;
+
+                if (!self.settings[target].settings) {
+                    self.settings[target].settings = {};
+                }
+                self.settings[target].settings.container_width = value;
+                self.markDirty();
+            });
+
+            // Enabled toggles
+            $('#header-enabled, #footer-enabled').on('change', function() {
+                const target = $(this).attr('id').replace('-enabled', '');
+                self.settings[target].enabled = $(this).is(':checked');
+                self.markDirty();
+            });
+
+            // Shadow toggle (header only)
+            $('#header-shadow').on('change', function() {
+                if (!self.settings.header.settings) {
+                    self.settings.header.settings = {};
+                }
+                self.settings.header.settings.shadow = $(this).is(':checked');
+                self.markDirty();
+            });
+
+            // Sticky toggle (header only)
+            $('#header-sticky').on('change', function() {
+                if (!self.settings.header.settings) {
+                    self.settings.header.settings = {};
+                }
+                self.settings.header.settings.sticky = $(this).is(':checked');
+                self.markDirty();
+            });
+        },
+
+        /**
+         * Load Global Settings Values
+         */
+        loadGlobalSettingsValues: function(type) {
+            const data = this.settings[type];
+            const settings = data.settings || {};
+
+            // Enabled
+            $(`#${type}-enabled`).prop('checked', data.enabled !== false);
+
+            // Width type
+            const widthType = settings.width_type || 'contained';
+            $(`.width-option[data-target="${type}"]`).removeClass('active');
+            $(`.width-option[data-target="${type}"][data-width="${widthType}"]`).addClass('active');
+
+            // Container width
+            $(`#${type}-container-width`).val(settings.container_width || 1200);
+
+            // Show/hide container width input
+            if (widthType !== 'contained') {
+                $(`#${type}-container-width-row`).addClass('hidden');
+            }
+
+            // Header-specific settings
+            if (type === 'header') {
+                $('#header-shadow').prop('checked', settings.shadow !== false);
+                $('#header-sticky').prop('checked', settings.sticky === true);
+            }
+        },
+
+        /**
+         * Update Global Settings Panel
+         */
+        updateGlobalSettingsPanel: function(tab) {
+            // Update title
+            $('#global-settings-title').text(tab === 'header' ? 'تنظیمات هدر' : 'تنظیمات فوتر');
+
+            // Toggle settings groups
+            $('.global-settings-group').addClass('hidden');
+            $(`#${tab}-global-settings`).removeClass('hidden');
         }
     };
 
