@@ -58,158 +58,161 @@ class DST_Modules_Admin {
         if (!current_user_can('manage_options')) {
             return;
         }
-        
+
         $modules = dst_modules()->get_modules();
         $all_modules = $this->scan_all_modules();
+        $active_count = count($modules);
+        $total_count = count($all_modules);
         ?>
-        
+
         <div class="wrap dst-modules-page">
-            <h1>
-                🧩 مدیریت ماژول‌ها
-                <span class="page-title-action">
-                    <?php echo count($modules); ?> ماژول فعال از <?php echo count($all_modules); ?>
-                </span>
-            </h1>
-            
-            <?php if (empty($all_modules)): ?>
-                
-                <div class="notice notice-warning">
-                    <p>
-                        <strong>هنوز ماژولی نصب نشده!</strong><br>
-                        برای ساخت ماژول جدید از دستور زیر استفاده کنید:<br>
-                        <code>php create-module.php module-name "Module Title"</code>
-                    </p>
+            <div class="dst-modules-header">
+                <div class="header-title">
+                    <h1>
+                        <i data-lucide="puzzle"></i>
+                        مدیریت ماژول‌ها
+                    </h1>
+                    <p class="description">فعال یا غیرفعال کردن قابلیت‌های قالب</p>
                 </div>
-                
-            <?php else: ?>
-                
-                <div class="dst-modules-grid">
-                    <?php foreach ($all_modules as $name => $module): ?>
-                        <?php 
-                        $is_active = isset($modules[$name]);
-                        $has_error = isset($module['error']);
-                        ?>
-                        
-                        <div class="dst-module-card <?php echo $is_active ? 'active' : 'inactive'; ?>">
-                            
-                            <!-- Header -->
-                            <div class="module-header">
-                                <h3><?php echo esc_html($module['title']); ?></h3>
-                                <span class="module-status">
-                                    <?php if ($has_error): ?>
-                                        ⚠️ خطا
-                                    <?php elseif ($is_active): ?>
-                                        ✅ فعال
-                                    <?php else: ?>
-                                        ⭕ غیرفعال
-                                    <?php endif; ?>
-                                </span>
-                            </div>
-                            
-                            <!-- Body -->
-                            <div class="module-body">
-                                
-                                <?php if ($has_error): ?>
-                                    <div class="module-error">
-                                        <?php echo esc_html($module['error']); ?>
-                                    </div>
-                                <?php endif; ?>
-                                
-                                <p class="module-description">
-                                    <?php echo esc_html($module['description']); ?>
-                                </p>
-                                
-                                <div class="module-meta">
-                                    <span class="meta-item">
-                                        📦 نسخه: <?php echo esc_html($module['version']); ?>
-                                    </span>
-                                    
-                                    <?php if (!empty($module['author'])): ?>
-                                        <span class="meta-item">
-                                            👤 <?php echo esc_html($module['author']); ?>
-                                        </span>
-                                    <?php endif; ?>
-                                    
-                                    <?php if (!empty($module['requires'])): ?>
-                                        <span class="meta-item">
-                                            🔗 نیازمندی: <?php echo implode(', ', $module['requires']); ?>
-                                        </span>
-                                    <?php endif; ?>
-                                </div>
-                                
-                                <?php if (!empty($module['features'])): ?>
-                                    <div class="module-features">
-                                        <strong>قابلیت‌ها:</strong>
-                                        <ul>
-                                            <?php foreach ($module['features'] as $feature): ?>
-                                                <li><?php echo esc_html($feature); ?></li>
-                                            <?php endforeach; ?>
-                                        </ul>
-                                    </div>
-                                <?php endif; ?>
-                                
-                            </div>
-                            
-                            <!-- Footer -->
-                            <div class="module-footer">
-                                <?php if (!$has_error): ?>
-                                    <button 
-                                        type="button" 
-                                        class="button dst-toggle-module"
-                                        data-module="<?php echo esc_attr($name); ?>"
-                                        data-active="<?php echo $is_active ? '1' : '0'; ?>">
-                                        <?php echo $is_active ? 'غیرفعال کردن' : 'فعال کردن'; ?>
-                                    </button>
-                                <?php endif; ?>
-                                
-                                <?php if (file_exists(DST_PATH . "/modules/{$name}/README.md")): ?>
-                                    <a href="<?php echo esc_url(admin_url("theme-editor.php?file=modules/{$name}/README.md")); ?>" 
-                                       class="button button-secondary">
-                                        📖 مستندات
-                                    </a>
-                                <?php endif; ?>
-                            </div>
-                            
-                        </div>
-                        
-                    <?php endforeach; ?>
-                </div>
-                
-            <?php endif; ?>
-            
-            <!-- راهنما -->
-            <div class="dst-help-section">
-                <h2>📚 راهنمای سریع</h2>
-                
-                <div class="help-grid">
-                    <div class="help-card">
-                        <h3>ساخت ماژول جدید</h3>
-                        <code>php create-module.php my-module "عنوان ماژول"</code>
+                <div class="header-stats">
+                    <div class="stat-item">
+                        <span class="stat-number"><?php echo $active_count; ?></span>
+                        <span class="stat-label">فعال</span>
                     </div>
-                    
-                    <div class="help-card">
-                        <h3>ساختار ماژول</h3>
-                        <pre>modules/
-└── my-module/
-    ├── module.json
-    ├── init.php
-    └── assets/</pre>
-                    </div>
-                    
-                    <div class="help-card">
-                        <h3>مستندات کامل</h3>
-                        <a href="<?php echo esc_url(DST_URL . '/docs/MODULES.md'); ?>" 
-                           target="_blank" 
-                           class="button">
-                            مشاهده مستندات
-                        </a>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-number"><?php echo $total_count; ?></span>
+                        <span class="stat-label">کل</span>
                     </div>
                 </div>
             </div>
-            
+
+            <?php if (empty($all_modules)): ?>
+
+                <div class="dst-modules-empty">
+                    <i data-lucide="package-x"></i>
+                    <h3>هنوز ماژولی نصب نشده!</h3>
+                    <p>برای ساخت ماژول جدید از دستور زیر استفاده کنید:</p>
+                    <code>php create-module.php module-name "Module Title"</code>
+                </div>
+
+            <?php else: ?>
+
+                <div class="dst-modules-grid">
+                    <?php foreach ($all_modules as $name => $module): ?>
+                        <?php
+                        $is_active = isset($modules[$name]);
+                        $has_error = isset($module['error']);
+                        $module_icon = $this->get_module_icon($name);
+                        ?>
+
+                        <div class="dst-module-card <?php echo $is_active ? 'is-active' : 'is-inactive'; ?> <?php echo $has_error ? 'has-error' : ''; ?>">
+
+                            <div class="module-icon">
+                                <i data-lucide="<?php echo esc_attr($module_icon); ?>"></i>
+                            </div>
+
+                            <div class="module-content">
+                                <div class="module-header">
+                                    <h3><?php echo esc_html($module['title']); ?></h3>
+                                    <?php if ($has_error): ?>
+                                        <span class="module-badge badge-error">خطا</span>
+                                    <?php elseif ($is_active): ?>
+                                        <span class="module-badge badge-active">فعال</span>
+                                    <?php else: ?>
+                                        <span class="module-badge badge-inactive">غیرفعال</span>
+                                    <?php endif; ?>
+                                </div>
+
+                                <?php if ($has_error): ?>
+                                    <div class="module-error">
+                                        <i data-lucide="alert-triangle"></i>
+                                        <?php echo esc_html($module['error']); ?>
+                                    </div>
+                                <?php endif; ?>
+
+                                <p class="module-description">
+                                    <?php echo esc_html($module['description']); ?>
+                                </p>
+
+                                <div class="module-meta">
+                                    <span class="meta-item">
+                                        <i data-lucide="tag"></i>
+                                        <?php echo esc_html($module['version']); ?>
+                                    </span>
+
+                                    <?php if (!empty($module['author'])): ?>
+                                        <span class="meta-item">
+                                            <i data-lucide="user"></i>
+                                            <?php echo esc_html($module['author']); ?>
+                                        </span>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+
+                            <div class="module-footer">
+                                <?php if (!$has_error): ?>
+                                    <label class="module-toggle">
+                                        <input type="checkbox"
+                                               class="dst-toggle-module"
+                                               data-module="<?php echo esc_attr($name); ?>"
+                                               <?php checked($is_active); ?>>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                <?php endif; ?>
+                            </div>
+
+                        </div>
+
+                    <?php endforeach; ?>
+                </div>
+
+            <?php endif; ?>
+
         </div>
-        
+
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
+        </script>
+
         <?php
+    }
+
+    /**
+     * گرفتن آیکون مناسب برای هر ماژول
+     */
+    private function get_module_icon($name) {
+        $icons = [
+            'admin-menu-manager' => 'layout-list',
+            'admin-theme' => 'palette',
+            'header-footer' => 'layout',
+            'theme-settings' => 'settings',
+            'seo' => 'search',
+            'cache' => 'zap',
+            'security' => 'shield',
+            'backup' => 'hard-drive',
+            'analytics' => 'bar-chart-2',
+            'forms' => 'file-input',
+            'slider' => 'images',
+            'gallery' => 'image',
+            'blog' => 'file-text',
+            'shop' => 'shopping-cart',
+            'social' => 'share-2',
+            'email' => 'mail',
+            'api' => 'code',
+        ];
+
+        foreach ($icons as $key => $icon) {
+            if (strpos($name, $key) !== false) {
+                return $icon;
+            }
+        }
+
+        return 'puzzle';
     }
     
     /**
@@ -295,117 +298,287 @@ class DST_Modules_Admin {
     private function get_inline_css() {
         return '
         .dst-modules-page {
-            max-width: 1400px;
+            max-width: 1200px;
+            margin: 20px auto 0;
         }
-        .dst-modules-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 20px;
-            margin: 20px 0;
-        }
-        .dst-module-card {
-            background: #fff;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            overflow: hidden;
-            transition: all 0.3s;
-        }
-        .dst-module-card.active {
-            border-color: #2271b1;
-            box-shadow: 0 0 0 1px rgba(34, 113, 177, 0.1);
-        }
-        .dst-module-card:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        .module-header {
+        /* Header */
+        .dst-modules-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 20px;
-            background: #f8f9fa;
-            border-bottom: 1px solid #ddd;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .dst-modules-header h1 {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 26px;
+            font-weight: 600;
+            color: #1e293b;
+            margin: 0 0 8px;
+        }
+        .dst-modules-header h1 svg {
+            width: 32px;
+            height: 32px;
+            stroke: #3C50E0;
+        }
+        .dst-modules-header .description {
+            font-size: 14px;
+            color: #64748b;
+            margin: 0;
+        }
+        .header-stats {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: #fff;
+            padding: 16px 24px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-number {
+            display: block;
+            font-size: 28px;
+            font-weight: 700;
+            color: #3C50E0;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: #64748b;
+        }
+        .stat-divider {
+            width: 1px;
+            height: 40px;
+            background: #e2e8f0;
+        }
+        /* Empty State */
+        .dst-modules-empty {
+            text-align: center;
+            padding: 60px 20px;
+            background: #fff;
+            border: 1px dashed #e2e8f0;
+            border-radius: 12px;
+        }
+        .dst-modules-empty svg {
+            width: 64px;
+            height: 64px;
+            stroke: #94a3b8;
+            margin-bottom: 20px;
+        }
+        .dst-modules-empty h3 {
+            font-size: 18px;
+            color: #1e293b;
+            margin: 0 0 8px;
+        }
+        .dst-modules-empty p {
+            color: #64748b;
+            margin: 0 0 16px;
+        }
+        .dst-modules-empty code {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #f1f5f9;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+        /* Grid */
+        .dst-modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+        /* Card */
+        .dst-module-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            gap: 16px;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        .dst-module-card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .dst-module-card.is-active {
+            background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+            border-color: #86efac;
+        }
+        .dst-module-card.has-error {
+            background: #fef2f2;
+            border-color: #fca5a5;
+        }
+        /* Icon */
+        .module-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .module-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: #64748b;
+        }
+        .dst-module-card.is-active .module-icon {
+            background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+        }
+        .dst-module-card.is-active .module-icon svg {
+            stroke: #fff;
+        }
+        .dst-module-card.has-error .module-icon {
+            background: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
+        }
+        .dst-module-card.has-error .module-icon svg {
+            stroke: #fff;
+        }
+        /* Content */
+        .module-content {
+            flex: 1;
+            min-width: 0;
+        }
+        .module-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
         }
         .module-header h3 {
             margin: 0;
             font-size: 16px;
-        }
-        .module-status {
-            font-size: 12px;
             font-weight: 600;
+            color: #1e293b;
         }
-        .module-body {
-            padding: 20px;
+        .module-badge {
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        .badge-active {
+            background: #10b981;
+            color: #fff;
+        }
+        .badge-inactive {
+            background: #94a3b8;
+            color: #fff;
+        }
+        .badge-error {
+            background: #ef4444;
+            color: #fff;
         }
         .module-error {
-            padding: 10px;
-            margin-bottom: 15px;
-            background: #fef2f2;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            margin-bottom: 10px;
+            background: #fff;
             border: 1px solid #fca5a5;
-            border-radius: 4px;
-            color: #991b1b;
-            font-size: 13px;
+            border-radius: 6px;
+            color: #dc2626;
+            font-size: 12px;
+        }
+        .module-error svg {
+            width: 14px;
+            height: 14px;
+            stroke: #dc2626;
+            flex-shrink: 0;
         }
         .module-description {
-            margin: 0 0 15px;
-            color: #666;
+            margin: 0 0 12px;
+            color: #64748b;
+            font-size: 13px;
+            line-height: 1.5;
         }
         .module-meta {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin: 15px 0;
+            gap: 8px;
         }
         .meta-item {
-            font-size: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
             padding: 4px 8px;
-            background: #f0f0f0;
+            background: #f1f5f9;
             border-radius: 4px;
+            color: #64748b;
         }
-        .module-features {
-            margin-top: 15px;
-            font-size: 13px;
+        .meta-item svg {
+            width: 12px;
+            height: 12px;
         }
-        .module-features ul {
-            margin: 5px 0;
-            padding-left: 20px;
-        }
+        /* Footer / Toggle */
         .module-footer {
             display: flex;
-            gap: 10px;
-            padding: 15px 20px;
-            background: #f8f9fa;
-            border-top: 1px solid #ddd;
+            align-items: flex-start;
+            padding-top: 8px;
         }
-        .dst-help-section {
-            margin-top: 40px;
-            padding: 20px;
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+        .module-toggle {
+            position: relative;
+            width: 48px;
+            height: 26px;
+            cursor: pointer;
         }
-        .help-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
+        .module-toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
         }
-        .help-card {
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 4px;
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #cbd5e1;
+            border-radius: 26px;
+            transition: 0.3s;
         }
-        .help-card h3 {
-            margin-top: 0;
-            font-size: 14px;
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            border-radius: 50%;
+            transition: 0.3s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        .help-card code,
-        .help-card pre {
-            display: block;
-            padding: 10px;
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 12px;
+        .module-toggle input:checked + .toggle-slider {
+            background-color: #10b981;
+        }
+        .module-toggle input:checked + .toggle-slider:before {
+            transform: translateX(22px);
+        }
+        .module-toggle input:disabled + .toggle-slider {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        @media screen and (max-width: 782px) {
+            .dst-modules-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .dst-modules-grid {
+                grid-template-columns: 1fr;
+            }
         }
         ';
     }
@@ -416,14 +589,18 @@ class DST_Modules_Admin {
     private function get_inline_js() {
         return "
         jQuery(function($) {
-            $('.dst-toggle-module').on('click', function() {
-                var btn = $(this);
-                var module = btn.data('module');
-                var isActive = btn.data('active') === 1;
-                var activate = !isActive;
-                
-                btn.prop('disabled', true).text('در حال پردازش...');
-                
+            $('.dst-toggle-module').on('change', function() {
+                var checkbox = $(this);
+                var card = checkbox.closest('.dst-module-card');
+                var module = checkbox.data('module');
+                var activate = checkbox.is(':checked');
+
+                // غیرفعال کردن چک‌باکس
+                checkbox.prop('disabled', true);
+
+                // نمایش loading
+                card.css('opacity', '0.6');
+
                 $.ajax({
                     url: ajaxurl,
                     type: 'POST',
@@ -438,12 +615,16 @@ class DST_Modules_Admin {
                             location.reload();
                         } else {
                             alert(response.data || 'خطا در تغییر وضعیت');
-                            btn.prop('disabled', false);
+                            checkbox.prop('checked', !activate);
+                            checkbox.prop('disabled', false);
+                            card.css('opacity', '1');
                         }
                     },
                     error: function() {
                         alert('خطا در ارتباط با سرور');
-                        btn.prop('disabled', false);
+                        checkbox.prop('checked', !activate);
+                        checkbox.prop('disabled', false);
+                        card.css('opacity', '1');
                     }
                 });
             });
