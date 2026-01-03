@@ -585,3 +585,28 @@ body.rtl .builder-cart .cart-count {
     right: auto;
     left: -8px;
 }
+
+/* ============================================
+   Responsive Visibility Classes
+   ============================================ */
+
+/* Desktop: > 992px */
+@media (min-width: 993px) {
+    .hide-desktop {
+        display: none !important;
+    }
+}
+
+/* Tablet: 768px - 992px */
+@media (min-width: 768px) and (max-width: 992px) {
+    .hide-tablet {
+        display: none !important;
+    }
+}
+
+/* Mobile: < 768px */
+@media (max-width: 767px) {
+    .hide-mobile {
+        display: none !important;
+    }
+}

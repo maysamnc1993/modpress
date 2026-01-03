@@ -272,6 +272,27 @@ class DST_Header_Footer_Builder {
 
         // فیلتر برای افزودن المان‌های سفارشی
         $this->elements = apply_filters('dst_builder_elements', $this->elements);
+
+        // اضافه کردن تنظیمات ریسپانسیو به همه المان‌ها
+        $this->inject_visibility_settings();
+    }
+
+    /**
+     * تزریق تنظیمات نمایش به همه المان‌ها
+     */
+    private function inject_visibility_settings() {
+        $visibility_settings = [
+            'hide_desktop' => ['type' => 'checkbox', 'label' => 'مخفی در دسکتاپ', 'default' => false],
+            'hide_tablet' => ['type' => 'checkbox', 'label' => 'مخفی در تبلت', 'default' => false],
+            'hide_mobile' => ['type' => 'checkbox', 'label' => 'مخفی در موبایل', 'default' => false],
+        ];
+
+        foreach ($this->elements as $key => $element) {
+            $this->elements[$key]['settings'] = array_merge(
+                $element['settings'] ?? [],
+                $visibility_settings
+            );
+        }
     }
 
     /**
@@ -361,11 +382,24 @@ class DST_Header_Footer_Builder {
      * لیست منوها
      */
     private function get_menus_list() {
-        $menus = wp_get_nav_menus();
         $list = ['' => 'انتخاب کنید...'];
-        foreach ($menus as $menu) {
-            $list[$menu->slug] = $menu->name;
+
+        // Theme locations
+        $locations = get_registered_nav_menus();
+        if (!empty($locations)) {
+            foreach ($locations as $location => $name) {
+                $list['location:' . $location] = '📍 ' . $name;
+            }
         }
+
+        // Custom menus
+        $menus = wp_get_nav_menus();
+        if (!empty($menus)) {
+            foreach ($menus as $menu) {
+                $list['menu:' . $menu->term_id] = '📋 ' . $menu->name;
+            }
+        }
+
         return $list;
     }
 
@@ -747,7 +781,13 @@ class DST_Header_Footer_Builder {
             return;
         }
 
-        echo '<div class="builder-element element-' . esc_attr($type) . '">';
+        // کلاس‌های نمایش ریسپانسیو
+        $classes = ['builder-element', 'element-' . $type];
+        if (!empty($settings['hide_desktop'])) $classes[] = 'hide-desktop';
+        if (!empty($settings['hide_tablet'])) $classes[] = 'hide-tablet';
+        if (!empty($settings['hide_mobile'])) $classes[] = 'hide-mobile';
+
+        echo '<div class="' . esc_attr(implode(' ', $classes)) . '">';
 
         switch ($type) {
             case 'logo':
@@ -814,7 +854,7 @@ class DST_Header_Footer_Builder {
     }
 
     private function render_menu($settings) {
-        $menu_slug = $settings['menu'] ?? '';
+        $menu_value = $settings['menu'] ?? '';
         $title = $settings['title'] ?? '';
         $style = $settings['style'] ?? 'horizontal';
 
@@ -822,14 +862,31 @@ class DST_Header_Footer_Builder {
             echo '<h4 class="menu-title">' . esc_html($title) . '</h4>';
         }
 
-        if ($menu_slug) {
-            wp_nav_menu([
-                'menu' => $menu_slug,
-                'container' => 'nav',
-                'container_class' => 'builder-nav style-' . $style,
-                'fallback_cb' => false,
-            ]);
+        if (empty($menu_value)) {
+            return;
         }
+
+        $menu_args = [
+            'container' => 'nav',
+            'container_class' => 'builder-nav style-' . $style,
+            'fallback_cb' => false,
+        ];
+
+        // چک کنید که location هست یا menu
+        if (strpos($menu_value, 'location:') === 0) {
+            // Theme location
+            $location = str_replace('location:', '', $menu_value);
+            $menu_args['theme_location'] = $location;
+        } elseif (strpos($menu_value, 'menu:') === 0) {
+            // Menu by ID
+            $menu_id = str_replace('menu:', '', $menu_value);
+            $menu_args['menu'] = intval($menu_id);
+        } else {
+            // Fallback - try as slug
+            $menu_args['menu'] = $menu_value;
+        }
+
+        wp_nav_menu($menu_args);
     }
 
     private function render_search($settings) {
