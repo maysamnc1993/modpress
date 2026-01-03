@@ -1780,3 +1780,99 @@ body.admin-theme-active #dashboard-widgets > div {
     z-index: 160000 !important;
   }
 
+
+/* ═══════════════════════════════════════════════════════
+   GUTENBERG / BLOCK EDITOR - ویرایشگر بلاکی
+   ═══════════════════════════════════════════════════════ */
+
+/* تنظیم فاصله ویرایشگر از منوی سایدبار */
+body.admin-theme-active.block-editor-page #wpcontent,
+body.admin-theme-active.block-editor-page #wpbody {
+    padding-right: 0 !important;
+    margin-right: 280px !important;
+}
+
+/* ریست پدینگ‌های اضافی */
+body.admin-theme-active.block-editor-page #wpbody-content {
+    padding: 0 !important;
+}
+
+/* کانتینر اصلی گوتنبرگ */
+body.admin-theme-active .interface-interface-skeleton {
+    top: 56px !important;
+    right: 0 !important;
+    left: 0 !important;
+}
+
+/* هدر گوتنبرگ (تولبار بالا) */
+body.admin-theme-active .interface-interface-skeleton__header,
+body.admin-theme-active .edit-post-header {
+    background: var(--admin-bg-white) !important;
+    border-bottom: 1px solid var(--admin-border) !important;
+    box-shadow: none !important;
+}
+
+/* محتوای اصلی ویرایشگر */
+body.admin-theme-active .interface-interface-skeleton__body {
+    background: var(--admin-bg-body) !important;
+}
+
+/* ناحیه ویرایش */
+body.admin-theme-active .editor-styles-wrapper {
+    background: var(--admin-bg-white) !important;
+}
+
+/* سایدبار تنظیمات گوتنبرگ (پنل راست) */
+body.admin-theme-active .interface-interface-skeleton__sidebar,
+body.admin-theme-active .interface-complementary-area {
+    background: var(--admin-bg-white) !important;
+    border-right: 1px solid var(--admin-border) !important;
+}
+
+/* دکمه انتشار */
+body.admin-theme-active .editor-post-publish-button {
+    background: var(--admin-primary) !important;
+    border-radius: 6px !important;
+}
+
+body.admin-theme-active .editor-post-publish-button:hover {
+    background: var(--admin-primary-hover) !important;
+}
+
+/* Fix برای Full Screen Mode */
+body.admin-theme-active.is-fullscreen-mode .interface-interface-skeleton {
+    top: 0 !important;
+}
+
+body.admin-theme-active.is-fullscreen-mode #wpcontent,
+body.admin-theme-active.is-fullscreen-mode #wpbody {
+    margin-right: 0 !important;
+}
+
+/* Fix برای Document Sidebar */
+body.admin-theme-active .edit-post-sidebar {
+    background: var(--admin-bg-white) !important;
+}
+
+/* Inserter Popover */
+body.admin-theme-active .block-editor-inserter__popover {
+    z-index: 100001 !important;
+}
+
+/* Block Toolbar */
+body.admin-theme-active .block-editor-block-contextual-toolbar {
+    z-index: 100000 !important;
+}
+
+/* Fix برای صفحه ویرایش نوشته کلاسیک هم */
+body.admin-theme-active.post-php #wpcontent,
+body.admin-theme-active.post-new-php #wpcontent {
+    padding-right: 0 !important;
+    margin-right: 280px !important;
+}
+
+body.admin-theme-active.post-php #wpbody-content,
+body.admin-theme-active.post-new-php #wpbody-content {
+    padding: 20px !important;
+}
+
