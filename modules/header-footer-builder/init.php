@@ -307,6 +307,12 @@ class DST_Header_Footer_Builder {
             return;
         }
 
+        // بارگذاری تنظیمات موقت برای پیش‌نمایش
+        $preview_settings = get_transient('dst_builder_preview_' . get_current_user_id());
+        if ($preview_settings) {
+            $this->settings = $preview_settings;
+        }
+
         // مخفی کردن ادمین بار
         add_filter('show_admin_bar', '__return_false');
         add_action('wp_head', function() {
@@ -438,6 +444,7 @@ class DST_Header_Footer_Builder {
 
     /**
      * پیش‌نمایش زنده با AJAX
+     * ذخیره تنظیمات موقت برای پیش‌نمایش
      */
     public function ajax_preview() {
         check_ajax_referer('dst_builder_nonce', 'nonce');
@@ -447,30 +454,16 @@ class DST_Header_Footer_Builder {
         }
 
         $settings = isset($_POST['settings']) ? $_POST['settings'] : [];
-        $type = isset($_POST['type']) ? sanitize_text_field($_POST['type']) : 'header';
 
         // پاکسازی داده‌ها
         $preview_settings = $this->sanitize_settings($settings);
 
-        // ذخیره موقت تنظیمات برای رندر
-        $original_settings = $this->settings;
-        $this->settings = $preview_settings;
-
-        // رندر HTML
-        ob_start();
-        if ($type === 'header') {
-            $this->render_header();
-        } else {
-            $this->render_footer();
-        }
-        $html = ob_get_clean();
-
-        // بازگرداندن تنظیمات اصلی
-        $this->settings = $original_settings;
+        // ذخیره موقت تنظیمات (1 دقیقه)
+        set_transient('dst_builder_preview_' . get_current_user_id(), $preview_settings, 60);
 
         wp_send_json_success([
-            'html' => $html,
-            'type' => $type
+            'preview_url' => home_url('/?dst_builder_preview=1&t=' . time()),
+            'message' => 'تنظیمات برای پیش‌نمایش ذخیره شد'
         ]);
     }
 

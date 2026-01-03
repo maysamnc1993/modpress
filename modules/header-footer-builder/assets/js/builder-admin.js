@@ -117,12 +117,9 @@
                 }
             });
 
-            // Wait for iframe to load, then update preview
+            // Handle iframe load - remove loading state
             $('#preview-frame').on('load', function() {
-                // Give it a moment to fully render
-                setTimeout(function() {
-                    self.updateLivePreview();
-                }, 500);
+                $('.preview-frame-wrapper').removeClass('loading');
             });
         },
 
@@ -1038,86 +1035,35 @@
 
         /**
          * Update Live Preview
+         * ذخیره تنظیمات موقت و رفرش iframe
          */
         updateLivePreview: function() {
             const self = this;
             const iframe = document.getElementById('preview-frame');
             if (!iframe) return;
 
-            // Send both header and footer for preview
+            // Show loading state
+            $('.preview-frame-wrapper').addClass('loading');
+
+            // Save settings temporarily via AJAX
             $.ajax({
                 url: dstBuilder.ajaxUrl,
                 type: 'POST',
                 data: {
                     action: 'dst_builder_preview',
                     nonce: dstBuilder.nonce,
-                    settings: this.settings,
-                    type: 'header'
+                    settings: this.settings
                 },
                 success: function(response) {
-                    if (response.success && response.data.html) {
-                        self.injectPreviewHTML('header', response.data.html);
+                    if (response.success && response.data.preview_url) {
+                        // Refresh iframe with new URL (cache busted)
+                        iframe.src = response.data.preview_url;
                     }
-                }
-            });
-
-            $.ajax({
-                url: dstBuilder.ajaxUrl,
-                type: 'POST',
-                data: {
-                    action: 'dst_builder_preview',
-                    nonce: dstBuilder.nonce,
-                    settings: this.settings,
-                    type: 'footer'
                 },
-                success: function(response) {
-                    if (response.success && response.data.html) {
-                        self.injectPreviewHTML('footer', response.data.html);
-                    }
+                error: function() {
+                    $('.preview-frame-wrapper').removeClass('loading');
                 }
             });
-        },
-
-        /**
-         * Inject Preview HTML into iframe
-         */
-        injectPreviewHTML: function(type, html) {
-            const iframe = document.getElementById('preview-frame');
-            if (!iframe || !iframe.contentDocument) return;
-
-            try {
-                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-
-                if (type === 'header') {
-                    // Replace header content
-                    const header = iframeDoc.querySelector('.dst-builder-header');
-                    if (header) {
-                        header.outerHTML = html;
-                    } else {
-                        // Try to find body and prepend
-                        const body = iframeDoc.body;
-                        if (body && html) {
-                            body.insertAdjacentHTML('afterbegin', html);
-                        }
-                    }
-                } else {
-                    // Replace footer content
-                    const footer = iframeDoc.querySelector('.dst-builder-footer');
-                    if (footer) {
-                        footer.outerHTML = html;
-                    } else {
-                        // Try to find body and append
-                        const body = iframeDoc.body;
-                        if (body && html) {
-                            body.insertAdjacentHTML('beforeend', html);
-                        }
-                    }
-                }
-            } catch (e) {
-                console.log('Live preview injection failed:', e);
-                // Fallback to full refresh
-                this.refreshPreview();
-            }
         },
 
         /**
