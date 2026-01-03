@@ -11,9 +11,7 @@
     background: #fff;
 }
 
-.dst-builder-header.has-shadow {
-    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-}
+/* Shadow is now applied via inline styles */
 
 .dst-builder-header.is-sticky {
     position: sticky;

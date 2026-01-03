@@ -1149,42 +1149,33 @@
             this.loadGlobalSettingsValues('header');
             this.loadGlobalSettingsValues('footer');
 
+            // Helper to update settings
+            const updateSetting = (target, key, value) => {
+                if (!self.settings[target].settings) {
+                    self.settings[target].settings = {};
+                }
+                self.settings[target].settings[key] = value;
+                self.markDirty();
+            };
+
             // Width option buttons
             $('.width-option').on('click', function() {
                 const target = $(this).data('target');
                 const width = $(this).data('width');
-
-                // Update active state
                 $(`.width-option[data-target="${target}"]`).removeClass('active');
                 $(this).addClass('active');
-
-                // Update settings
-                if (!self.settings[target].settings) {
-                    self.settings[target].settings = {};
-                }
-
-                self.settings[target].settings.width_type = width;
-
-                // Show/hide container width input
+                updateSetting(target, 'width_type', width);
                 if (width === 'contained') {
                     $(`#${target}-container-width-row`).removeClass('hidden');
                 } else {
                     $(`#${target}-container-width-row`).addClass('hidden');
                 }
-
-                self.markDirty();
             });
 
             // Container width input
-            $('#header-container-width, #footer-container-width').on('change', function() {
+            $('#header-container-width, #footer-container-width').on('change input', function() {
                 const target = $(this).attr('id').replace('-container-width', '');
-                const value = parseInt($(this).val()) || 1200;
-
-                if (!self.settings[target].settings) {
-                    self.settings[target].settings = {};
-                }
-                self.settings[target].settings.container_width = value;
-                self.markDirty();
+                updateSetting(target, 'container_width', parseInt($(this).val()) || 1200);
             });
 
             // Enabled toggles
@@ -1194,93 +1185,92 @@
                 self.markDirty();
             });
 
-            // Shadow toggle (header only)
-            $('#header-shadow').on('change', function() {
-                if (!self.settings.header.settings) {
-                    self.settings.header.settings = {};
-                }
-                self.settings.header.settings.shadow = $(this).is(':checked');
-                self.markDirty();
-            });
-
             // Sticky toggle (header only)
             $('#header-sticky').on('change', function() {
-                if (!self.settings.header.settings) {
-                    self.settings.header.settings = {};
-                }
-                self.settings.header.settings.sticky = $(this).is(':checked');
-                self.markDirty();
+                updateSetting('header', 'sticky', $(this).is(':checked'));
             });
 
             // Background color inputs
             $('#header-bg-color, #footer-bg-color').on('input change', function() {
                 const target = $(this).attr('id').includes('header') ? 'header' : 'footer';
                 const value = $(this).val();
-
-                if (!self.settings[target].settings) {
-                    self.settings[target].settings = {};
-                }
-                self.settings[target].settings.bg_color = value;
                 $(`#${target}-bg-color-text`).val(value);
-                self.markDirty();
+                updateSetting(target, 'bg_color', value);
             });
 
             $('#header-bg-color-text, #footer-bg-color-text').on('input change', function() {
                 const target = $(this).attr('id').includes('header') ? 'header' : 'footer';
                 const value = $(this).val();
-
-                if (!self.settings[target].settings) {
-                    self.settings[target].settings = {};
+                if (/^#[0-9A-Fa-f]{6}$/.test(value) || /^rgba?\(/.test(value)) {
+                    $(`#${target}-bg-color`).val(value.startsWith('#') ? value : '#ffffff');
+                    updateSetting(target, 'bg_color', value);
                 }
-                self.settings[target].settings.bg_color = value;
-                $(`#${target}-bg-color`).val(value);
-                self.markDirty();
             });
 
-            // Border toggles
-            $('#header-border, #footer-border').on('change', function() {
+            // Shadow enabled toggle (header only)
+            $('#header-shadow-enabled').on('change', function() {
+                const isChecked = $(this).is(':checked');
+                updateSetting('header', 'shadow_enabled', isChecked);
+                if (isChecked) {
+                    $('#header-shadow-settings').removeClass('hidden');
+                } else {
+                    $('#header-shadow-settings').addClass('hidden');
+                }
+            });
+
+            // Shadow color
+            $('#header-shadow-color').on('input change', function() {
+                $('#header-shadow-color-text').val($(this).val());
+            });
+
+            $('#header-shadow-color-text').on('input change', function() {
+                const value = $(this).val();
+                updateSetting('header', 'shadow_color', value);
+            });
+
+            // Shadow values
+            $('#header-shadow-x, #header-shadow-y, #header-shadow-blur, #header-shadow-spread').on('input change', function() {
+                const prop = $(this).attr('id').replace('header-shadow-', 'shadow_');
+                updateSetting('header', prop, parseInt($(this).val()) || 0);
+            });
+
+            // Border enabled toggles
+            $('#header-border-enabled, #footer-border-enabled').on('change', function() {
                 const target = $(this).attr('id').includes('header') ? 'header' : 'footer';
                 const isChecked = $(this).is(':checked');
-                const borderKey = target === 'header' ? 'border_bottom' : 'border_top';
-
-                if (!self.settings[target].settings) {
-                    self.settings[target].settings = {};
-                }
-                self.settings[target].settings[borderKey] = isChecked;
-
-                // Show/hide border color settings
+                updateSetting(target, 'border_enabled', isChecked);
                 if (isChecked) {
                     $(`#${target}-border-settings`).removeClass('hidden');
                 } else {
                     $(`#${target}-border-settings`).addClass('hidden');
                 }
-
-                self.markDirty();
             });
 
             // Border color inputs
             $('#header-border-color, #footer-border-color').on('input change', function() {
                 const target = $(this).attr('id').includes('header') ? 'header' : 'footer';
                 const value = $(this).val();
-
-                if (!self.settings[target].settings) {
-                    self.settings[target].settings = {};
-                }
-                self.settings[target].settings.border_color = value;
                 $(`#${target}-border-color-text`).val(value);
-                self.markDirty();
+                updateSetting(target, 'border_color', value);
             });
 
             $('#header-border-color-text, #footer-border-color-text').on('input change', function() {
                 const target = $(this).attr('id').includes('header') ? 'header' : 'footer';
                 const value = $(this).val();
-
-                if (!self.settings[target].settings) {
-                    self.settings[target].settings = {};
-                }
-                self.settings[target].settings.border_color = value;
                 $(`#${target}-border-color`).val(value);
-                self.markDirty();
+                updateSetting(target, 'border_color', value);
+            });
+
+            // Border width
+            $('#header-border-width, #footer-border-width').on('input change', function() {
+                const target = $(this).attr('id').includes('header') ? 'header' : 'footer';
+                updateSetting(target, 'border_width', parseInt($(this).val()) || 1);
+            });
+
+            // Border style
+            $('#header-border-style, #footer-border-style').on('change', function() {
+                const target = $(this).attr('id').includes('header') ? 'header' : 'footer';
+                updateSetting(target, 'border_style', $(this).val());
             });
         },
 
@@ -1301,35 +1291,44 @@
 
             // Container width
             $(`#${type}-container-width`).val(settings.container_width || 1200);
-
-            // Show/hide container width input
             if (widthType !== 'contained') {
                 $(`#${type}-container-width-row`).addClass('hidden');
             }
 
             // Background color
             const bgColor = settings.bg_color || (type === 'header' ? '#ffffff' : '#1f2937');
-            $(`#${type}-bg-color`).val(bgColor);
+            $(`#${type}-bg-color`).val(bgColor.startsWith('#') ? bgColor : '#ffffff');
             $(`#${type}-bg-color-text`).val(bgColor);
-
-            // Border
-            const borderKey = type === 'header' ? 'border_bottom' : 'border_top';
-            const hasBorder = settings[borderKey] === true;
-            $(`#${type}-border`).prop('checked', hasBorder);
-            if (hasBorder) {
-                $(`#${type}-border-settings`).removeClass('hidden');
-            }
-
-            // Border color
-            const borderColor = settings.border_color || '#e5e7eb';
-            $(`#${type}-border-color`).val(borderColor);
-            $(`#${type}-border-color-text`).val(borderColor);
 
             // Header-specific settings
             if (type === 'header') {
-                $('#header-shadow').prop('checked', settings.shadow !== false);
+                // Sticky
                 $('#header-sticky').prop('checked', settings.sticky === true);
+
+                // Shadow
+                const shadowEnabled = settings.shadow_enabled !== false;
+                $('#header-shadow-enabled').prop('checked', shadowEnabled);
+                if (!shadowEnabled) {
+                    $('#header-shadow-settings').addClass('hidden');
+                }
+                $('#header-shadow-color-text').val(settings.shadow_color || 'rgba(0,0,0,0.08)');
+                $('#header-shadow-x').val(settings.shadow_x ?? 0);
+                $('#header-shadow-y').val(settings.shadow_y ?? 2);
+                $('#header-shadow-blur').val(settings.shadow_blur ?? 10);
+                $('#header-shadow-spread').val(settings.shadow_spread ?? 0);
             }
+
+            // Border
+            const borderEnabled = settings.border_enabled === true;
+            $(`#${type}-border-enabled`).prop('checked', borderEnabled);
+            if (borderEnabled) {
+                $(`#${type}-border-settings`).removeClass('hidden');
+            }
+            const borderColor = settings.border_color || (type === 'header' ? '#e5e7eb' : '#374151');
+            $(`#${type}-border-color`).val(borderColor);
+            $(`#${type}-border-color-text`).val(borderColor);
+            $(`#${type}-border-width`).val(settings.border_width || 1);
+            $(`#${type}-border-style`).val(settings.border_style || 'solid');
         },
 
         /**

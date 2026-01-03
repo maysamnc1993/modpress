@@ -73,12 +73,18 @@ class DST_Header_Footer_Builder {
                 'settings' => [
                     'width_type' => 'contained',
                     'container_width' => 1200,
-                    'shadow' => true,
-                    'sticky' => false,
                     'bg_color' => '#ffffff',
-                    'border_bottom' => false,
+                    'sticky' => false,
+                    'shadow_enabled' => true,
+                    'shadow_color' => 'rgba(0,0,0,0.08)',
+                    'shadow_x' => 0,
+                    'shadow_y' => 2,
+                    'shadow_blur' => 10,
+                    'shadow_spread' => 0,
+                    'border_enabled' => false,
                     'border_color' => '#e5e7eb',
-                    'border_width' => 1
+                    'border_width' => 1,
+                    'border_style' => 'solid'
                 ]
             ],
             'footer' => [
@@ -119,9 +125,10 @@ class DST_Header_Footer_Builder {
                     'width_type' => 'contained',
                     'container_width' => 1200,
                     'bg_color' => '#1f2937',
-                    'border_top' => false,
-                    'border_color' => '#e5e7eb',
-                    'border_width' => 1
+                    'border_enabled' => false,
+                    'border_color' => '#374151',
+                    'border_width' => 1,
+                    'border_style' => 'solid'
                 ]
             ]
         ];
@@ -601,33 +608,77 @@ class DST_Header_Footer_Builder {
 
                                 <div class="setting-row">
                                     <label class="setting-toggle">
-                                        <input type="checkbox" id="header-shadow" checked>
-                                        <span class="toggle-slider"></span>
-                                        <span class="toggle-label">سایه زیر هدر</span>
-                                    </label>
-                                </div>
-
-                                <div class="setting-row">
-                                    <label class="setting-toggle">
                                         <input type="checkbox" id="header-sticky">
                                         <span class="toggle-slider"></span>
                                         <span class="toggle-label">هدر چسبان (Sticky)</span>
                                     </label>
                                 </div>
 
+                                <h4 class="settings-section-title">سایه (Box Shadow)</h4>
                                 <div class="setting-row">
                                     <label class="setting-toggle">
-                                        <input type="checkbox" id="header-border">
+                                        <input type="checkbox" id="header-shadow-enabled" checked>
                                         <span class="toggle-slider"></span>
-                                        <span class="toggle-label">خط زیر هدر</span>
+                                        <span class="toggle-label">فعال</span>
                                     </label>
                                 </div>
+                                <div class="shadow-settings" id="header-shadow-settings">
+                                    <div class="setting-row">
+                                        <label>رنگ سایه</label>
+                                        <div class="color-input-wrapper">
+                                            <input type="color" id="header-shadow-color" value="#000000">
+                                            <input type="text" id="header-shadow-color-text" value="rgba(0,0,0,0.08)">
+                                        </div>
+                                    </div>
+                                    <div class="setting-row-grid">
+                                        <div class="setting-mini">
+                                            <label>X</label>
+                                            <input type="number" id="header-shadow-x" value="0" min="-50" max="50">
+                                        </div>
+                                        <div class="setting-mini">
+                                            <label>Y</label>
+                                            <input type="number" id="header-shadow-y" value="2" min="-50" max="50">
+                                        </div>
+                                        <div class="setting-mini">
+                                            <label>Blur</label>
+                                            <input type="number" id="header-shadow-blur" value="10" min="0" max="100">
+                                        </div>
+                                        <div class="setting-mini">
+                                            <label>Spread</label>
+                                            <input type="number" id="header-shadow-spread" value="0" min="-50" max="50">
+                                        </div>
+                                    </div>
+                                </div>
 
-                                <div class="setting-row border-settings hidden" id="header-border-settings">
-                                    <label>رنگ خط</label>
-                                    <div class="color-input-wrapper">
-                                        <input type="color" id="header-border-color" value="#e5e7eb">
-                                        <input type="text" id="header-border-color-text" value="#e5e7eb">
+                                <h4 class="settings-section-title">خط پایین (Border)</h4>
+                                <div class="setting-row">
+                                    <label class="setting-toggle">
+                                        <input type="checkbox" id="header-border-enabled">
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">فعال</span>
+                                    </label>
+                                </div>
+                                <div class="border-settings hidden" id="header-border-settings">
+                                    <div class="setting-row">
+                                        <label>رنگ خط</label>
+                                        <div class="color-input-wrapper">
+                                            <input type="color" id="header-border-color" value="#e5e7eb">
+                                            <input type="text" id="header-border-color-text" value="#e5e7eb">
+                                        </div>
+                                    </div>
+                                    <div class="setting-row-grid cols-2">
+                                        <div class="setting-mini">
+                                            <label>ضخامت (px)</label>
+                                            <input type="number" id="header-border-width" value="1" min="1" max="10">
+                                        </div>
+                                        <div class="setting-mini">
+                                            <label>استایل</label>
+                                            <select id="header-border-style">
+                                                <option value="solid">خط</option>
+                                                <option value="dashed">خط‌چین</option>
+                                                <option value="dotted">نقطه‌چین</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -673,19 +724,35 @@ class DST_Header_Footer_Builder {
                                     </div>
                                 </div>
 
+                                <h4 class="settings-section-title">خط بالا (Border)</h4>
                                 <div class="setting-row">
                                     <label class="setting-toggle">
-                                        <input type="checkbox" id="footer-border">
+                                        <input type="checkbox" id="footer-border-enabled">
                                         <span class="toggle-slider"></span>
-                                        <span class="toggle-label">خط بالای فوتر</span>
+                                        <span class="toggle-label">فعال</span>
                                     </label>
                                 </div>
-
-                                <div class="setting-row border-settings hidden" id="footer-border-settings">
-                                    <label>رنگ خط</label>
-                                    <div class="color-input-wrapper">
-                                        <input type="color" id="footer-border-color" value="#e5e7eb">
-                                        <input type="text" id="footer-border-color-text" value="#e5e7eb">
+                                <div class="border-settings hidden" id="footer-border-settings">
+                                    <div class="setting-row">
+                                        <label>رنگ خط</label>
+                                        <div class="color-input-wrapper">
+                                            <input type="color" id="footer-border-color" value="#374151">
+                                            <input type="text" id="footer-border-color-text" value="#374151">
+                                        </div>
+                                    </div>
+                                    <div class="setting-row-grid cols-2">
+                                        <div class="setting-mini">
+                                            <label>ضخامت (px)</label>
+                                            <input type="number" id="footer-border-width" value="1" min="1" max="10">
+                                        </div>
+                                        <div class="setting-mini">
+                                            <label>استایل</label>
+                                            <select id="footer-border-style">
+                                                <option value="solid">خط</option>
+                                                <option value="dashed">خط‌چین</option>
+                                                <option value="dotted">نقطه‌چین</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -907,9 +974,7 @@ class DST_Header_Footer_Builder {
         if ($width_type === 'full') $classes[] = 'full-width';
         if ($width_type === 'boxed') $classes[] = 'boxed-width';
 
-        if (!empty($settings['shadow'])) $classes[] = 'has-shadow';
         if (!empty($settings['sticky'])) $classes[] = 'is-sticky';
-        if (!empty($settings['border_bottom'])) $classes[] = 'has-border';
 
         // Build inline styles
         $styles = [];
@@ -924,11 +989,22 @@ class DST_Header_Footer_Builder {
             $styles[] = 'background-color:' . esc_attr($settings['bg_color']);
         }
 
+        // Box Shadow
+        if (!empty($settings['shadow_enabled'])) {
+            $shadow_color = $settings['shadow_color'] ?? 'rgba(0,0,0,0.08)';
+            $shadow_x = intval($settings['shadow_x'] ?? 0);
+            $shadow_y = intval($settings['shadow_y'] ?? 2);
+            $shadow_blur = intval($settings['shadow_blur'] ?? 10);
+            $shadow_spread = intval($settings['shadow_spread'] ?? 0);
+            $styles[] = 'box-shadow:' . $shadow_x . 'px ' . $shadow_y . 'px ' . $shadow_blur . 'px ' . $shadow_spread . 'px ' . esc_attr($shadow_color);
+        }
+
         // Border
-        if (!empty($settings['border_bottom'])) {
+        if (!empty($settings['border_enabled'])) {
             $border_color = $settings['border_color'] ?? '#e5e7eb';
-            $border_width = $settings['border_width'] ?? 1;
-            $styles[] = 'border-bottom:' . intval($border_width) . 'px solid ' . esc_attr($border_color);
+            $border_width = intval($settings['border_width'] ?? 1);
+            $border_style = $settings['border_style'] ?? 'solid';
+            $styles[] = 'border-bottom:' . $border_width . 'px ' . esc_attr($border_style) . ' ' . esc_attr($border_color);
         }
 
         $style_attr = !empty($styles) ? ' style="' . implode(';', $styles) . '"' : '';
@@ -958,7 +1034,6 @@ class DST_Header_Footer_Builder {
         $width_type = $settings['width_type'] ?? 'contained';
         if ($width_type === 'full') $classes[] = 'full-width';
         if ($width_type === 'boxed') $classes[] = 'boxed-width';
-        if (!empty($settings['border_top'])) $classes[] = 'has-border';
 
         // Build inline styles
         $styles = [];
@@ -974,10 +1049,11 @@ class DST_Header_Footer_Builder {
         }
 
         // Border
-        if (!empty($settings['border_top'])) {
-            $border_color = $settings['border_color'] ?? '#e5e7eb';
-            $border_width = $settings['border_width'] ?? 1;
-            $styles[] = 'border-top:' . intval($border_width) . 'px solid ' . esc_attr($border_color);
+        if (!empty($settings['border_enabled'])) {
+            $border_color = $settings['border_color'] ?? '#374151';
+            $border_width = intval($settings['border_width'] ?? 1);
+            $border_style = $settings['border_style'] ?? 'solid';
+            $styles[] = 'border-top:' . $border_width . 'px ' . esc_attr($border_style) . ' ' . esc_attr($border_color);
         }
 
         $style_attr = !empty($styles) ? ' style="' . implode(';', $styles) . '"' : '';
