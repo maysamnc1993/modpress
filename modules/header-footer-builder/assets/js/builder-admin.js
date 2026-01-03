@@ -1211,6 +1211,77 @@
                 self.settings.header.settings.sticky = $(this).is(':checked');
                 self.markDirty();
             });
+
+            // Background color inputs
+            $('#header-bg-color, #footer-bg-color').on('input change', function() {
+                const target = $(this).attr('id').includes('header') ? 'header' : 'footer';
+                const value = $(this).val();
+
+                if (!self.settings[target].settings) {
+                    self.settings[target].settings = {};
+                }
+                self.settings[target].settings.bg_color = value;
+                $(`#${target}-bg-color-text`).val(value);
+                self.markDirty();
+            });
+
+            $('#header-bg-color-text, #footer-bg-color-text').on('input change', function() {
+                const target = $(this).attr('id').includes('header') ? 'header' : 'footer';
+                const value = $(this).val();
+
+                if (!self.settings[target].settings) {
+                    self.settings[target].settings = {};
+                }
+                self.settings[target].settings.bg_color = value;
+                $(`#${target}-bg-color`).val(value);
+                self.markDirty();
+            });
+
+            // Border toggles
+            $('#header-border, #footer-border').on('change', function() {
+                const target = $(this).attr('id').includes('header') ? 'header' : 'footer';
+                const isChecked = $(this).is(':checked');
+                const borderKey = target === 'header' ? 'border_bottom' : 'border_top';
+
+                if (!self.settings[target].settings) {
+                    self.settings[target].settings = {};
+                }
+                self.settings[target].settings[borderKey] = isChecked;
+
+                // Show/hide border color settings
+                if (isChecked) {
+                    $(`#${target}-border-settings`).removeClass('hidden');
+                } else {
+                    $(`#${target}-border-settings`).addClass('hidden');
+                }
+
+                self.markDirty();
+            });
+
+            // Border color inputs
+            $('#header-border-color, #footer-border-color').on('input change', function() {
+                const target = $(this).attr('id').includes('header') ? 'header' : 'footer';
+                const value = $(this).val();
+
+                if (!self.settings[target].settings) {
+                    self.settings[target].settings = {};
+                }
+                self.settings[target].settings.border_color = value;
+                $(`#${target}-border-color-text`).val(value);
+                self.markDirty();
+            });
+
+            $('#header-border-color-text, #footer-border-color-text').on('input change', function() {
+                const target = $(this).attr('id').includes('header') ? 'header' : 'footer';
+                const value = $(this).val();
+
+                if (!self.settings[target].settings) {
+                    self.settings[target].settings = {};
+                }
+                self.settings[target].settings.border_color = value;
+                $(`#${target}-border-color`).val(value);
+                self.markDirty();
+            });
         },
 
         /**
@@ -1235,6 +1306,24 @@
             if (widthType !== 'contained') {
                 $(`#${type}-container-width-row`).addClass('hidden');
             }
+
+            // Background color
+            const bgColor = settings.bg_color || (type === 'header' ? '#ffffff' : '#1f2937');
+            $(`#${type}-bg-color`).val(bgColor);
+            $(`#${type}-bg-color-text`).val(bgColor);
+
+            // Border
+            const borderKey = type === 'header' ? 'border_bottom' : 'border_top';
+            const hasBorder = settings[borderKey] === true;
+            $(`#${type}-border`).prop('checked', hasBorder);
+            if (hasBorder) {
+                $(`#${type}-border-settings`).removeClass('hidden');
+            }
+
+            // Border color
+            const borderColor = settings.border_color || '#e5e7eb';
+            $(`#${type}-border-color`).val(borderColor);
+            $(`#${type}-border-color-text`).val(borderColor);
 
             // Header-specific settings
             if (type === 'header') {

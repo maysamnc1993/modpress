@@ -71,9 +71,14 @@ class DST_Header_Footer_Builder {
                 ],
                 'mobile_menu' => 'offcanvas',
                 'settings' => [
-                    'full_width' => false,
+                    'width_type' => 'contained',
+                    'container_width' => 1200,
                     'shadow' => true,
-                    'border_bottom' => false
+                    'sticky' => false,
+                    'bg_color' => '#ffffff',
+                    'border_bottom' => false,
+                    'border_color' => '#e5e7eb',
+                    'border_width' => 1
                 ]
             ],
             'footer' => [
@@ -111,7 +116,12 @@ class DST_Header_Footer_Builder {
                     ]
                 ],
                 'settings' => [
-                    'full_width' => false
+                    'width_type' => 'contained',
+                    'container_width' => 1200,
+                    'bg_color' => '#1f2937',
+                    'border_top' => false,
+                    'border_color' => '#e5e7eb',
+                    'border_width' => 1
                 ]
             ]
         ];
@@ -128,7 +138,11 @@ class DST_Header_Footer_Builder {
                 'category' => 'basic',
                 'settings' => [
                     'max_height' => ['type' => 'number', 'label' => 'حداکثر ارتفاع (px)', 'default' => 50],
+                    'max_width' => ['type' => 'number', 'label' => 'حداکثر عرض (px)', 'default' => 200],
                     'custom_logo' => ['type' => 'image', 'label' => 'لوگوی سفارشی', 'default' => ''],
+                    'show_site_title' => ['type' => 'checkbox', 'label' => 'نمایش نام سایت', 'default' => false],
+                    'title_color' => ['type' => 'color', 'label' => 'رنگ نام سایت', 'default' => '#1e293b'],
+                    'title_size' => ['type' => 'number', 'label' => 'اندازه نام سایت (px)', 'default' => 24],
                 ]
             ],
             'menu' => [
@@ -139,6 +153,11 @@ class DST_Header_Footer_Builder {
                     'menu' => ['type' => 'select', 'label' => 'انتخاب منو', 'options' => 'menus', 'default' => ''],
                     'title' => ['type' => 'text', 'label' => 'عنوان (برای فوتر)', 'default' => ''],
                     'style' => ['type' => 'select', 'label' => 'استایل', 'options' => ['horizontal' => 'افقی', 'vertical' => 'عمودی'], 'default' => 'horizontal'],
+                    'font_size' => ['type' => 'number', 'label' => 'اندازه فونت (px)', 'default' => 14],
+                    'font_weight' => ['type' => 'select', 'label' => 'وزن فونت', 'options' => ['400' => 'معمولی', '500' => 'متوسط', '600' => 'نیمه‌بولد', '700' => 'بولد'], 'default' => '500'],
+                    'text_color' => ['type' => 'color', 'label' => 'رنگ متن', 'default' => '#333333'],
+                    'hover_color' => ['type' => 'color', 'label' => 'رنگ هاور', 'default' => '#2563eb'],
+                    'gap' => ['type' => 'number', 'label' => 'فاصله آیتم‌ها (px)', 'default' => 25],
                 ]
             ],
             'search' => [
@@ -158,7 +177,13 @@ class DST_Header_Footer_Builder {
                     'text' => ['type' => 'text', 'label' => 'متن دکمه', 'default' => 'کلیک کنید'],
                     'url' => ['type' => 'text', 'label' => 'لینک', 'default' => '#'],
                     'target' => ['type' => 'checkbox', 'label' => 'باز شدن در تب جدید', 'default' => false],
-                    'style' => ['type' => 'select', 'label' => 'استایل', 'options' => ['primary' => 'اصلی', 'secondary' => 'ثانویه', 'outline' => 'خط‌دار'], 'default' => 'primary'],
+                    'style' => ['type' => 'select', 'label' => 'استایل', 'options' => ['primary' => 'اصلی', 'secondary' => 'ثانویه', 'outline' => 'خط‌دار', 'custom' => 'سفارشی'], 'default' => 'primary'],
+                    'bg_color' => ['type' => 'color', 'label' => 'رنگ پس‌زمینه', 'default' => '#2563eb'],
+                    'text_color' => ['type' => 'color', 'label' => 'رنگ متن', 'default' => '#ffffff'],
+                    'border_radius' => ['type' => 'number', 'label' => 'گردی گوشه (px)', 'default' => 8],
+                    'font_size' => ['type' => 'number', 'label' => 'اندازه فونت (px)', 'default' => 14],
+                    'padding_x' => ['type' => 'number', 'label' => 'پدینگ افقی (px)', 'default' => 24],
+                    'padding_y' => ['type' => 'number', 'label' => 'پدینگ عمودی (px)', 'default' => 12],
                 ]
             ],
             'text' => [
@@ -567,6 +592,14 @@ class DST_Header_Footer_Builder {
                                 </div>
 
                                 <div class="setting-row">
+                                    <label>رنگ پس‌زمینه</label>
+                                    <div class="color-input-wrapper">
+                                        <input type="color" id="header-bg-color" value="#ffffff">
+                                        <input type="text" id="header-bg-color-text" value="#ffffff">
+                                    </div>
+                                </div>
+
+                                <div class="setting-row">
                                     <label class="setting-toggle">
                                         <input type="checkbox" id="header-shadow" checked>
                                         <span class="toggle-slider"></span>
@@ -580,6 +613,22 @@ class DST_Header_Footer_Builder {
                                         <span class="toggle-slider"></span>
                                         <span class="toggle-label">هدر چسبان (Sticky)</span>
                                     </label>
+                                </div>
+
+                                <div class="setting-row">
+                                    <label class="setting-toggle">
+                                        <input type="checkbox" id="header-border">
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">خط زیر هدر</span>
+                                    </label>
+                                </div>
+
+                                <div class="setting-row border-settings hidden" id="header-border-settings">
+                                    <label>رنگ خط</label>
+                                    <div class="color-input-wrapper">
+                                        <input type="color" id="header-border-color" value="#e5e7eb">
+                                        <input type="text" id="header-border-color-text" value="#e5e7eb">
+                                    </div>
                                 </div>
                             </div>
 
@@ -614,6 +663,30 @@ class DST_Header_Footer_Builder {
                                 <div class="setting-row container-width-value" id="footer-container-width-row">
                                     <label>عرض کانتینر (px)</label>
                                     <input type="number" id="footer-container-width" value="1200" min="960" max="1920" step="10">
+                                </div>
+
+                                <div class="setting-row">
+                                    <label>رنگ پس‌زمینه</label>
+                                    <div class="color-input-wrapper">
+                                        <input type="color" id="footer-bg-color" value="#1f2937">
+                                        <input type="text" id="footer-bg-color-text" value="#1f2937">
+                                    </div>
+                                </div>
+
+                                <div class="setting-row">
+                                    <label class="setting-toggle">
+                                        <input type="checkbox" id="footer-border">
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">خط بالای فوتر</span>
+                                    </label>
+                                </div>
+
+                                <div class="setting-row border-settings hidden" id="footer-border-settings">
+                                    <label>رنگ خط</label>
+                                    <div class="color-input-wrapper">
+                                        <input type="color" id="footer-border-color" value="#e5e7eb">
+                                        <input type="text" id="footer-border-color-text" value="#e5e7eb">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -836,14 +909,31 @@ class DST_Header_Footer_Builder {
 
         if (!empty($settings['shadow'])) $classes[] = 'has-shadow';
         if (!empty($settings['sticky'])) $classes[] = 'is-sticky';
+        if (!empty($settings['border_bottom'])) $classes[] = 'has-border';
+
+        // Build inline styles
+        $styles = [];
 
         // Custom container width
-        $container_style = '';
         if ($width_type === 'contained' && !empty($settings['container_width'])) {
-            $container_style = '--container-width:' . intval($settings['container_width']) . 'px;';
+            $styles[] = '--container-width:' . intval($settings['container_width']) . 'px';
         }
 
-        echo '<header class="' . esc_attr(implode(' ', $classes)) . '"' . ($container_style ? ' style="' . $container_style . '"' : '') . '>';
+        // Background color
+        if (!empty($settings['bg_color'])) {
+            $styles[] = 'background-color:' . esc_attr($settings['bg_color']);
+        }
+
+        // Border
+        if (!empty($settings['border_bottom'])) {
+            $border_color = $settings['border_color'] ?? '#e5e7eb';
+            $border_width = $settings['border_width'] ?? 1;
+            $styles[] = 'border-bottom:' . intval($border_width) . 'px solid ' . esc_attr($border_color);
+        }
+
+        $style_attr = !empty($styles) ? ' style="' . implode(';', $styles) . '"' : '';
+
+        echo '<header class="' . esc_attr(implode(' ', $classes)) . '"' . $style_attr . '>';
 
         foreach ($header['rows'] as $row) {
             $this->render_row($row, 'header');
@@ -868,14 +958,31 @@ class DST_Header_Footer_Builder {
         $width_type = $settings['width_type'] ?? 'contained';
         if ($width_type === 'full') $classes[] = 'full-width';
         if ($width_type === 'boxed') $classes[] = 'boxed-width';
+        if (!empty($settings['border_top'])) $classes[] = 'has-border';
+
+        // Build inline styles
+        $styles = [];
 
         // Custom container width
-        $container_style = '';
         if ($width_type === 'contained' && !empty($settings['container_width'])) {
-            $container_style = '--container-width:' . intval($settings['container_width']) . 'px;';
+            $styles[] = '--container-width:' . intval($settings['container_width']) . 'px';
         }
 
-        echo '<footer class="' . esc_attr(implode(' ', $classes)) . '"' . ($container_style ? ' style="' . $container_style . '"' : '') . '>';
+        // Background color
+        if (!empty($settings['bg_color'])) {
+            $styles[] = 'background-color:' . esc_attr($settings['bg_color']);
+        }
+
+        // Border
+        if (!empty($settings['border_top'])) {
+            $border_color = $settings['border_color'] ?? '#e5e7eb';
+            $border_width = $settings['border_width'] ?? 1;
+            $styles[] = 'border-top:' . intval($border_width) . 'px solid ' . esc_attr($border_color);
+        }
+
+        $style_attr = !empty($styles) ? ' style="' . implode(';', $styles) . '"' : '';
+
+        echo '<footer class="' . esc_attr(implode(' ', $classes)) . '"' . $style_attr . '>';
 
         foreach ($footer['rows'] as $row) {
             $this->render_row($row, 'footer');
@@ -986,15 +1093,24 @@ class DST_Header_Footer_Builder {
     // متدهای رندر المان‌ها
     private function render_logo($settings) {
         $max_height = $settings['max_height'] ?? 50;
+        $max_width = $settings['max_width'] ?? 200;
         $custom_logo = $settings['custom_logo'] ?? '';
+        $show_site_title = !empty($settings['show_site_title']);
+        $title_color = $settings['title_color'] ?? '#1e293b';
+        $title_size = $settings['title_size'] ?? 24;
 
-        echo '<a href="' . esc_url(home_url('/')) . '" class="builder-logo" style="max-height:' . intval($max_height) . 'px">';
+        $logo_style = sprintf('max-height:%dpx;max-width:%dpx;', intval($max_height), intval($max_width));
+
+        echo '<a href="' . esc_url(home_url('/')) . '" class="builder-logo" style="' . $logo_style . '">';
         if ($custom_logo) {
-            echo '<img src="' . esc_url($custom_logo) . '" alt="' . esc_attr(get_bloginfo('name')) . '">';
+            echo '<img src="' . esc_url($custom_logo) . '" alt="' . esc_attr(get_bloginfo('name')) . '" style="max-height:' . intval($max_height) . 'px;max-width:' . intval($max_width) . 'px;">';
         } elseif (has_custom_logo()) {
             the_custom_logo();
-        } else {
-            echo '<span class="site-title">' . esc_html(get_bloginfo('name')) . '</span>';
+        }
+
+        if ($show_site_title || (!$custom_logo && !has_custom_logo())) {
+            $title_style = sprintf('font-size:%dpx;color:%s;', intval($title_size), esc_attr($title_color));
+            echo '<span class="site-title" style="' . $title_style . '">' . esc_html(get_bloginfo('name')) . '</span>';
         }
         echo '</a>';
     }
@@ -1003,6 +1119,23 @@ class DST_Header_Footer_Builder {
         $menu_value = $settings['menu'] ?? '';
         $title = $settings['title'] ?? '';
         $style = $settings['style'] ?? 'horizontal';
+
+        // Custom styles
+        $font_size = $settings['font_size'] ?? 14;
+        $font_weight = $settings['font_weight'] ?? '500';
+        $text_color = $settings['text_color'] ?? '#333333';
+        $hover_color = $settings['hover_color'] ?? '#2563eb';
+        $gap = $settings['gap'] ?? 25;
+
+        // CSS variables for styling
+        $css_vars = sprintf(
+            '--menu-font-size:%dpx;--menu-font-weight:%s;--menu-color:%s;--menu-hover:%s;--menu-gap:%dpx;',
+            intval($font_size),
+            esc_attr($font_weight),
+            esc_attr($text_color),
+            esc_attr($hover_color),
+            intval($gap)
+        );
 
         if ($title) {
             echo '<h4 class="menu-title">' . esc_html($title) . '</h4>';
@@ -1015,6 +1148,7 @@ class DST_Header_Footer_Builder {
                     'theme_location' => 'primary',
                     'container' => 'nav',
                     'container_class' => 'builder-nav style-' . $style,
+                    'container_attr' => ['style' => $css_vars],
                     'fallback_cb' => false,
                 ]);
             }
@@ -1024,6 +1158,7 @@ class DST_Header_Footer_Builder {
         $menu_args = [
             'container' => 'nav',
             'container_class' => 'builder-nav style-' . $style,
+            'container_attr' => ['style' => $css_vars],
             'fallback_cb' => false,
             'echo' => true,
         ];
@@ -1076,7 +1211,29 @@ class DST_Header_Footer_Builder {
         $target = !empty($settings['target']) ? ' target="_blank"' : '';
         $style = $settings['style'] ?? 'primary';
 
-        echo '<a href="' . esc_url($url) . '" class="builder-button style-' . esc_attr($style) . '"' . $target . '>' . esc_html($text) . '</a>';
+        // Custom styles
+        $inline_style = '';
+        if ($style === 'custom') {
+            $bg_color = $settings['bg_color'] ?? '#2563eb';
+            $text_color = $settings['text_color'] ?? '#ffffff';
+            $border_radius = $settings['border_radius'] ?? 8;
+            $font_size = $settings['font_size'] ?? 14;
+            $padding_x = $settings['padding_x'] ?? 24;
+            $padding_y = $settings['padding_y'] ?? 12;
+
+            $inline_style = sprintf(
+                'background:%s;color:%s;border-radius:%dpx;font-size:%dpx;padding:%dpx %dpx;',
+                esc_attr($bg_color),
+                esc_attr($text_color),
+                intval($border_radius),
+                intval($font_size),
+                intval($padding_y),
+                intval($padding_x)
+            );
+        }
+
+        $style_attr = $inline_style ? ' style="' . $inline_style . '"' : '';
+        echo '<a href="' . esc_url($url) . '" class="builder-button style-' . esc_attr($style) . '"' . $target . $style_attr . '>' . esc_html($text) . '</a>';
     }
 
     private function render_text($settings) {

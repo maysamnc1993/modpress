@@ -190,7 +190,7 @@ body.admin-bar .dst-builder-header.is-sticky {
 .builder-nav.style-horizontal ul {
     display: flex;
     align-items: center;
-    gap: 25px;
+    gap: var(--menu-gap, 25px);
     list-style: none;
     margin: 0;
     padding: 0;
@@ -204,14 +204,15 @@ body.admin-bar .dst-builder-header.is-sticky {
     display: inline-flex;
     align-items: center;
     padding: 10px 0;
-    color: inherit;
+    color: var(--menu-color, inherit);
     text-decoration: none;
-    font-weight: 500;
+    font-weight: var(--menu-font-weight, 500);
+    font-size: var(--menu-font-size, 14px);
     transition: color 0.2s;
 }
 
 .builder-nav.style-horizontal ul li a:hover {
-    color: var(--primary-color, #2563eb);
+    color: var(--menu-hover, #2563eb);
 }
 
 /* Dropdown */
@@ -252,21 +253,24 @@ body.admin-bar .dst-builder-header.is-sticky {
 .builder-nav.style-vertical ul {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: var(--menu-gap, 10px);
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
 .builder-nav.style-vertical ul li a {
-    color: inherit;
+    color: var(--menu-color, inherit);
     text-decoration: none;
+    font-size: var(--menu-font-size, 14px);
+    font-weight: var(--menu-font-weight, 400);
     opacity: 0.8;
-    transition: opacity 0.2s;
+    transition: all 0.2s;
 }
 
 .builder-nav.style-vertical ul li a:hover {
     opacity: 1;
+    color: var(--menu-hover, inherit);
 }
 
 .menu-title {
