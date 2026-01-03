@@ -14,6 +14,8 @@
         selectedElement: null,
         selectedRow: null,
         isDirty: false,
+        previewTimeout: null,
+        previewDebounceTime: 500,
 
         /**
          * Initialize
@@ -113,6 +115,14 @@
                 if (self.isDirty) {
                     return 'تغییرات ذخیره نشده دارید. آیا می‌خواهید صفحه را ترک کنید؟';
                 }
+            });
+
+            // Wait for iframe to load, then update preview
+            $('#preview-frame').on('load', function() {
+                // Give it a moment to fully render
+                setTimeout(function() {
+                    self.updateLivePreview();
+                }, 500);
             });
         },
 
@@ -1004,6 +1014,110 @@
         markDirty: function() {
             this.isDirty = true;
             $('#save-builder span').text('ذخیره تغییرات *');
+
+            // Trigger live preview with debounce
+            this.triggerLivePreview();
+        },
+
+        /**
+         * Trigger Live Preview (debounced)
+         */
+        triggerLivePreview: function() {
+            const self = this;
+
+            // Clear previous timeout
+            if (this.previewTimeout) {
+                clearTimeout(this.previewTimeout);
+            }
+
+            // Set new timeout
+            this.previewTimeout = setTimeout(function() {
+                self.updateLivePreview();
+            }, this.previewDebounceTime);
+        },
+
+        /**
+         * Update Live Preview
+         */
+        updateLivePreview: function() {
+            const self = this;
+            const iframe = document.getElementById('preview-frame');
+            if (!iframe) return;
+
+            // Send both header and footer for preview
+            $.ajax({
+                url: dstBuilder.ajaxUrl,
+                type: 'POST',
+                data: {
+                    action: 'dst_builder_preview',
+                    nonce: dstBuilder.nonce,
+                    settings: this.settings,
+                    type: 'header'
+                },
+                success: function(response) {
+                    if (response.success && response.data.html) {
+                        self.injectPreviewHTML('header', response.data.html);
+                    }
+                }
+            });
+
+            $.ajax({
+                url: dstBuilder.ajaxUrl,
+                type: 'POST',
+                data: {
+                    action: 'dst_builder_preview',
+                    nonce: dstBuilder.nonce,
+                    settings: this.settings,
+                    type: 'footer'
+                },
+                success: function(response) {
+                    if (response.success && response.data.html) {
+                        self.injectPreviewHTML('footer', response.data.html);
+                    }
+                }
+            });
+        },
+
+        /**
+         * Inject Preview HTML into iframe
+         */
+        injectPreviewHTML: function(type, html) {
+            const iframe = document.getElementById('preview-frame');
+            if (!iframe || !iframe.contentDocument) return;
+
+            try {
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+
+                if (type === 'header') {
+                    // Replace header content
+                    const header = iframeDoc.querySelector('.dst-builder-header');
+                    if (header) {
+                        header.outerHTML = html;
+                    } else {
+                        // Try to find body and prepend
+                        const body = iframeDoc.body;
+                        if (body && html) {
+                            body.insertAdjacentHTML('afterbegin', html);
+                        }
+                    }
+                } else {
+                    // Replace footer content
+                    const footer = iframeDoc.querySelector('.dst-builder-footer');
+                    if (footer) {
+                        footer.outerHTML = html;
+                    } else {
+                        // Try to find body and append
+                        const body = iframeDoc.body;
+                        if (body && html) {
+                            body.insertAdjacentHTML('beforeend', html);
+                        }
+                    }
+                }
+            } catch (e) {
+                console.log('Live preview injection failed:', e);
+                // Fallback to full refresh
+                this.refreshPreview();
+            }
         },
 
         /**

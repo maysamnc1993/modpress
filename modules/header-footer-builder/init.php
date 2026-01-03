@@ -437,6 +437,44 @@ class DST_Header_Footer_Builder {
     }
 
     /**
+     * پیش‌نمایش زنده با AJAX
+     */
+    public function ajax_preview() {
+        check_ajax_referer('dst_builder_nonce', 'nonce');
+
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error('Permission denied');
+        }
+
+        $settings = isset($_POST['settings']) ? $_POST['settings'] : [];
+        $type = isset($_POST['type']) ? sanitize_text_field($_POST['type']) : 'header';
+
+        // پاکسازی داده‌ها
+        $preview_settings = $this->sanitize_settings($settings);
+
+        // ذخیره موقت تنظیمات برای رندر
+        $original_settings = $this->settings;
+        $this->settings = $preview_settings;
+
+        // رندر HTML
+        ob_start();
+        if ($type === 'header') {
+            $this->render_header();
+        } else {
+            $this->render_footer();
+        }
+        $html = ob_get_clean();
+
+        // بازگرداندن تنظیمات اصلی
+        $this->settings = $original_settings;
+
+        wp_send_json_success([
+            'html' => $html,
+            'type' => $type
+        ]);
+    }
+
+    /**
      * پاکسازی تنظیمات
      */
     private function sanitize_settings($settings) {

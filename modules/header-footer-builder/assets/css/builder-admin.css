@@ -171,6 +171,7 @@
     display: flex;
     flex: 1;
     overflow: hidden;
+    min-height: 0; /* Critical for flex scroll */
 }
 
 /* ============================================
@@ -184,12 +185,15 @@
     flex-direction: column;
     flex-shrink: 0;
     overflow: hidden;
+    max-height: 100%;
 }
 
 .elements-panel {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    flex: 1;
+    min-height: 0; /* Critical for flex scroll */
+    overflow: hidden;
 }
 
 .panel-header {
@@ -221,7 +225,9 @@
 .elements-list {
     flex: 1;
     overflow-y: auto;
+    overflow-x: hidden;
     padding: 15px;
+    min-height: 0; /* Critical for flex scroll */
 }
 
 .element-category {
@@ -670,6 +676,8 @@
     flex-direction: column;
     flex-shrink: 0;
     transition: all 0.3s;
+    max-height: 100%;
+    overflow: hidden;
 }
 
 .builder-settings-panel.collapsed {
@@ -684,6 +692,7 @@
     justify-content: space-between;
     padding: 15px 20px;
     border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
 }
 
 .settings-panel-header h3 {
@@ -715,7 +724,9 @@
 .settings-panel-body {
     flex: 1;
     overflow-y: auto;
+    overflow-x: hidden;
     padding: 20px;
+    min-height: 0; /* Critical for flex scroll */
 }
 
 .empty-settings {
@@ -1154,12 +1165,19 @@ body.rtl .modal-close {
 .global-settings-panel {
     border-bottom: 1px solid var(--border);
     background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    flex-shrink: 0;
+    max-height: 320px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 .global-settings-panel .panel-header {
     padding: 12px 15px;
     background: rgba(37, 99, 235, 0.05);
     border-bottom: 1px solid rgba(37, 99, 235, 0.1);
+    flex-shrink: 0;
+    cursor: pointer;
 }
 
 .global-settings-panel .panel-header h3 {
@@ -1173,6 +1191,9 @@ body.rtl .modal-close {
 
 .global-settings-content {
     padding: 15px;
+    overflow-y: auto;
+    flex: 1;
+    min-height: 0;
 }
 
 .global-settings-group {
