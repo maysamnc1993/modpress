@@ -47,12 +47,47 @@ class DST_Header_Footer_Manager {
         $this->module_path = $module['path'];
         $this->module_url  = $module['url'];
         $this->settings    = get_option($this->option_name, $this->get_default_settings());
-        
+
+        // چک حالت پیش‌نمایش
+        $this->handle_preview_mode();
+
         // هوک‌ها
         add_action('admin_menu', [$this, 'add_admin_menu']);
         add_action('admin_enqueue_scripts', [$this, 'admin_assets']);
         add_action('wp_enqueue_scripts', [$this, 'frontend_assets']);
         add_action('admin_init', [$this, 'handle_save_settings']);
+    }
+
+    /**
+     * هندل کردن حالت پیش‌نمایش
+     */
+    private function handle_preview_mode() {
+        if (!isset($_GET['dst_preview'])) {
+            return;
+        }
+
+        // فقط ادمین‌ها می‌تونن پیش‌نمایش ببینن
+        if (!current_user_can('manage_options')) {
+            return;
+        }
+
+        // اگر هدر پیش‌نمایش تنظیم شده
+        if (isset($_GET['preview_header'])) {
+            $preview_header = sanitize_text_field($_GET['preview_header']);
+            $headers = $this->get_available_headers();
+            if (isset($headers[$preview_header])) {
+                $this->settings['active_header'] = $preview_header;
+            }
+        }
+
+        // اگر فوتر پیش‌نمایش تنظیم شده
+        if (isset($_GET['preview_footer'])) {
+            $preview_footer = sanitize_text_field($_GET['preview_footer']);
+            $footers = $this->get_available_footers();
+            if (isset($footers[$preview_footer])) {
+                $this->settings['active_footer'] = $preview_footer;
+            }
+        }
     }
     
     /**
@@ -365,17 +400,56 @@ class DST_Header_Footer_Manager {
         $footers = $this->get_available_footers();
         $active_header = $this->settings['active_header'];
         $active_footer = $this->settings['active_footer'];
+        $preview_url = add_query_arg('dst_preview', '1', home_url('/'));
         ?>
         <div class="wrap dst-hf-wrap">
-            <h1>🎨 مدیریت هدر و فوتر</h1>
-            <p class="description">هدر و فوتر مورد نظر خود را انتخاب کنید</p>
-            
-            <form method="post" action="">
-                <?php wp_nonce_field('dst_hf_settings_nonce'); ?>
+            <div class="dst-hf-header">
+                <div class="header-title">
+                    <h1>
+                        <i data-lucide="layout"></i>
+                        مدیریت هدر و فوتر
+                    </h1>
+                    <p class="description">طراحی هدر و فوتر سایت را انتخاب و شخصی‌سازی کنید</p>
+                </div>
+                <div class="header-actions">
+                    <a href="<?php echo esc_url(home_url('/')); ?>" target="_blank" class="dst-btn-secondary">
+                        <i data-lucide="external-link"></i>
+                        مشاهده سایت
+                    </a>
+                </div>
+            </div>
+
+            <div class="dst-hf-layout">
+                <!-- ستون اصلی -->
+                <div class="dst-hf-main">
+                    <form method="post" action="" id="dst-hf-form">
+                        <?php wp_nonce_field('dst_hf_settings_nonce'); ?>
                 
-                <!-- بخش هدر -->
-                <div class="dst-hf-section">
-                    <h2>📌 انتخاب هدر</h2>
+                        <!-- تب‌ها -->
+                        <div class="dst-hf-tabs">
+                            <button type="button" class="dst-hf-tab active" data-tab="headers">
+                                <i data-lucide="layout-template"></i>
+                                هدرها
+                                <span class="tab-count"><?php echo count($headers); ?></span>
+                            </button>
+                            <button type="button" class="dst-hf-tab" data-tab="footers">
+                                <i data-lucide="layout-dashboard"></i>
+                                فوترها
+                                <span class="tab-count"><?php echo count($footers); ?></span>
+                            </button>
+                        </div>
+
+                        <!-- بخش هدر -->
+                        <div class="dst-hf-section dst-hf-tab-content active" data-tab="headers">
+                            <div class="section-header">
+                                <h2>
+                                    <i data-lucide="layout-template"></i>
+                                    انتخاب هدر
+                                </h2>
+                                <span class="current-selection">
+                                    فعال: <strong><?php echo esc_html($headers[$active_header]['title'] ?? $active_header); ?></strong>
+                                </span>
+                            </div>
                     
                     <?php if (empty($headers)): ?>
                         <div class="dst-hf-empty">
@@ -444,9 +518,17 @@ class DST_Header_Footer_Manager {
                     <?php endif; ?>
                 </div>
                 
-                <!-- بخش فوتر -->
-                <div class="dst-hf-section">
-                    <h2>📌 انتخاب فوتر</h2>
+                        <!-- بخش فوتر -->
+                        <div class="dst-hf-section dst-hf-tab-content" data-tab="footers">
+                            <div class="section-header">
+                                <h2>
+                                    <i data-lucide="layout-dashboard"></i>
+                                    انتخاب فوتر
+                                </h2>
+                                <span class="current-selection">
+                                    فعال: <strong><?php echo esc_html($footers[$active_footer]['title'] ?? $active_footer); ?></strong>
+                                </span>
+                            </div>
                     
                     <?php if (empty($footers)): ?>
                         <div class="dst-hf-empty">
@@ -515,35 +597,46 @@ class DST_Header_Footer_Manager {
                     <?php endif; ?>
                 </div>
                 
-                <p class="submit">
-                    <button type="submit" name="dst_hf_save" class="button button-primary button-large">
-                        💾 ذخیره تنظیمات
-                    </button>
-                </p>
-            </form>
-            
-            <!-- راهنما -->
-            <div class="dst-hf-help">
-                <h3>📚 راهنمای افزودن هدر/فوتر جدید</h3>
-                <p>برای افزودن هدر یا فوتر جدید، یک پوشه با ساختار زیر ایجاد کنید:</p>
-                <pre>
-templates/headers/my-header/
-├── config.json      ← تنظیمات (اختیاری)
-├── template.php     ← کد HTML (اجباری)
-├── style.css        ← استایل (اختیاری)
-├── script.js        ← جاوااسکریپت (اختیاری)
-└── screenshot.png   ← تصویر پیش‌نمایش (اختیاری)
-                </pre>
-                
-                <p><strong>نمونه config.json:</strong></p>
-                <pre>
-{
-    "name": "my-header",
-    "title": "هدر سفارشی من",
-    "description": "یک هدر زیبا با منوی همبرگری",
-    "version": "1.0.0"
-}
-                </pre>
+                        <div class="dst-hf-submit">
+                            <button type="submit" name="dst_hf_save" class="dst-btn-primary">
+                                <i data-lucide="save"></i>
+                                ذخیره تنظیمات
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- ستون پیش‌نمایش -->
+                <div class="dst-hf-preview">
+                    <div class="preview-header">
+                        <h3>
+                            <i data-lucide="monitor"></i>
+                            پیش‌نمایش زنده
+                        </h3>
+                        <div class="preview-actions">
+                            <button type="button" class="preview-device active" data-device="desktop" title="دسکتاپ">
+                                <i data-lucide="monitor"></i>
+                            </button>
+                            <button type="button" class="preview-device" data-device="tablet" title="تبلت">
+                                <i data-lucide="tablet"></i>
+                            </button>
+                            <button type="button" class="preview-device" data-device="mobile" title="موبایل">
+                                <i data-lucide="smartphone"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="preview-frame-wrapper" data-device="desktop">
+                        <iframe id="dst-preview-iframe" src="<?php echo esc_url($preview_url); ?>"></iframe>
+                        <div class="preview-loading">
+                            <i data-lucide="loader-2" class="spin"></i>
+                            <span>در حال بارگذاری...</span>
+                        </div>
+                    </div>
+                    <div class="preview-info">
+                        <i data-lucide="info"></i>
+                        با انتخاب هدر یا فوتر، پیش‌نمایش به‌روز می‌شود
+                    </div>
+                </div>
             </div>
 
             <!-- لایت‌باکس -->
@@ -566,6 +659,53 @@ templates/headers/my-header/
 
         <script>
         jQuery(document).ready(function($) {
+            // Initialize Lucide icons
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+
+            // === تب‌ها ===
+            $('.dst-hf-tab').on('click', function() {
+                var tab = $(this).data('tab');
+
+                // آپدیت تب‌ها
+                $('.dst-hf-tab').removeClass('active');
+                $(this).addClass('active');
+
+                // نمایش محتوای تب
+                $('.dst-hf-tab-content').removeClass('active');
+                $('.dst-hf-tab-content[data-tab="' + tab + '"]').addClass('active');
+            });
+
+            // === پیش‌نمایش ===
+            var $iframe = $('#dst-preview-iframe');
+            var $previewWrapper = $('.preview-frame-wrapper');
+            var $loading = $('.preview-loading');
+            var previewTimeout;
+
+            // آماده شدن iframe
+            $iframe.on('load', function() {
+                $loading.removeClass('show');
+            });
+
+            // تغییر دستگاه
+            $('.preview-device').on('click', function() {
+                var device = $(this).data('device');
+                $('.preview-device').removeClass('active');
+                $(this).addClass('active');
+                $previewWrapper.attr('data-device', device);
+            });
+
+            // تابع آپدیت پیش‌نمایش
+            function updatePreview() {
+                $loading.addClass('show');
+                var header = $('input[name="active_header"]:checked').val();
+                var footer = $('input[name="active_footer"]:checked').val();
+                var baseUrl = '<?php echo esc_js(home_url('/')); ?>';
+                var previewUrl = baseUrl + '?dst_preview=1&preview_header=' + header + '&preview_footer=' + footer + '&t=' + Date.now();
+                $iframe.attr('src', previewUrl);
+            }
+
             // کلیک روی کارت
             $('.dst-hf-card').on('click', function(e) {
                 // اگر روی دکمه زوم کلیک شده، کارت رو انتخاب نکن
@@ -599,6 +739,10 @@ templates/headers/my-header/
                 // نمایش/مخفی کردن تنظیمات
                 $section.find('.dst-hf-template-settings').hide();
                 $section.find('[data-template="header-' + templateName + '"]').show();
+
+                // آپدیت پیش‌نمایش
+                clearTimeout(previewTimeout);
+                previewTimeout = setTimeout(updatePreview, 300);
             });
 
             $('input[name="active_footer"]').on('change', function() {
@@ -613,6 +757,10 @@ templates/headers/my-header/
                 // نمایش/مخفی کردن تنظیمات
                 $section.find('.dst-hf-template-settings').hide();
                 $section.find('[data-template="footer-' + templateName + '"]').show();
+
+                // آپدیت پیش‌نمایش
+                clearTimeout(previewTimeout);
+                previewTimeout = setTimeout(updatePreview, 300);
             });
 
             // لایت‌باکس
