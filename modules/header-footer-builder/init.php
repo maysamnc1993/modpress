@@ -26,20 +26,16 @@ class DST_Header_Footer_Builder {
      * سازنده
      */
     public function __construct() {
-        $module = dst_get_module('header-footer-builder');
-        if (!$module) {
-            return;
-        }
-
-        $this->module_path = $module['path'];
-        $this->module_url  = $module['url'];
+        // تنظیم مسیرها مستقیم
+        $this->module_path = dirname(__FILE__);
+        $this->module_url  = get_template_directory_uri() . '/modules/header-footer-builder';
         $this->settings    = get_option($this->option_name, $this->get_default_settings());
 
         // ثبت المان‌ها
         $this->register_elements();
 
-        // هوک‌ها
-        add_action('admin_menu', [$this, 'add_admin_menu']);
+        // هوک‌ها - زیرمنوی تنظیمات وب‌سایت
+        add_action('admin_menu', [$this, 'add_admin_menu'], 20);
         add_action('admin_enqueue_scripts', [$this, 'admin_assets']);
         add_action('wp_enqueue_scripts', [$this, 'frontend_assets']);
         add_action('wp_ajax_dst_builder_save', [$this, 'ajax_save']);
@@ -305,14 +301,14 @@ class DST_Header_Footer_Builder {
      * اضافه کردن منو
      */
     public function add_admin_menu() {
-        add_menu_page(
+        // زیرمنوی تنظیمات وب‌سایت
+        add_submenu_page(
+            'dst-website-settings',
             'سازنده هدر و فوتر',
             'سازنده هدر/فوتر',
             'manage_options',
             'dst-hf-builder',
-            [$this, 'render_admin_page'],
-            'dashicons-editor-kitchensink',
-            998
+            [$this, 'render_admin_page']
         );
     }
 
@@ -320,7 +316,8 @@ class DST_Header_Footer_Builder {
      * فایل‌های ادمین
      */
     public function admin_assets($hook) {
-        if (strpos($hook, 'dst-hf-builder') === false) {
+        // برای submenu، hook به شکل 'parent_page_slug' میشه
+        if ($hook !== 'dst-website-settings_page_dst-hf-builder' && strpos($hook, 'dst-hf-builder') === false) {
             return;
         }
 
