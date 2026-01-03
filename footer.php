@@ -2,11 +2,10 @@
 
 <?php
 /**
- * لود Footer براساس انتخاب کاربر
- * از ماژول header-footer-manager استفاده میکنه
+ * لود Footer از سازنده هدر/فوتر
  */
-if (function_exists('dst_render_footer')) {
-    dst_render_footer();
+if (function_exists('dst_builder_footer')) {
+    dst_builder_footer();
 } else {
     // Fallback به footer پیش‌فرض
     ?>

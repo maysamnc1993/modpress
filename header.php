@@ -10,11 +10,10 @@
 
 <?php
 /**
- * لود Header براساس انتخاب کاربر
- * از ماژول header-footer-manager استفاده میکنه
+ * لود Header از سازنده هدر/فوتر
  */
-if (function_exists('dst_render_header')) {
-    dst_render_header();
+if (function_exists('dst_builder_header')) {
+    dst_builder_header();
 } else {
     // Fallback به header پیش‌فرض
     ?>
