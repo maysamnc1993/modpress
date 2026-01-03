@@ -215,19 +215,19 @@ class DST_Admin_Menu_Manager {
         // === جداکننده 2 ===
         $menu[95] = ['', 'read', 'separator2', '', 'wp-menu-separator'];
 
-        // === بخش سوم: سایر ===
+        // === بخش سوم: همه امکانات ===
         add_menu_page(
-            'سایر',
-            'سایر',
+            'همه امکانات',
+            'همه امکانات',
             'read',
-            'dst-others',
-            [$this, 'render_others_page'],
-            'dashicons-ellipsis',
+            'dst-all-features',
+            [$this, 'render_all_features_page'],
+            'dashicons-screenoptions',
             100
         );
 
-        // جمع‌آوری بقیه منوها برای "سایر"
-        $this->collect_other_menus($original_menu, $original_submenu);
+        // جمع‌آوری همه منوها برای صفحه "همه امکانات"
+        $this->collect_all_menus($original_menu);
 
         // مرتب‌سازی منو
         ksort($menu);
@@ -271,15 +271,13 @@ class DST_Admin_Menu_Manager {
     }
     
     /**
-     * جمع‌آوری منوهای دیگر برای قرار دادن در "سایر"
+     * جمع‌آوری همه منوها برای صفحه "همه امکانات"
      */
-    private function collect_other_menus($original_menu, $original_submenu) {
-        global $submenu;
-
-        // منوهایی که نباید در سایر باشند (همیشه مخفی)
-        $always_excluded = [
-            'dst-header-footer',   // هدر و فوتر (زیرمنوی تنظیمات وب‌سایت)
-            'dst-theme-settings',  // تنظیمات قالب
+    private function collect_all_menus($original_menu) {
+        // منوهایی که نباید نمایش داده شوند
+        $excluded = [
+            'dst-header-footer',
+            'dst-theme-settings',
             'separator1',
             'separator2',
             'separator3',
@@ -291,47 +289,20 @@ class DST_Admin_Menu_Manager {
 
             $slug = $item[2];
 
-            // رد کردن جداکننده‌ها و منوهای همیشه مخفی
-            if (in_array($slug, $always_excluded)) continue;
+            // رد کردن جداکننده‌ها و موارد مخفی
+            if (in_array($slug, $excluded)) continue;
             if (strpos($slug, 'separator') !== false) continue;
-            if (strpos($slug, 'dst-') === 0) continue; // منوهای خود قالب
-
-            // اگر در سایدبار اصلی هست، در سایر نباشد
-            if (in_array($slug, $this->main_sidebar_menus)) continue;
 
             // ساخت URL صحیح
             $url = $this->build_menu_url($slug);
 
-            // ذخیره برای نمایش در صفحه سایر
+            // ذخیره برای نمایش در صفحه همه امکانات
             $this->others_menus[] = [
                 'title' => strip_tags($item[0]),
                 'capability' => $item[1],
                 'slug' => $slug,
                 'url' => $url,
                 'icon' => $item[6] ?? 'dashicons-admin-generic',
-            ];
-        }
-
-        // اضافه کردن زیرمنوها با لینک مستقیم
-        if (!isset($submenu['dst-others'])) {
-            $submenu['dst-others'] = [];
-        }
-
-        // اولین آیتم باید خود صفحه سایر باشد
-        $submenu['dst-others'][] = [
-            'همه موارد',
-            'read',
-            'dst-others',
-        ];
-
-        // اضافه کردن لینک‌های مستقیم به زیرمنو
-        foreach ($this->others_menus as $menu_item) {
-            if (!current_user_can($menu_item['capability'])) continue;
-
-            $submenu['dst-others'][] = [
-                $menu_item['title'],
-                $menu_item['capability'],
-                $menu_item['url'],
             ];
         }
     }
@@ -442,37 +413,41 @@ class DST_Admin_Menu_Manager {
         </style>
         <?php
     }
-    
+
     /**
-     * صفحه سایر - نمایش گرید منوها
+     * صفحه همه امکانات - نمایش تمام منوهای وردپرس
      */
-    public function render_others_page() {
+    public function render_all_features_page() {
         ?>
-        <div class="wrap dst-others-wrap">
-            <div class="dst-others-header">
+        <div class="wrap dst-all-features-wrap">
+            <div class="dst-all-features-header">
                 <h1>
-                    <i data-lucide="more-horizontal"></i>
-                    سایر
+                    <i data-lucide="layout-grid"></i>
+                    همه امکانات
                 </h1>
-                <p class="description">دسترسی سریع به سایر بخش‌های مدیریت وردپرس</p>
+                <p class="description">دسترسی سریع به تمام بخش‌های مدیریت وردپرس</p>
             </div>
 
             <?php if (empty($this->others_menus)): ?>
-                <div class="dst-others-empty">
+                <div class="dst-all-features-empty">
                     <i data-lucide="inbox"></i>
-                    <p>هیچ منوی دیگری وجود ندارد</p>
+                    <p>هیچ منویی یافت نشد</p>
                 </div>
             <?php else: ?>
-                <div class="dst-others-grid">
+                <div class="dst-all-features-grid">
                     <?php foreach ($this->others_menus as $menu_item):
                         if (!current_user_can($menu_item['capability'])) continue;
                         $lucide_icon = $this->get_lucide_icon($menu_item['slug']);
+                        $is_in_sidebar = in_array($menu_item['slug'], $this->main_sidebar_menus);
                         ?>
-                        <a href="<?php echo esc_url($menu_item['url']); ?>" class="dst-other-item">
-                            <span class="dst-other-icon">
+                        <a href="<?php echo esc_url($menu_item['url']); ?>" class="dst-feature-item <?php echo $is_in_sidebar ? 'in-sidebar' : ''; ?>">
+                            <span class="dst-feature-icon">
                                 <i data-lucide="<?php echo esc_attr($lucide_icon); ?>"></i>
                             </span>
-                            <span class="dst-other-title"><?php echo esc_html($menu_item['title']); ?></span>
+                            <span class="dst-feature-title"><?php echo esc_html($menu_item['title']); ?></span>
+                            <?php if ($is_in_sidebar): ?>
+                                <span class="dst-feature-badge">در منو</span>
+                            <?php endif; ?>
                         </a>
                     <?php endforeach; ?>
                 </div>
@@ -480,105 +455,132 @@ class DST_Admin_Menu_Manager {
         </div>
 
         <style>
-            .dst-others-wrap {
-                max-width: 1200px;
+            .dst-all-features-wrap {
+                max-width: 1400px;
                 margin: 20px auto 0;
             }
-            .dst-others-header {
+            .dst-all-features-header {
                 margin-bottom: 30px;
             }
-            .dst-others-header h1 {
+            .dst-all-features-header h1 {
                 display: flex;
                 align-items: center;
                 gap: 12px;
-                font-size: 24px;
+                font-size: 26px;
                 font-weight: 600;
                 color: #1e293b;
                 margin: 0 0 8px;
             }
-            .dst-others-header h1 svg {
-                width: 28px;
-                height: 28px;
+            .dst-all-features-header h1 svg {
+                width: 32px;
+                height: 32px;
                 stroke: #3C50E0;
             }
-            .dst-others-header .description {
+            .dst-all-features-header .description {
                 font-size: 14px;
                 color: #64748b;
                 margin: 0;
             }
-            .dst-others-empty {
+            .dst-all-features-empty {
                 text-align: center;
                 padding: 60px 20px;
                 background: #fff;
                 border: 1px dashed #e2e8f0;
                 border-radius: 12px;
             }
-            .dst-others-empty svg {
+            .dst-all-features-empty svg {
                 width: 48px;
                 height: 48px;
                 stroke: #94a3b8;
                 margin-bottom: 16px;
             }
-            .dst-others-empty p {
+            .dst-all-features-empty p {
                 color: #64748b;
                 font-size: 15px;
                 margin: 0;
             }
-            .dst-others-grid {
+            .dst-all-features-grid {
                 display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
                 gap: 16px;
             }
-            .dst-other-item {
+            .dst-feature-item {
                 background: #fff;
                 border: 1px solid #e2e8f0;
                 border-radius: 12px;
                 padding: 20px;
                 text-decoration: none;
                 display: flex;
+                flex-direction: column;
                 align-items: center;
-                gap: 14px;
+                gap: 12px;
                 transition: all 0.2s ease;
+                position: relative;
             }
-            .dst-other-item:hover {
+            .dst-feature-item:hover {
                 border-color: #3C50E0;
                 background: #f8fafc;
                 transform: translateY(-2px);
                 box-shadow: 0 4px 12px rgba(60, 80, 224, 0.1);
             }
-            .dst-other-icon {
-                width: 44px;
-                height: 44px;
+            .dst-feature-item.in-sidebar {
+                border-color: #86efac;
+                background: #f0fdf4;
+            }
+            .dst-feature-icon {
+                width: 52px;
+                height: 52px;
                 background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-                border-radius: 10px;
+                border-radius: 12px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 transition: all 0.2s ease;
             }
-            .dst-other-icon svg {
-                width: 22px;
-                height: 22px;
+            .dst-feature-icon svg {
+                width: 26px;
+                height: 26px;
                 stroke: #64748b;
                 transition: all 0.2s ease;
             }
-            .dst-other-item:hover .dst-other-icon {
+            .dst-feature-item:hover .dst-feature-icon {
                 background: linear-gradient(135deg, #3C50E0 0%, #5B6CE0 100%);
             }
-            .dst-other-item:hover .dst-other-icon svg {
+            .dst-feature-item:hover .dst-feature-icon svg {
                 stroke: #fff;
             }
-            .dst-other-title {
+            .dst-feature-item.in-sidebar .dst-feature-icon {
+                background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+            }
+            .dst-feature-item.in-sidebar .dst-feature-icon svg {
+                stroke: #fff;
+            }
+            .dst-feature-title {
                 color: #1e293b;
                 font-size: 14px;
                 font-weight: 500;
-                flex: 1;
+                text-align: center;
             }
-            .dst-other-item:hover .dst-other-title {
+            .dst-feature-item:hover .dst-feature-title {
                 color: #3C50E0;
             }
+            .dst-feature-badge {
+                position: absolute;
+                top: 8px;
+                left: 8px;
+                background: #10b981;
+                color: #fff;
+                font-size: 10px;
+                padding: 3px 8px;
+                border-radius: 4px;
+            }
             @media screen and (max-width: 782px) {
-                .dst-others-grid {
+                .dst-all-features-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+            @media screen and (max-width: 480px) {
+                .dst-all-features-grid {
                     grid-template-columns: 1fr;
                 }
             }
