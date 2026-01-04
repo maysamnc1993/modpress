@@ -436,11 +436,11 @@
     align-items: center;
     justify-content: space-between;
     padding: 8px 12px !important;
-    min-height: 42px !important;
+    min-height: 38px !important;
     height: auto !important;
     max-height: none !important;
-    background: #cbd5e1 !important;
-    border-bottom: 2px solid #94a3b8 !important;
+    background: #f8fafc !important;
+    border-bottom: 1px solid #e2e8f0 !important;
     cursor: move;
     position: relative;
     z-index: 10;
