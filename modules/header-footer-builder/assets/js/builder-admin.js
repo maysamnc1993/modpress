@@ -619,9 +619,27 @@
                         <label for="row_sticky">چسبنده (Sticky)</label>
                     </div>
                 </div>
+
+                <div class="settings-section">
+                    <button type="button" class="delete-row-btn" data-section="${section}" data-row="${rowIndex}" style="width:100%;padding:10px;background:#fee2e2;color:#dc2626;border:1px solid #fca5a5;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;">
+                        حذف این ردیف
+                    </button>
+                </div>
             `;
 
             $('#settings-content').html(html);
+
+            // Bind delete row button
+            $('.delete-row-btn').on('click', function() {
+                const sec = $(this).data('section');
+                const idx = $(this).data('row');
+                if (confirm('آیا از حذف این ردیف مطمئن هستید؟')) {
+                    self.settings[sec].rows.splice(idx, 1);
+                    self.renderCanvas(sec);
+                    self.clearSelection();
+                    self.markDirty();
+                }
+            });
 
             // Bind layout change
             $('.row-layout-btn').on('click', function() {
