@@ -606,14 +606,15 @@ class DST_Header_Footer_Builder {
                 <!-- پنل چپ: المان‌ها -->
                 <div class="builder-sidebar">
                     <!-- تنظیمات کلی هدر/فوتر -->
-                    <div class="global-settings-panel" id="global-settings-panel">
-                        <div class="panel-header">
+                    <div class="global-settings-panel accordion-panel" id="global-settings-panel">
+                        <div class="panel-header accordion-header" data-target="global-settings-content">
                             <h3>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.26.604.852.997 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
                                 <span id="global-settings-title">تنظیمات هدر</span>
                             </h3>
+                            <svg class="accordion-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
                         </div>
-                        <div class="global-settings-content">
+                        <div class="global-settings-content accordion-content" id="global-settings-content">
                             <!-- تنظیمات هدر -->
                             <div class="global-settings-group" id="header-global-settings">
                                 <div class="setting-row">
@@ -808,13 +809,16 @@ class DST_Header_Footer_Builder {
                         </div>
                     </div>
 
-                    <div class="elements-panel">
-                        <div class="panel-header">
+                    <div class="elements-panel accordion-panel">
+                        <div class="panel-header accordion-header" data-target="elements-list-content">
                             <h3>المان‌ها</h3>
-                            <input type="text" id="element-search" placeholder="جستجو...">
+                            <svg class="accordion-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
                         </div>
-                        <div class="elements-list">
-                            <?php $this->render_elements_list(); ?>
+                        <div class="accordion-content" id="elements-list-content">
+                            <input type="text" id="element-search" placeholder="جستجو..." class="element-search-input">
+                            <div class="elements-list">
+                                <?php $this->render_elements_list(); ?>
+                            </div>
                         </div>
                     </div>
                 </div>

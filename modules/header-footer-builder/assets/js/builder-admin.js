@@ -39,6 +39,15 @@
         bindEvents: function() {
             const self = this;
 
+            // Accordion toggle
+            $(document).on('click', '.accordion-header', function(e) {
+                // Don't toggle if clicking on input inside header
+                if ($(e.target).is('input')) return;
+
+                const $panel = $(this).closest('.accordion-panel');
+                $panel.toggleClass('collapsed');
+            });
+
             // Tab switching
             $('.builder-tab').on('click', function() {
                 const tab = $(this).data('tab');
