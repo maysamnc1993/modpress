@@ -416,6 +416,7 @@
     border-radius: var(--radius);
     background: var(--light);
     transition: all 0.2s;
+    overflow: visible !important;
 }
 
 .builder-row:hover {
@@ -434,47 +435,58 @@
     opacity: 1 !important;
     align-items: center;
     justify-content: space-between;
-    padding: 8px 12px;
-    min-height: 42px;
-    background: #e2e8f0 !important;
-    border-bottom: 1px solid var(--border);
+    padding: 8px 12px !important;
+    min-height: 42px !important;
+    height: auto !important;
+    max-height: none !important;
+    background: #cbd5e1 !important;
+    border-bottom: 2px solid #94a3b8 !important;
     cursor: move;
     position: relative;
     z-index: 10;
+    overflow: visible !important;
 }
 
 .row-label {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--secondary);
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+    display: block !important;
+    visibility: visible !important;
 }
 
 .row-actions {
     display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
     gap: 4px;
     flex-shrink: 0;
 }
 
 .row-action-btn {
-    width: 26px;
-    height: 26px;
-    min-width: 26px;
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+    min-height: 28px !important;
     display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
     align-items: center;
     justify-content: center;
-    border: 1px solid var(--border);
-    background: #fff;
+    border: 1px solid #94a3b8 !important;
+    background: #fff !important;
     border-radius: 4px;
-    color: #666;
+    color: #475569 !important;
     cursor: pointer;
     transition: all 0.2s;
     padding: 0;
 }
 
 .row-action-btn svg {
-    width: 14px;
-    height: 14px;
-    display: block;
+    width: 14px !important;
+    height: 14px !important;
+    display: block !important;
+    visibility: visible !important;
 }
 
 .row-action-btn:hover {
