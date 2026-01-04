@@ -1042,6 +1042,9 @@
             const iframe = document.getElementById('preview-frame');
             if (!iframe) return;
 
+            // Debug: Log settings
+            console.log('📤 Sending preview settings:', JSON.stringify(this.settings, null, 2));
+
             // Show loading state
             $('.preview-frame-wrapper').addClass('loading');
 
@@ -1055,6 +1058,7 @@
                     settings_json: JSON.stringify(this.settings)
                 },
                 success: function(response) {
+                    console.log('📥 Preview response:', response);
                     if (response.success && response.data.preview_url) {
                         // Refresh iframe with new URL (cache busted)
                         iframe.src = response.data.preview_url;

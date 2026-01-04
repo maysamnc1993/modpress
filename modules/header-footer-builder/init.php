@@ -340,9 +340,21 @@ class DST_Header_Footer_Builder {
         }
 
         // بارگذاری تنظیمات موقت برای پیش‌نمایش
-        $preview_settings = get_transient('dst_builder_preview_' . get_current_user_id());
-        if ($preview_settings) {
+        $transient_key = 'dst_builder_preview_' . get_current_user_id();
+        $preview_settings = get_transient($transient_key);
+
+        if ($preview_settings && is_array($preview_settings)) {
             $this->settings = $preview_settings;
+
+            // Debug: Output settings to console
+            add_action('wp_footer', function() use ($preview_settings) {
+                echo '<script>console.log("📋 Preview loaded settings:", ' . wp_json_encode($preview_settings) . ');</script>';
+            }, 999);
+        } else {
+            // Debug: No transient found
+            add_action('wp_footer', function() use ($transient_key) {
+                echo '<script>console.warn("⚠️ No preview transient found for: ' . esc_js($transient_key) . '");</script>';
+            }, 999);
         }
 
         // مخفی کردن ادمین بار
@@ -507,7 +519,11 @@ class DST_Header_Footer_Builder {
         }
 
         if (empty($settings) || !is_array($settings)) {
-            wp_send_json_error('Invalid settings');
+            wp_send_json_error([
+                'message' => 'Invalid settings',
+                'has_json' => isset($_POST['settings_json']),
+                'has_settings' => isset($_POST['settings'])
+            ]);
         }
 
         // پاکسازی داده‌ها
@@ -515,11 +531,14 @@ class DST_Header_Footer_Builder {
 
         // ذخیره موقت تنظیمات (2 دقیقه)
         $transient_key = 'dst_builder_preview_' . get_current_user_id();
-        set_transient($transient_key, $preview_settings, 120);
+        $saved = set_transient($transient_key, $preview_settings, 120);
 
         wp_send_json_success([
             'preview_url' => home_url('/?dst_builder_preview=1&t=' . time()),
-            'message' => 'تنظیمات برای پیش‌نمایش ذخیره شد'
+            'message' => 'تنظیمات برای پیش‌نمایش ذخیره شد',
+            'transient_saved' => $saved,
+            'transient_key' => $transient_key,
+            'header_bg' => $preview_settings['header']['settings']['bg_color'] ?? 'not set'
         ]);
     }
 
