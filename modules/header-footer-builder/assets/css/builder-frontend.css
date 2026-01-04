@@ -8,7 +8,7 @@
 .dst-builder-header {
     position: relative;
     z-index: 1000;
-    background: #fff;
+    /* background is set via inline styles */
 }
 
 /* Shadow is now applied via inline styles */
@@ -582,9 +582,16 @@ body.admin-bar .dst-builder-header.is-sticky {
         flex: 0 0 calc(50% - 10px);
     }
 
-    .builder-nav.style-horizontal {
-        display: none;
+    /* Horizontal menu - responsive behavior */
+    .builder-nav.style-horizontal ul {
+        flex-wrap: wrap;
+        gap: 10px 20px;
     }
+}
+
+/* Preview mode - always show horizontal menu */
+body.dst-preview-mode .builder-nav.style-horizontal {
+    display: flex !important;
 }
 
 @media (max-width: 768px) {

@@ -366,6 +366,12 @@ class DST_Header_Footer_Builder {
                 body.admin-bar { margin-top: 0 !important; }
             </style>';
         }, 999);
+
+        // اضافه کردن کلاس preview mode به body
+        add_filter('body_class', function($classes) {
+            $classes[] = 'dst-preview-mode';
+            return $classes;
+        });
     }
 
     /**
@@ -1012,8 +1018,12 @@ class DST_Header_Footer_Builder {
         $settings = $header['settings'] ?? [];
         $classes = ['dst-builder-header'];
 
-        // Width type
+        // Width type - support both old (full_width) and new (width_type) keys
         $width_type = $settings['width_type'] ?? 'contained';
+        // Backward compatibility: full_width: "true" => width_type: "full"
+        if (isset($settings['full_width']) && $settings['full_width'] === 'true') {
+            $width_type = 'full';
+        }
         if ($width_type === 'full') $classes[] = 'full-width';
         if ($width_type === 'boxed') $classes[] = 'boxed-width';
 
@@ -1027,13 +1037,18 @@ class DST_Header_Footer_Builder {
             $styles[] = '--container-width:' . intval($settings['container_width']) . 'px';
         }
 
-        // Background color
+        // Background color - always apply if set
         if (!empty($settings['bg_color'])) {
             $styles[] = 'background-color:' . esc_attr($settings['bg_color']);
+        } else {
+            // Default background if not set
+            $styles[] = 'background-color:#ffffff';
         }
 
-        // Box Shadow
-        if (!empty($settings['shadow_enabled'])) {
+        // Box Shadow - support both old (shadow) and new (shadow_enabled) keys
+        $has_shadow = !empty($settings['shadow_enabled']) ||
+                      (isset($settings['shadow']) && ($settings['shadow'] === true || $settings['shadow'] === 'true'));
+        if ($has_shadow) {
             $shadow_color = $settings['shadow_color'] ?? 'rgba(0,0,0,0.08)';
             $shadow_x = intval($settings['shadow_x'] ?? 0);
             $shadow_y = intval($settings['shadow_y'] ?? 2);
@@ -1042,8 +1057,10 @@ class DST_Header_Footer_Builder {
             $styles[] = 'box-shadow:' . $shadow_x . 'px ' . $shadow_y . 'px ' . $shadow_blur . 'px ' . $shadow_spread . 'px ' . esc_attr($shadow_color);
         }
 
-        // Border
-        if (!empty($settings['border_enabled'])) {
+        // Border - support both old (border_bottom) and new (border_enabled) keys
+        $has_border = !empty($settings['border_enabled']) ||
+                      (isset($settings['border_bottom']) && ($settings['border_bottom'] === true || $settings['border_bottom'] === 'true'));
+        if ($has_border) {
             $border_color = $settings['border_color'] ?? '#e5e7eb';
             $border_width = intval($settings['border_width'] ?? 1);
             $border_style = $settings['border_style'] ?? 'solid';
@@ -1073,8 +1090,12 @@ class DST_Header_Footer_Builder {
         $settings = $footer['settings'] ?? [];
         $classes = ['dst-builder-footer'];
 
-        // Width type
+        // Width type - support both old (full_width) and new (width_type) keys
         $width_type = $settings['width_type'] ?? 'contained';
+        // Backward compatibility: full_width: "true" => width_type: "full"
+        if (isset($settings['full_width']) && $settings['full_width'] === 'true') {
+            $width_type = 'full';
+        }
         if ($width_type === 'full') $classes[] = 'full-width';
         if ($width_type === 'boxed') $classes[] = 'boxed-width';
 
@@ -1086,13 +1107,18 @@ class DST_Header_Footer_Builder {
             $styles[] = '--container-width:' . intval($settings['container_width']) . 'px';
         }
 
-        // Background color
+        // Background color - always apply if set
         if (!empty($settings['bg_color'])) {
             $styles[] = 'background-color:' . esc_attr($settings['bg_color']);
+        } else {
+            // Default background for footer
+            $styles[] = 'background-color:#1f2937';
         }
 
-        // Border
-        if (!empty($settings['border_enabled'])) {
+        // Border - support both old (border_top) and new (border_enabled) keys
+        $has_border = !empty($settings['border_enabled']) ||
+                      (isset($settings['border_top']) && ($settings['border_top'] === true || $settings['border_top'] === 'true'));
+        if ($has_border) {
             $border_color = $settings['border_color'] ?? '#374151';
             $border_width = intval($settings['border_width'] ?? 1);
             $border_style = $settings['border_style'] ?? 'solid';
@@ -1270,6 +1296,11 @@ class DST_Header_Footer_Builder {
                     'container_attr' => ['style' => $css_vars],
                     'fallback_cb' => false,
                 ]);
+            } else {
+                // Fallback: نمایش پیام یا منوی پیش‌فرض
+                echo '<nav class="builder-nav style-' . esc_attr($style) . '" style="' . esc_attr($css_vars) . '">';
+                echo '<ul><li><a href="' . esc_url(home_url('/')) . '">خانه</a></li></ul>';
+                echo '</nav>';
             }
             return;
         }
