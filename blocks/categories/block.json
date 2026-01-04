@@ -2,7 +2,7 @@
     "name": "categories",
     "title": "دسته‌بندی‌ها",
     "description": "نمایش دسته‌بندی محصولات یا مطالب با تنظیمات کامل",
-    "category": "developer-starter",
+    "category": "theme-blocks",
     "icon": "category",
     "keywords": ["categories", "دسته‌بندی", "grid", "شبکه"],
     "supports": {

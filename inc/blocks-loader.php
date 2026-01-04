@@ -212,8 +212,8 @@ function dst_register_block_category($categories) {
     return array_merge(
         [
             [
-                'slug'  => 'developer-starter',
-                'title' => __('بلاک‌های قالب', 'developer-starter'),
+                'slug'  => 'theme-blocks',
+                'title' => __('🧩 بلاک‌های قالب', 'developer-starter'),
                 'icon'  => 'layout',
             ],
         ],

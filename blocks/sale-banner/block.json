@@ -2,8 +2,8 @@
     "name": "sale-banner",
     "title": "بنر تخفیف",
     "description": "بنر پیشنهاد ویژه و تخفیفات با شمارش معکوس",
-    "category": "developer-starter",
-    "icon": "megaphone",
+    "category": "theme-blocks",
+    "icon": "tag",
     "keywords": ["sale", "banner", "discount", "تخفیف", "پیشنهاد"],
     "supports": {
         "align": ["wide", "full"],

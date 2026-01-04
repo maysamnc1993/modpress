@@ -2,7 +2,7 @@
     "name": "brands",
     "title": "برندها",
     "description": "نمایش لوگوی برندها به صورت اسلایدر یا گرید",
-    "category": "developer-starter",
+    "category": "theme-blocks",
     "icon": "awards",
     "keywords": ["brands", "logos", "partners", "برند", "لوگو"],
     "supports": {

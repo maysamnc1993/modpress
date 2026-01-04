@@ -2,8 +2,8 @@
     "name": "products",
     "title": "محصولات",
     "description": "نمایش محصولات ووکامرس با تنظیمات کامل",
-    "category": "developer-starter",
-    "icon": "products",
+    "category": "theme-blocks",
+    "icon": "cart",
     "keywords": ["products", "woocommerce", "shop", "محصولات", "فروشگاه"],
     "supports": {
         "align": ["wide", "full"],
