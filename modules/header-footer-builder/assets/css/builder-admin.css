@@ -431,23 +431,29 @@
     background: rgba(0,0,0,0.03);
     border-bottom: 1px solid var(--border);
     cursor: move;
+    flex-direction: row-reverse; /* RTL support */
 }
 
 .row-label {
     font-size: 12px;
     font-weight: 600;
     color: var(--secondary);
+    order: 1; /* RTL: label on right */
 }
 
 .row-actions {
-    display: flex;
+    display: flex !important;
     gap: 5px;
+    order: 0; /* RTL: actions on left */
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .row-action-btn {
     width: 28px;
     height: 28px;
-    display: flex;
+    min-width: 28px;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     border: none;
