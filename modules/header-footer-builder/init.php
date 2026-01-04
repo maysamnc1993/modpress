@@ -1016,6 +1016,10 @@ class DST_Header_Footer_Builder {
 
         $header = $this->settings['header'];
         $settings = $header['settings'] ?? [];
+
+        // Debug: output settings to console
+        echo '<!-- DEBUG Header Settings: ' . esc_html(wp_json_encode($settings)) . ' -->';
+
         $classes = ['dst-builder-header'];
 
         // Width type - support both old (full_width) and new (width_type) keys
@@ -1039,10 +1043,10 @@ class DST_Header_Footer_Builder {
 
         // Background color - always apply if set
         if (!empty($settings['bg_color'])) {
-            $styles[] = 'background-color:' . esc_attr($settings['bg_color']);
+            $styles[] = 'background-color:' . esc_attr($settings['bg_color']) . ' !important';
         } else {
             // Default background if not set
-            $styles[] = 'background-color:#ffffff';
+            $styles[] = 'background-color:#ffffff !important';
         }
 
         // Box Shadow - support both old (shadow) and new (shadow_enabled) keys
@@ -1109,10 +1113,10 @@ class DST_Header_Footer_Builder {
 
         // Background color - always apply if set
         if (!empty($settings['bg_color'])) {
-            $styles[] = 'background-color:' . esc_attr($settings['bg_color']);
+            $styles[] = 'background-color:' . esc_attr($settings['bg_color']) . ' !important';
         } else {
             // Default background for footer
-            $styles[] = 'background-color:#1f2937';
+            $styles[] = 'background-color:#1f2937 !important';
         }
 
         // Border - support both old (border_top) and new (border_enabled) keys
