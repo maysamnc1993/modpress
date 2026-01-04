@@ -1,0 +1,13 @@
+{
+    "name": "categories",
+    "title": "دسته‌بندی‌ها",
+    "description": "نمایش دسته‌بندی محصولات یا مطالب با تنظیمات کامل",
+    "category": "developer-starter",
+    "icon": "category",
+    "keywords": ["categories", "دسته‌بندی", "grid", "شبکه"],
+    "supports": {
+        "align": ["wide", "full"],
+        "mode": true,
+        "anchor": true
+    }
+}

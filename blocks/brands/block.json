@@ -1,0 +1,13 @@
+{
+    "name": "brands",
+    "title": "برندها",
+    "description": "نمایش لوگوی برندها به صورت اسلایدر یا گرید",
+    "category": "developer-starter",
+    "icon": "awards",
+    "keywords": ["brands", "logos", "partners", "برند", "لوگو"],
+    "supports": {
+        "align": ["wide", "full"],
+        "mode": true,
+        "anchor": true
+    }
+}

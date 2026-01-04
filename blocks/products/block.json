@@ -1,0 +1,13 @@
+{
+    "name": "products",
+    "title": "محصولات",
+    "description": "نمایش محصولات ووکامرس با تنظیمات کامل",
+    "category": "developer-starter",
+    "icon": "products",
+    "keywords": ["products", "woocommerce", "shop", "محصولات", "فروشگاه"],
+    "supports": {
+        "align": ["wide", "full"],
+        "mode": true,
+        "anchor": true
+    }
+}

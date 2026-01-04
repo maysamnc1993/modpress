@@ -1,0 +1,13 @@
+{
+    "name": "newsletter",
+    "title": "خبرنامه",
+    "description": "فرم عضویت در خبرنامه با طراحی زیبا",
+    "category": "developer-starter",
+    "icon": "email",
+    "keywords": ["newsletter", "email", "subscribe", "خبرنامه", "ایمیل"],
+    "supports": {
+        "align": ["wide", "full"],
+        "mode": true,
+        "anchor": true
+    }
+}
