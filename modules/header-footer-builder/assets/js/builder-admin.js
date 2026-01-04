@@ -1045,22 +1045,26 @@
             // Show loading state
             $('.preview-frame-wrapper').addClass('loading');
 
-            // Save settings temporarily via AJAX
+            // Save settings temporarily via AJAX (use JSON to preserve nested structure)
             $.ajax({
                 url: dstBuilder.ajaxUrl,
                 type: 'POST',
                 data: {
                     action: 'dst_builder_preview',
                     nonce: dstBuilder.nonce,
-                    settings: this.settings
+                    settings_json: JSON.stringify(this.settings)
                 },
                 success: function(response) {
                     if (response.success && response.data.preview_url) {
                         // Refresh iframe with new URL (cache busted)
                         iframe.src = response.data.preview_url;
+                    } else {
+                        console.error('Preview error:', response);
+                        $('.preview-frame-wrapper').removeClass('loading');
                     }
                 },
-                error: function() {
+                error: function(xhr, status, error) {
+                    console.error('AJAX error:', status, error);
                     $('.preview-frame-wrapper').removeClass('loading');
                 }
             });
@@ -1081,7 +1085,7 @@
                 data: {
                     action: 'dst_builder_save',
                     nonce: dstBuilder.nonce,
-                    settings: this.settings
+                    settings_json: JSON.stringify(this.settings)
                 },
                 success: function(response) {
                     if (response.success) {

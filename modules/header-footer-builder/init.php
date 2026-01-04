@@ -41,8 +41,8 @@ class DST_Header_Footer_Builder {
         add_action('wp_ajax_dst_builder_save', [$this, 'ajax_save']);
         add_action('wp_ajax_dst_builder_preview', [$this, 'ajax_preview']);
 
-        // پیش‌نمایش
-        $this->handle_preview_mode();
+        // پیش‌نمایش - باید بعد از init اجرا بشه که user شناسایی شده باشه
+        add_action('init', [$this, 'handle_preview_mode'], 1);
     }
 
     /**
@@ -330,7 +330,7 @@ class DST_Header_Footer_Builder {
     /**
      * حالت پیش‌نمایش
      */
-    private function handle_preview_mode() {
+    public function handle_preview_mode() {
         if (!isset($_GET['dst_builder_preview'])) {
             return;
         }
@@ -463,13 +463,26 @@ class DST_Header_Footer_Builder {
             wp_send_json_error('Permission denied');
         }
 
-        $settings = isset($_POST['settings']) ? $_POST['settings'] : [];
+        // خواندن از JSON برای حفظ ساختار nested
+        $settings = [];
+        if (isset($_POST['settings_json'])) {
+            $settings = json_decode(stripslashes($_POST['settings_json']), true);
+        } elseif (isset($_POST['settings'])) {
+            $settings = $_POST['settings'];
+        }
+
+        if (empty($settings) || !is_array($settings)) {
+            wp_send_json_error('Invalid settings');
+        }
 
         // پاکسازی داده‌ها
         $sanitized = $this->sanitize_settings($settings);
 
         update_option($this->option_name, $sanitized);
         $this->settings = $sanitized;
+
+        // پاک کردن transient پیش‌نمایش
+        delete_transient('dst_builder_preview_' . get_current_user_id());
 
         wp_send_json_success(['message' => 'ذخیره شد!']);
     }
@@ -485,13 +498,24 @@ class DST_Header_Footer_Builder {
             wp_send_json_error('Permission denied');
         }
 
-        $settings = isset($_POST['settings']) ? $_POST['settings'] : [];
+        // خواندن از JSON برای حفظ ساختار nested
+        $settings = [];
+        if (isset($_POST['settings_json'])) {
+            $settings = json_decode(stripslashes($_POST['settings_json']), true);
+        } elseif (isset($_POST['settings'])) {
+            $settings = $_POST['settings'];
+        }
+
+        if (empty($settings) || !is_array($settings)) {
+            wp_send_json_error('Invalid settings');
+        }
 
         // پاکسازی داده‌ها
         $preview_settings = $this->sanitize_settings($settings);
 
-        // ذخیره موقت تنظیمات (1 دقیقه)
-        set_transient('dst_builder_preview_' . get_current_user_id(), $preview_settings, 60);
+        // ذخیره موقت تنظیمات (2 دقیقه)
+        $transient_key = 'dst_builder_preview_' . get_current_user_id();
+        set_transient($transient_key, $preview_settings, 120);
 
         wp_send_json_success([
             'preview_url' => home_url('/?dst_builder_preview=1&t=' . time()),
