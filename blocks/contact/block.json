@@ -1,0 +1,13 @@
+{
+    "name": "contact",
+    "title": "تماس با ما",
+    "description": "اطلاعات تماس با فرم و نقشه",
+    "category": "theme-blocks",
+    "icon": "phone",
+    "keywords": ["contact", "form", "تماس", "ارتباط"],
+    "supports": {
+        "align": ["wide", "full"],
+        "mode": true,
+        "anchor": true
+    }
+}

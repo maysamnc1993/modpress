@@ -1,0 +1,13 @@
+{
+    "name": "services",
+    "title": "خدمات",
+    "description": "نمایش خدمات و ویژگی‌ها با آیکون",
+    "category": "theme-blocks",
+    "icon": "screenoptions",
+    "keywords": ["services", "features", "خدمات", "ویژگی"],
+    "supports": {
+        "align": ["wide", "full"],
+        "mode": true,
+        "anchor": true
+    }
+}

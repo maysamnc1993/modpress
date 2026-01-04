@@ -1,0 +1,14 @@
+{
+    "name": "row",
+    "title": "ردیف",
+    "description": "ردیف با ستون‌بندی برای چیدمان محتوا",
+    "category": "theme-blocks",
+    "icon": "align-center",
+    "keywords": ["row", "container", "layout", "ردیف", "ستون"],
+    "supports": {
+        "align": ["wide", "full"],
+        "mode": true,
+        "anchor": true,
+        "jsx": true
+    }
+}

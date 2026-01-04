@@ -1,0 +1,13 @@
+{
+    "name": "testimonials",
+    "title": "نظرات مشتریان",
+    "description": "نمایش نظرات و تجربیات مشتریان",
+    "category": "theme-blocks",
+    "icon": "format-quote",
+    "keywords": ["testimonials", "reviews", "نظرات", "مشتریان"],
+    "supports": {
+        "align": ["wide", "full"],
+        "mode": true,
+        "anchor": true
+    }
+}

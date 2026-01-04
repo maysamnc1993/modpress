@@ -1,0 +1,13 @@
+{
+    "name": "cta",
+    "title": "دعوت به اقدام",
+    "description": "بنر CTA با دکمه و پس‌زمینه جذاب",
+    "category": "theme-blocks",
+    "icon": "megaphone",
+    "keywords": ["cta", "call to action", "فراخوان", "دکمه"],
+    "supports": {
+        "align": ["wide", "full"],
+        "mode": true,
+        "anchor": true
+    }
+}

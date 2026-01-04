@@ -1,0 +1,13 @@
+{
+    "name": "hero",
+    "title": "هیرو",
+    "description": "بنر اصلی صفحه با تصویر، ویدیو یا گرادیان",
+    "category": "theme-blocks",
+    "icon": "cover-image",
+    "keywords": ["hero", "banner", "slider", "هیرو", "بنر"],
+    "supports": {
+        "align": ["full"],
+        "mode": true,
+        "anchor": true
+    }
+}

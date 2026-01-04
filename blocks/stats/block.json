@@ -1,0 +1,13 @@
+{
+    "name": "stats",
+    "title": "آمار و ارقام",
+    "description": "شمارنده آماری با انیمیشن",
+    "category": "theme-blocks",
+    "icon": "chart-bar",
+    "keywords": ["stats", "counter", "آمار", "شمارنده"],
+    "supports": {
+        "align": ["wide", "full"],
+        "mode": true,
+        "anchor": true
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "name": "about",
+    "title": "درباره ما",
+    "description": "معرفی شرکت یا سازمان با تصویر",
+    "category": "theme-blocks",
+    "icon": "id-alt",
+    "keywords": ["about", "company", "درباره", "معرفی"],
+    "supports": {
+        "align": ["wide", "full"],
+        "mode": true,
+        "anchor": true
+    }
+}

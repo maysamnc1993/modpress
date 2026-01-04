@@ -1,0 +1,13 @@
+{
+    "name": "faq",
+    "title": "سوالات متداول",
+    "description": "سوالات و پاسخ‌ها با آکاردئون",
+    "category": "theme-blocks",
+    "icon": "editor-help",
+    "keywords": ["faq", "questions", "سوالات", "پرسش"],
+    "supports": {
+        "align": ["wide", "full"],
+        "mode": true,
+        "anchor": true
+    }
+}

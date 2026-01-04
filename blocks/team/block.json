@@ -1,0 +1,13 @@
+{
+    "name": "team",
+    "title": "تیم ما",
+    "description": "معرفی اعضای تیم با تصویر و شبکه‌های اجتماعی",
+    "category": "theme-blocks",
+    "icon": "groups",
+    "keywords": ["team", "members", "تیم", "اعضا"],
+    "supports": {
+        "align": ["wide", "full"],
+        "mode": true,
+        "anchor": true
+    }
+}

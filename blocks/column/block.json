@@ -1,0 +1,15 @@
+{
+    "name": "column",
+    "title": "ستون",
+    "description": "ستون برای قرار دادن محتوا داخل ردیف",
+    "category": "theme-blocks",
+    "icon": "columns",
+    "keywords": ["column", "ستون", "layout"],
+    "supports": {
+        "align": false,
+        "mode": true,
+        "anchor": true,
+        "jsx": true
+    },
+    "parent": ["acf/row"]
+}
